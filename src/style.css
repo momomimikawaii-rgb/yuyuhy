@@ -1,301 +1,122 @@
 :root {
+  font-family: "Yu Gothic", sans-serif;
   color: #4b4254;
-  background: #fff7fd;
-  font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #fff7fd 0%, #f6fbff 100%);
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 218, 238, 0.75), transparent 34%),
-    radial-gradient(circle at top right, rgba(205, 235, 255, 0.85), transparent 32%),
-    linear-gradient(180deg, #fff7fd 0%, #f7fbff 48%, #fff8fb 100%);
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.app {
-  min-height: 100vh;
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-}
-
 .heroImage {
   width: 100%;
-  height: auto;
   display: block;
 }
 
 .sisterBox {
-  max-width: 960px;
-  margin: 18px auto 0;
-  padding: 14px 18px;
-  border: 1px solid rgba(244, 151, 190, 0.45);
+  margin: 0 auto;
+  margin-top: -20px;
+  width: fit-content;
+  background: white;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 10px 30px rgba(176, 108, 149, 0.12);
+  padding: 12px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   display: flex;
-  justify-content: center;
+  gap: 12px;
   align-items: center;
-  gap: 14px;
-  transform: translateY(-50%);
-}
-
-.sisterLabel {
-  display: inline-flex;
-  border-radius: 999px;
-  padding: 5px 12px;
-  background: #ffe6f2;
-  color: #d84e91;
-  font-size: 0.86rem;
-  font-weight: 700;
 }
 
 .sisterBox a {
   color: #5f72d7;
-  font-weight: 800;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .main {
-  width: min(1180px, calc(100% - 32px));
+  width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 6px 0 64px;
+  padding-bottom: 60px;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 170, 208, 0.35);
-  border-radius: 28px;
-  box-shadow: 0 18px 45px rgba(111, 92, 137, 0.1);
+  background: rgba(255,255,255,0.9);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
 }
 
 .intro {
-  padding: 34px;
+  margin-top: 24px;
   text-align: center;
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: #d85c9a;
-  font-size: 0.84rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-h1,
-h2,
-h3,
-p {
-  margin-top: 0;
-}
-
-h1 {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  color: #4b3d68;
-  margin-bottom: 16px;
-}
-
-h2 {
-  font-size: clamp(1.25rem, 3vw, 1.85rem);
-  color: #4b3d68;
-  margin-bottom: 14px;
-}
-
-p,
-.note {
-  line-height: 1.8;
-}
-
-.section {
-  margin-top: 36px;
-}
-
-.categoryGrid {
+.grid {
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.selectCard {
-  text-align: left;
-  border: 1px solid rgba(248, 157, 202, 0.42);
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 22px;
-  padding: 18px;
-  color: #4b4254;
-  box-shadow: 0 10px 24px rgba(111, 92, 137, 0.08);
-}
-
-.selectCard strong {
-  display: block;
-  color: #4b3d68;
-  font-size: 1.05rem;
-  margin-bottom: 8px;
-}
-
-.selectCard span {
-  display: block;
-  line-height: 1.65;
-}
-
-.selectCard.active,
-.pillButton.active,
-.checkCard.active {
-  border-color: #ee7fb6;
-  background: linear-gradient(180deg, #fff0f8, #ffffff);
-  box-shadow: 0 12px 28px rgba(216, 92, 154, 0.16);
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: 420px 1fr;
   gap: 24px;
-  align-items: start;
 }
 
-.panel {
-  padding: 24px;
-}
-
-.templateOptions,
-.checkGrid {
+.buttonGrid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
-.pillButton,
-.copyButton {
-  border: 1px solid rgba(248, 157, 202, 0.5);
-  background: #fff;
-  color: #4b3d68;
+button {
+  border: none;
   border-radius: 999px;
-  padding: 10px 14px;
-  font-weight: 700;
+  padding: 10px 16px;
+  background: #ffe7f2;
+  cursor: pointer;
 }
 
-.previewImageBox {
-  overflow: hidden;
-  border-radius: 22px;
-  margin: 12px 0 22px;
-  background: #fff;
-  border: 1px solid rgba(248, 157, 202, 0.3);
+button.active {
+  background: linear-gradient(135deg, #ff9dc9, #a7bcff);
+  color: white;
 }
 
-.previewImageBox img {
+.preview {
   width: 100%;
-  display: block;
+  border-radius: 20px;
+  margin-bottom: 24px;
 }
 
-select,
-input,
-textarea {
+select {
   width: 100%;
-  border: 1px solid rgba(168, 143, 185, 0.35);
-  border-radius: 18px;
-  background: #fff;
-  color: #4b4254;
-  padding: 13px 14px;
-  margin: 8px 0 18px;
-  outline: none;
-}
-
-textarea {
-  resize: vertical;
-}
-
-label {
-  font-weight: 700;
-  color: #5d4d72;
-}
-
-.note {
-  color: #7a6d85;
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-}
-
-.checkCard {
-  border: 1px solid rgba(248, 157, 202, 0.5);
-  border-radius: 999px;
-  padding: 10px 14px;
-  background: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.checkCard input {
-  width: auto;
-  margin: 0;
-}
-
-.outputPanel {
-  position: sticky;
-  top: 16px;
+  padding: 12px;
+  border-radius: 14px;
 }
 
 .outputHeader {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
   align-items: center;
 }
 
-.copyButton {
-  background: linear-gradient(135deg, #ff8fc3, #9cb4ff);
-  color: #fff;
-  border: none;
-}
-
-.output {
-  min-height: 620px;
-  line-height: 1.65;
-  white-space: pre-wrap;
+textarea {
+  width: 100%;
+  min-height: 600px;
+  border-radius: 18px;
+  padding: 16px;
+  margin-top: 12px;
+  resize: vertical;
 }
 
 @media (max-width: 900px) {
-  .sisterBox {
-    width: calc(100% - 28px);
-    border-radius: 24px;
-    flex-direction: column;
-    gap: 8px;
-    transform: translateY(-26%);
-    text-align: center;
-  }
-
-  .categoryGrid,
-  .layout {
+  .grid {
     grid-template-columns: 1fr;
   }
 
-  .intro,
-  .panel {
-    padding: 22px;
-  }
-
-  .outputPanel {
-    position: static;
+  .sisterBox {
+    width: calc(100% - 24px);
+    border-radius: 20px;
+    flex-direction: column;
+    text-align: center;
   }
 }
