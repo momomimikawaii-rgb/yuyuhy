@@ -48,6 +48,13 @@ const lightOptions = opt([
  ["night","夜でも顔明るく","夜景や暗い場面でも、ペットの顔はやわらかく明るく見えるようにしてください。"]
 ]);
 
+const sizeOptions = opt([
+ ["square","1:1 正方形","1:1の正方形サイズで作成してください。"],
+ ["insta45","インスタ4:5縦長サイズ","Instagram投稿向けの4:5縦長サイズで作成してください。"],
+ ["insta916","インスタ9:16縦長サイズ","Instagramストーリー・リール向けの9:16縦長サイズで作成してください。"],
+ ["wide169","16:9横長サイズ","16:9の横長サイズで作成してください。"]
+]);
+
 const categories = [
  {id:"travel", label:"夢の世界旅行", icon:Globe2, description:"有名観光地を、うちの子が行ける理想化された夢の観光ポスター構図にします。", templates: opt([
   ["mykonos","ミコノス島風","白い階段、真っ白な建物、濃い青い丸屋根、青いドア、ターコイズブルーの海が見える理想化されたミコノス島風。禿山や茶色い岩山、雑多な観光地感は目立たせない。カメラは白い階段の奥行きと海が両方見え、ペットの顔も見える前景〜中景の夢の観光ポスター構図。"],
@@ -147,13 +154,14 @@ function App(){
  const [accIds,setAccIds]=useState([]),[customAcc,setCustomAcc]=useState("");
  const [colorId,setColorId]=useState("auto"),[customColor,setCustomColor]=useState("");
  const [lightId,setLightId]=useState("auto");
+ const [sizeId,setSizeId]=useState("insta45"),[customSize,setCustomSize]=useState("");
  const [underId,setUnderId]=useState("none"),[summerId,setSummerId]=useState("none");
  const [vibeIds,setVibeIds]=useState(["clear","dream","clean"]),[title,setTitle]=useState("");
  const [animalId,setAnimalId]=useState("panda"),[animalColor,setAnimalColor]=useState(""),[customAnimal,setCustomAnimal]=useState("");
  const [profile,setProfile]=useState("");
  const category=by(categories,cat), template=by(category.templates,tpl[cat]);
  const outfitList=outfitSet[cat]||commonOutfits, outfit=by(outfitList,outfitId), isK=!!outfit.kigurumi;
- const head=by(headOptions,headId), shoe=by(shoes,shoeId), col=by(outfitColors,colorId), li=by(lightOptions,lightId), un=by(underwater,underId), su=by(summerG,summerId), animal=by(animals,animalId), Icon=category.icon;
+ const head=by(headOptions,headId), shoe=by(shoes,shoeId), col=by(outfitColors,colorId), li=by(lightOptions,lightId), size=by(sizeOptions,sizeId), un=by(underwater,underId), su=by(summerG,summerId), animal=by(animals,animalId), Icon=category.icon;
  const prompt=useMemo(()=>{
   const p=[`【最優先：ペット本人の保持】\n${identityRule}`,`【共通：夢化・理想化】\n${dreamRule}`];
   if(cat==="travel")p.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);
