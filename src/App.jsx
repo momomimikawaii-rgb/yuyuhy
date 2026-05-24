@@ -181,14 +181,16 @@ function App(){
   p.push(`【光・明るさ】\n${li.prompt}`);
   p.push(`【雰囲気】\n${vibeIds.map(id=>by(vibes,id).prompt).join("\n")}\n${darkDogRule}`);
   if(cat==="movie"&&title.trim())p.push(`【架空タイトル】\n「${title.trim()}」\n短く大きく読みやすく配置してください。実在映画ロゴや実在ブランド風の完全再現は避けてください。`);
-  p.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");
+  p.push(`【画像サイズ】\n${customSize.trim() || size.prompt}`);
+    p.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");
   return p.join("\n\n");
- },[cat,template,customPlace,cordoba,outfit,customOutfit,isK,head,customHead,shoe,customShoe,accIds,customAcc,col,customColor,un,su,animal,animalColor,customAnimal,profile,li,vibeIds,title]);
+ },[cat,template,customPlace,cordoba,outfit,customOutfit,isK,head,customHead,shoe,customShoe,accIds,customAcc,col,customColor,un,su,animal,animalColor,customAnimal,profile,li,vibeIds,title,size,customSize]);
  const copy=async(text=prompt)=>{await navigator.clipboard.writeText(text);setCopied(true);setTimeout(()=>setCopied(false),1400)};
  const toggleAcc=id=>setAccIds(cur=>cur.includes(id)?cur.filter(x=>x!==id):[...cur,id]);
  const toggleVibe=id=>setVibeIds(cur=>cur.includes(id)?cur.filter(x=>x!==id):cur.length>=3?cur:[...cur,id]);
  const changeCat=id=>{setCat(id);const list=outfitSet[id]||commonOutfits;setOutfitId(list.find(x=>x.id==="auto")?.id||list[0].id);};
- const recommendationPrompt=r=>{const rc=by(categories,r.categoryId),rt=by(rc.templates,r.templateId);const arr=[`【最優先：ペット本人の保持】\n${identityRule}`,`【共通：夢化・理想化】\n${dreamRule}`];if(r.categoryId==="travel")arr.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);if(r.categoryId==="movie")arr.push(`【映画ポスター風の特殊ルール】\n${movieRule}`);arr.push(`【世界観・背景】\n${rt.prompt}`);if(r.categoryId==="movie")arr.push("【衣装・体型】\n衣装、体型、ポーズ、構図はテンプレート固定です。変更するのは顔、耳、毛色、模様、手の毛色だけにしてください。");arr.push(`【光・明るさ】\n${li.prompt}`);arr.push(`【雰囲気】\n${vibeIds.map(id=>by(vibes,id).prompt).join("\n")}\n${darkDogRule}`);arr.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");return arr.join("\n\n")};
+ const recommendationPrompt=r=>{const rc=by(categories,r.categoryId),rt=by(rc.templates,r.templateId);const arr=[`【最優先：ペット本人の保持】\n${identityRule}`,`【共通：夢化・理想化】\n${dreamRule}`];if(r.categoryId==="travel")arr.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);if(r.categoryId==="movie")arr.push(`【映画ポスター風の特殊ルール】\n${movieRule}`);arr.push(`【世界観・背景】\n${rt.prompt}`);if(r.categoryId==="movie")arr.push("【衣装・体型】\n衣装、体型、ポーズ、構図はテンプレート固定です。変更するのは顔、耳、毛色、模様、手の毛色だけにしてください。");arr.push(`【光・明るさ】\n${li.prompt}`);arr.push(`【雰囲気】\n${vibeIds.map(id=>by(vibes,id).prompt).join("\n")}\n${darkDogRule}`);arr.push(`【画像サイズ】\n${customSize.trim() || size.prompt}`);
+    arr.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");return arr.join("\n\n")};
  const selectRec=r=>{setCat(r.categoryId);setTpl(cur=>({...cur,[r.categoryId]:r.templateId}));copy(recommendationPrompt(r));};
  const blocked=un.block||[];
  return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/><div className="container">
@@ -203,6 +205,8 @@ function App(){
   {cat==="animal"&&<section className="card"><h2><PawPrint size={19}/>8. 動物を選択</h2><div className="animal-list">{animals.map(a=><div className="animal-row" key={a.id}><button className={`animal-name ${animal.id===a.id?"active":""}`} onClick={()=>{setAnimalId(a.id);setAnimalColor(a.colors?.[0]||"")}}>{a.label}</button>{a.colors&&<span>{a.colors.map(color=><label className="radio-inline" key={color}><input type="radio" checked={animal.id===a.id&&animalColor===color} onChange={()=>{setAnimalId(a.id);setAnimalColor(color)}}/>{color}</label>)}</span>}</div>)}</div><label>自由記入</label><input value={customAnimal} onChange={e=>setCustomAnimal(e.target.value)} placeholder="例：白いフェネック、小さなユニコーン"/></section>}
   {cat==="infographic"&&<section className="card"><h2><Info size={19}/>3. プロフィール情報</h2><p className="selected">学名風の名前はAIが自動でつけます。入力内容は希少動物図鑑風に言い換えます。</p><textarea className="profile-textarea" value={profile} onChange={e=>setProfile(e.target.value)} placeholder={`名前：\n犬種・動物種：\n性別：\n年齢・誕生日：\n性格：\n好きなもの：\n苦手なもの：\nよく散歩に行く時間：\nよくいる場所：\n食べ物の好み：\nチャームポイント：\n特技：\n飼い主から一言：`}/></section>}
   <section className="card"><h2><Heart size={19}/>{cat==="summer"||cat==="animal"?"9":cat==="movie"||cat==="infographic"?"4":"8"}. 雰囲気（3つまで選択可能）</h2><div className="chips">{vibes.map(v=><button className={`chip ${vibeIds.includes(v.id)?"active":""}`} onClick={()=>toggleVibe(v.id)} key={v.id}>{v.label}</button>)}</div><label>光・明るさ</label><div className="chips">{lightOptions.map(l=><button className={`chip ${li.id===l.id?"active":""}`} onClick={()=>setLightId(l.id)} key={l.id}>{l.label}</button>)}</div></section>
+
+          <section className="card"><h2>{cat==="summer"||cat==="animal"?"10":cat==="movie"||cat==="infographic"?"5":"9"}. 画像サイズ</h2><p className="selected">画像サイズは1つだけ選べます。自由入力欄に書いた場合、サイズの選択肢は無効になります。</p><div className="chips">{sizeOptions.map(s=><button disabled={!!customSize.trim()} className={`chip ${size.id===s.id?"active":""}`} onClick={()=>setSizeId(s.id)} key={s.id}>{s.label}</button>)}</div><label>画像サイズの自由記入</label><input value={customSize} onChange={e=>setCustomSize(e.target.value)} placeholder="例：横2048×縦3072の縦長ポスターサイズ"/></section>
   </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={()=>copy()}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/></section></aside></div>
  </div></main>;
 }
