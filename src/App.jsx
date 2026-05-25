@@ -31,7 +31,7 @@ const ratioOptions = opt([
 
 const cats = [
   {id:"travel",label:"夢の世界旅行",icon:Globe2,desc:"うちの子と夢の観光ポスター構図。",tpl:opt([
-    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。エーゲ海沿いの白い階段、石灰で塗られた真っ白な家々、濃い青い丸屋根、青いドアと窓枠、ターコイズブルーの海が見える坂道。白壁と青のコントラストを主役にし、茶色い禿山・雑多な観光客・生活感は目立たせない。ペットは白い階段の前景〜中景に置き、海と街並みも見える夢の観光ポスター構図。"],
+    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。エーゲ海沿いの真っ白な街並み、石灰で塗られた白い家々、濃いコバルトブルーの丸屋根、青いドアと窓枠、白い階段が続く明るい地中海リゾート。ペットは曲がった白い階段の踊り場、または白い坂道の前景〜中景に配置。背景には白い階段、青い丸屋根、青いドア、ピンクのブーゲンビリア、花飾り、きらきら輝くターコイズブルーの海とサンゴ礁を入れる。空は濃く鮮やかな青空。明るい陽射しが降り注ぎ、海面や白い壁に光がきらきら反射している。白・青・ピンク・ターコイズを主役色にした、清潔感と透明感のある夢かわいいリゾート写真風。茶色い禿げ山、汚れた床、古びた壁、雑多な観光客、生活感は目立たせない。現実のミコノスより、夢みたいに美しい理想のリゾート写真にする。"],
     ["paris","パリ風","フランス・パリ風。遠景にエッフェル塔、クラシカルな街灯、石畳、淡いクリーム色の建物、花のある上品なカフェ通り。車や人混みは減らし、ペットが前景で可愛く見える距離。パリらしいエレガントな空気感を残した夢の観光ポスター構図。"],
     ["london","ロンドン風","イギリス・ロンドン風。赤い電話ボックス、クラシカルな石造りの街並み、遠景にビッグベン風の時計塔、上品な街灯と石畳。霧で暗くしすぎず、明るく清潔なロンドンの空気。ペットは前景、背景にロンドンらしい象徴が入る構図。"],
     ["alsace","アルザス風","フランス・アルザス地方風。木組みの家、パステル色の壁、花いっぱいの窓辺、細い石畳の小道が奥へ続く絵本のような街並み。家の並びと小道の奥行きが分かる構図で、ペットは前景に可愛く配置。"],
@@ -79,6 +79,8 @@ const cats = [
     ["magic","魔法学校ファンタジー映画風","1枚目のペットを中央の主役にした魔法学校映画ポスター。人数は3匹。左右の仲間は2枚目・3枚目があれば本人化、1枚だけなら同じペット種でAIが作る。左上または右上に夜の崖上の魔法学校の城、背景または下部に赤黒のレトロな魔法列車。黒い魔法ローブ、主役は丸メガネと杖。"],
     ["pirate","伝説の海賊船長映画風","伝説の海賊船長映画ポスター。赤いバンダナ必須、くるくるしたドレッド風の髪かつら必須、ビーズ飾り、白いシャツ、黒〜焦げ茶のベスト、腰ベルト、海賊コート風。背景に海賊船、夕焼けと嵐空、海、煙、古い港町。"],
     ["subway_wind","地下鉄から風ふいてスカートめくれる映画風","1950年代アメリカ映画ポスター風。白いふわふわドレス姿のペットが地下鉄の通気口の上で、下から吹き上がる風によりスカートがふわっと大きく舞い上がる。横には黄色いスーツと帽子を着た同じペット種の男の子役が驚いたように見上げる。"],
+    ["detective","名探偵ミステリー映画風","霧の街、街灯、虫眼鏡、クラシカルな探偵映画ポスター風。主役は帽子とケープで謎を解く名探偵。"],
+    ["western","荒野のガンマン西部劇風","夕焼けの荒野、木造の街並み、テンガロンハットと西部劇風衣装。暴力表現や銃の強調は避け、映画ポスター風の雰囲気にする。"]
   ])},
   {id:"animal",label:"動物さんと一緒",icon:PawPrint,desc:"動物さんと一緒。色選択も自由記入もOK。",tpl:opt([["friend","動物さんと一緒","選んだ動物さんと仲良く一緒にいる、夢のように可愛い動物フォト。"]])},
   {id:"panel",label:"うちの子パネル",icon:Info,desc:"インフォグラフィック・カレンダー。",tpl:opt([
@@ -110,7 +112,7 @@ const vehicleWear = {
   flying_car: opt([["future","未来風ライダースーツ","未来風のかっこいいライダースーツ。"],["sf","SFジャンプスーツ","SF風ジャンプスーツ。"]]),
   space_car: opt([["sf","SFジャンプスーツ","SF風ジャンプスーツ。"],["space","近未来パイロットスーツ","近未来パイロットスーツ。"]])
 };
-const animalWear = opt([["k_auto","おまかせ（きぐるみ）","一緒にいる動物とおそろいに見える可愛いきぐるみ姿。動物の色・柄・耳・羽・模様・花冠などを合わせ、双子・親子・仲間のように見せる。",{kigurumi:true}],["keep","なし（元写真のまま）","元写真のまま。"],["kigurumi","きぐるみ","一緒にいる動物モチーフのおそろいきぐるみ姿。色・柄・耳・羽・模様・装飾を合わせ、双子・親子・仲間のように見せる。",{kigurumi:true}]]);
+const animalWear = opt([["k_auto","おまかせ（きぐるみ）","選んだ動物に合わせた可愛いきぐるみ姿。",{kigurumi:true}],["keep","なし（元写真のまま）","元写真のまま。"],["kigurumi","きぐるみ","選んだ動物モチーフの可愛いきぐるみ姿。",{kigurumi:true}]]);
 
 const headBase = opt([["keep","なし（元写真のまま）","頭装備は追加せず、元写真のまま。"],["auto","おまかせ","世界観に合う頭装備。"],["ribbon","リボン","可愛いリボン。"],["frill","フリル帽","可愛いフリル帽。"],["flower","花冠","可愛い花冠。"],["crown","王冠","小さな可愛い王冠。"]]);
 const headSummer = opt([["straw","麦わら帽子","夏らしい麦わら帽子。"]]);
@@ -132,12 +134,12 @@ const animals = [
 
 const monthThemes = {
  1:"お正月。和室、床の間、正月飾り、梅、障子から朝日、羽子板、鏡餅、金粉。高級感ある可愛い着物、和風の飾り帯、繊細な帯飾り、花の帯結び。男の子は青系の落ち着いた高級和装、女の子はピンク系の華やかな着物。",
- 2:"雪遊び。スノーボード、雪の結晶、雪煙、小さい雪だるま。男の子は青系、女の子はピンク系のスノボスーツとゴーグル。女の子は冬服に合うふわふわリボンをつける。女の子は冬服に合うふわふわリボンをつける。",
+ 2:"雪遊び。スノーボード、雪の結晶、雪煙、小さい雪だるま。男の子は青系、女の子はピンク系のスノボスーツとゴーグル。女の子は冬服に合うふわふわリボンをつける。",
  3:"ひな祭り。お雛様の祭壇、桃の花、和室、三色団子、甘酒、ひなあられ。淡いピンク系の可愛い和装。豪華すぎず上品。",
  4:"満開の桜。桜トンネル、桜吹雪多め、桜絨毯、青空。春のおでかけ服。女の子は桜色の春服・軽いケープ・春リボン、男の子は生成りや薄ピンクの春色ケープ。マズルに桜の花びらを1枚ちょこんと乗せる。マズルが目立たない子やハムスターは額に花びら。",
  5:"こいのぼりと初夏ピクニック。芝生、ピクニックシート、こいのぼり、シャボン玉。女の子はピンク系春服・ピンクワンピース・リボン。男の子は青系の鎧兜、若武者風、怖くしない、顔を隠さない。",
  6:"梅雨の夢池。オオオニバスの葉っぱの上、周囲にスイレン、スイレンの葉の傘、お天気雨、紫陽花控えめ、雨粒キラキラ。可愛いレインコート必須。必要に応じて人形・ぬいぐるみ寄りの自然な直立ボディ。犬の骨格のまま無理に二足立ちさせない。前足は増やさず、丸いペットらしい手で傘を自然に持つ。",
- 7:"ひまわり畑。満開のひまわり、青空、入道雲、夏の風。女の子は黄色いワンピースと黄色いリボン付き麦わら帽子。男の子は麦わら帽子、黄色の帽子帯、首元に黄色いスカーフ。女の子は黄色いワンピースと黄色いリボン付き麦わら帽子。男の子は麦わら帽子、黄色の帽子帯、首元に黄色いスカーフ。",
+ 7:"ひまわり畑。満開のひまわり、青空、入道雲、夏の風。女の子は黄色いワンピースと黄色いリボン付き麦わら帽子。男の子は麦わら帽子、黄色の帽子帯、首元に黄色いスカーフ。",
  8:"花火大会。多色の大きな花火、ピンク・青・紫・金・虹色系を混ぜた華やかな夜空。花火光でペットをほんのり照らし、暗すぎる夜景は禁止。提灯、金魚すくい、夏祭り小物を少し。男の子は紺色浴衣、女の子はピンク浴衣。",
  9:"秋の甘味と十五夜。栗、かぼちゃ、お芋、お月さま、ススキ、温かい秋色。男の子は落ち着いた秋色の羽織風和装、女の子は淡い秋色の着物風と秋色リボン。成人式の振袖みたいに派手にしない。",
  10:"ハロウィン。基本は紫・オレンジ・黒・金色の光。衣装はミイラ・魔女・パンプキンきぐるみ・吸血鬼・アリス。アリス選択時は水色と白、トランプ、ティーカップ、ティーポット、懐中時計、うさぎ、不思議の国のティーパーティーを基本にする。",
@@ -345,12 +347,18 @@ function App(){
     if(cat==="travel") p.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);
     if(cat==="movie") p.push(`【映画ポスター風の特殊ルール】\n${movieRule}\n映画カテゴリでは共通の雰囲気選択は使わず、選んだ映画テンプレート固有の雰囲気・色・構図を最優先してください。`);
     if(cat==="animal") p.push(`【動物さんの表現】\n${animalRule}`);
-    let world = isPanel ? "ペットを主役にした、選択したタイプのうちの子パネル。選択したパネルタイプの雰囲気を最優先してください。" : template.prompt;
+    let world=template.prompt;
     if(template.customPlace&&customPlace) world+=`\n場所：${customPlace}\n※場所名のみ採用し、ポーズ・服・ギミック指定は無視。`;
     if(template.colors) world+=`\n色合い：${by(cordobaColors,cordoba).prompt}`;
     if(template.customVehicle&&customVehicle) world+=`\n乗り物：${customVehicle}`;
     if(template.fireworks) world+=`\n花火を見る場所：${by(fireworksPlaces,fwPlace).prompt}`;
-    p.push(`【世界観・背景】\n${world}`);
+    p.push(`【世界観・背景】\n${world}${cat==="travel" ? `\n\n【世界旅行系 共通演出】
+実在の観光地をそのまま再現するのではなく、「夢の中で見た理想の観光ポスター」のように、美しく理想化してください。
+旅行雑誌の表紙、高級リゾート広告、夢かわいい観光ポスター、ファンタジー旅行パンフレットのような世界観。
+現実感よりも、「ここに行ってみたい」と思わせる憧れ感、透明感、強い陽射し、きらめき、幸福感を優先してください。
+空気は澄み、空は鮮やかで、光はきらきら反射し、海・街・花・建物すべてが少し幻想的に美しく見えるようにしてください。
+生活感、汚れ、古びた質感、雑多な観光客、曇り空、くすみ色、寂しい雰囲気は避けてください。
+ペットは「その世界を旅する主人公」のように、観光ポスターの中心で魅力的に見せてください。` : ""}`);
 
     if(cat==="movie"){
       p.push("【衣装・体型】\n衣装、体型、ポーズ、構図はテンプレート固定。顔、耳、毛色、模様、手の毛色だけ本人化してください。");
@@ -383,7 +391,7 @@ function App(){
 
     if(isInfo) p.push(`【うちの子インフォグラフィック】\nタイプ：${by(infoStyles,infoStyle).label}\n${by(infoStyles,infoStyle).prompt}\n\n${panelText||"入力された情報をもとに作成してください。"}\n学名風の名前はAIがその子らしく可愛く自動生成。空欄項目は無視。選んだタイプに合わせて、自然に言い換えてください。`);
     if(isCalendar) {
-      p.push(`【うちの子カレンダー】\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\nカレンダーは日曜開始で、曜日並びは「日・月・火・水・木・金・土」にしてください。曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜開始のカレンダーにしてください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
+      p.push(`【うちの子カレンダー】\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\nカレンダーは日曜開始で、曜日並びは「日・月・火・水・木・金・土」にしてください。曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
       if(Number(month)===10) p.push(`【ハロウィン衣装】\n性別：${by(genderOptions,gender).label}\n衣装：${halloween}`);
       if([1,2,5,8,12].includes(Number(month))) p.push(`【性別による衣装・配色】\n性別：${by(genderOptions,gender).label}`);
     }
@@ -408,7 +416,7 @@ function App(){
       <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
-        <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>window.location.reload()}>全部リセット</button></div>
+        <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span></div>
         <Section title={<><Sparkles size={19}/>1. ジャンルを選択</>}><div className="choice-grid">{cats.map(c=>{const I=c.icon;return <button key={c.id} className={`big-choice ${cat===c.id?"active-soft":""}`} onClick={()=>{setCat(c.id);setTpl({...tpl,[c.id]:c.tpl[0].id})}}><strong><I size={18}/>{c.label}</strong><span>{c.desc}</span></button>})}</div></Section>
         <Section title={<><Icon size={19}/>2. テンプレを選択</>}><div className="chips">{category.tpl.map(t=><Chip key={t.id} active={template.id===t.id} onClick={()=>setTpl({...tpl,[cat]:t.id})}>{t.label}</Chip>)}</div>{template.customPlace&&<><p className="selected">※場所のみ記入。ギミック・ポーズ・服装指定は無視されます。</p><input value={customPlace} onChange={e=>setCustomPlace(e.target.value)} placeholder="例：フィレンツェ、モロッコの青い街"/></>}{template.customVehicle&&<><label>乗り物自由記入</label><input value={customVehicle} onChange={e=>setCustomVehicle(e.target.value)} placeholder="例：かぼちゃの馬車"/></>}{template.colors&&<><label>パティオの色合い</label><div className="chips">{cordobaColors.map(x=><Chip key={x.id} active={cordoba===x.id} onClick={()=>setCordoba(x.id)}>{x.label}</Chip>)}</div></>}{template.fireworks&&<><label>花火を見る場所</label><div className="chips">{fireworksPlaces.map(x=><Chip key={x.id} active={fwPlace===x.id} onClick={()=>setFwPlace(x.id)}>{x.label}</Chip>)}</div></>}</Section>
 
