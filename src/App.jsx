@@ -426,7 +426,55 @@ function App(){
         {cat!=="movie"&&<Section title={`${catNum}. 雰囲気（3つまで選択可能）`}><div className="chips">{vibes.map(v=><Chip key={v.id} active={vibe.includes(v.id)} onClick={()=>setVibe(vibe.includes(v.id)?vibe.filter(x=>x!==v.id):vibe.length>=3?vibe:[...vibe,v.id])}>{v.label}</Chip>)}</div></Section>}
         <Section title={`${catNum+1}. 光・明るさ`}><div className="chips">{lightOptions.map(l=><Chip key={l.id} active={light===l.id} onClick={()=>setLight(l.id)}>{l.label}</Chip>)}</div></Section>
         {!(isCalendar && paperId!=="sns")&&<Section title={`${catNum+2}. 縦横比`}><button type="button" className="outline-button mini" onClick={()=>{setRh("");setRw("");setRatio("4:5")}}>リセット</button><div className="chips">{ratioOptions.map(r=><Chip key={r.id} disabled={!!rh||!!rw} active={ratio===r.id} onClick={()=>setRatio(r.id)}>{r.label}</Chip>)}</div><div className="ratio-inputs"><label>縦<input value={rh} onChange={e=>setRh(e.target.value)} placeholder="9"/></label><span>：</span><label>横<input value={rw} onChange={e=>setRw(e.target.value)} placeholder="16"/></label></div></Section>}
-      </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/></section></aside></div>
+      </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button>
+        <div className="instagram-follow-card" style={{
+          marginTop: "16px",
+          padding: "14px",
+          borderRadius: "20px",
+          background: "rgba(255,255,255,.82)",
+          border: "1px solid rgba(236,180,220,.55)",
+          boxShadow: "0 10px 30px rgba(180,120,180,.12)",
+          textAlign: "center"
+        }}>
+          <div style={{fontWeight: 800, color: "#8b4b9e", marginBottom: "8px"}}>
+            Instagramも見てね
+          </div>
+          <a
+            href="https://www.instagram.com/momomimiyuyu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram momomimiyuyu を開く"
+            style={{display: "inline-block", textDecoration: "none"}}
+          >
+            <img
+              src="/instagram_momomimiyuyu.png"
+              alt="Instagram @momomimiyuyu のQRコード"
+              style={{
+                display: "block",
+                width: "min(220px, 100%)",
+                height: "auto",
+                margin: "0 auto",
+                borderRadius: "14px",
+                background: "white"
+              }}
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/momomimiyuyu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-block",
+              marginTop: "8px",
+              color: "#8b4b9e",
+              fontWeight: 700,
+              textDecoration: "none"
+            }}
+          >
+            @momomimiyuyu
+          </a>
+        </div>
+</div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/></section></aside></div>
     </div>
   
 {modalImage && (
