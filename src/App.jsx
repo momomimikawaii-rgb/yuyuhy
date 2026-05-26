@@ -7,9 +7,9 @@ const HERO = "/top.png";
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
 const darkFix = `黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく維持してください。`;
-const travelRule = `旅行カテゴリは「夢の観光ポスター構図」です。場所らしさが分かる背景量と、ペットの顔が見える距離を両立してください。近すぎてただの壁にならず、遠すぎてペットが豆粒にならないようにしてください。現実の建物配置は完全再現不要です。`;
-const movieRule = `映画ポスター風では、元写真の体型・ポーズ・四足姿勢をコピーしないでください。体は可愛いマスコット人形風の直立ボディ。腰が後ろに出た犬の二足立ちは禁止。実在映画名・ロゴは使わず架空映画ポスターとして作ってください。`;
-const animalRule = `選んだ動物に最も似合う夢背景を自動生成してください。ただの森・草原・単色背景は禁止。ペットのきぐるみは、ペット本人の毛色ではなく、一緒にいる動物の色・柄・耳・羽・模様に合わせてください。双子・親子・同じ生き物の仲間のようなおそろい感を出してください。相手動物に花冠や飾りがある場合は、ペットにもおそろいで付けてください。猛獣や大型動物も怖くせず、清潔で優しく、ぬいぐるみのような愛らしさを少し加えてください。キリン・馬・シマウマ・象は首や脚を長くしすぎないでください。恐竜は怖くせず絵本のようにしてください。`;
+const travelRule = `旅行カテゴリは「夢の観光ポスター構図」です。実在の観光地を記録写真のように再現するのではなく、「夢の中で見た理想の観光ポスター」のように、圧倒的に美しく理想化してください。高級リゾート広告、夢かわいい旅行パンフレット、ラグジュアリー観光CM、SNSで憧れられる幻想旅行写真のような完成度を目指してください。現実感より「ここに行ってみたい」と思わせる憧れ感、透明感、強い陽射し、きらめき、幸福感を優先してください。普通の旅行写真、曇り空、灰色、低彩度、地味、生活感、雑多な観光客、古びた壁、汚れ、現実感の強すぎる風景は禁止寄りです。世界旅行では背景の観光地も主役級に見せてください。縦長画像では、ペットの高さは画像全体の3〜4割程度を目安にしてください。カメラは少し引き気味にし、ペットだけのアップ写真にしないでください。階段・道・水面・街並み・建物・空などの奥行きが広く見える構図にしてください。背景の情報量をしっかり残し、観光地の空気感も主役級にしてください。ただし豆粒のように小さくしすぎず、顔と服はちゃんと見えるサイズにしてください。`;
+const movieRule = `映画ポスター風では、元写真の体型・ポーズ・四足姿勢をコピーしないでください。体は可愛いマスコット人形風の直立ボディ。腰が後ろに出た犬の二足立ちは禁止。実在映画名・ロゴは使わず架空映画ポスターとして作ってください。「なんとなく映画風」ではなく、一目で元ネタ映画を連想できるレベルまで、構図・色・空気感・小物・時代感・照明を強化してください。シネマ照明、強い色演出、ドラマチックな逆光、タイトルロゴが入りそうな余白、印刷ポスター感、映画宣伝ビジュアル感を重視してください。普通のコスプレ写真、普通の記念撮影、普通の背景合成、曖昧なファンタジー化は禁止寄りです。`;
+const animalRule = `選んだ動物に最も似合う夢背景を自動生成してください。ただの森・草原・単色背景は禁止。ペットのきぐるみは、ペット本人の毛色ではなく、一緒にいる動物の色・柄・耳・羽・模様に合わせてください。相手動物に花冠・リボン・飾りがある場合は、ペットにもおそろいで付けてください。双子・親子・同じ生き物の仲間のように見えるきぐるみにしてください。`;
 const kigurumiRule = `きぐるみは首から下を完全に丸いぬいぐるみ体型にしてください。顔だけ本人が見えている状態にし、手先・足先まできぐるみで覆ってください。高級感のあるふわふわフェイクファーで、安っぽい化繊・スポンジ感は禁止。`;
 
 const opt = (rows) => rows.map(([id,label,prompt,extra]) => ({id,label,prompt,...(extra||{})}));
@@ -31,7 +31,7 @@ const ratioOptions = opt([
 
 const cats = [
   {id:"travel",label:"夢の世界旅行",icon:Globe2,desc:"うちの子と夢の観光ポスター構図。",tpl:opt([
-    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。エーゲ海沿いの白い階段、石灰で塗られた真っ白な家々、濃い青い丸屋根、青いドアと窓枠、ターコイズブルーの海が見える坂道。白壁と青のコントラストを主役にし、茶色い禿山・雑多な観光客・生活感は目立たせない。ペットは白い階段の前景〜中景に置き、海と街並みも見える夢の観光ポスター構図。"],
+    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。夢の中で見た理想のミコノス島のように、白い街並み、青い屋根、ターコイズブルーの海、ブーゲンビリア、強い陽射し、透明感、海面のきらめきを極端に美しく理想化してください。エーゲ海沿いの真っ白な街並み、石灰で塗られた白い家々、濃いコバルトブルーの丸屋根、青いドアと窓枠、白い階段が続く理想化された地中海リゾート。ペットは画面下部〜中景に配置し、縦長画像ではペットの高さを画像全体の3〜4割程度にしてください。少し引き気味のカメラ距離で、白い街並み、海、ブーゲンビリア、青い屋根、階段の奥行きがたっぷり見える構図。背景には大量のピンクのブーゲンビリア、白い階段、青い窓、青い丸屋根、白いカフェ、白い石畳、花飾りを入れる。海はターコイズブルーに強く輝き、サンゴ礁が見えるほど透明。空は濃く鮮やかな青空。強い陽射しが降り注ぎ、白壁や海面に光がきらきら反射している。空気の透明感、反射光、レンズフレア、リゾートCMのような発光感を積極的に加える。白・青・ターコイズ・ピンクを主役色にし、清潔感と透明感を極端に高める。茶色い禿げ山、汚れた壁、古びた床、曇り空、生活感、雑多な観光客は禁止寄り。"],
     ["paris","パリ風","フランス・パリ風。遠景にエッフェル塔、クラシカルな街灯、石畳、淡いクリーム色の建物、花のある上品なカフェ通り。車や人混みは減らし、ペットが前景で可愛く見える距離。パリらしいエレガントな空気感を残した夢の観光ポスター構図。"],
     ["london","ロンドン風","イギリス・ロンドン風。赤い電話ボックス、クラシカルな石造りの街並み、遠景にビッグベン風の時計塔、上品な街灯と石畳。霧で暗くしすぎず、明るく清潔なロンドンの空気。ペットは前景、背景にロンドンらしい象徴が入る構図。"],
     ["alsace","アルザス風","フランス・アルザス地方風。木組みの家、パステル色の壁、花いっぱいの窓辺、細い石畳の小道が奥へ続く絵本のような街並み。家の並びと小道の奥行きが分かる構図で、ペットは前景に可愛く配置。"],
@@ -79,8 +79,6 @@ const cats = [
     ["magic","魔法学校ファンタジー映画風","1枚目のペットを中央の主役にした魔法学校映画ポスター。人数は3匹。左右の仲間は2枚目・3枚目があれば本人化、1枚だけなら同じペット種でAIが作る。左上または右上に夜の崖上の魔法学校の城、背景または下部に赤黒のレトロな魔法列車。黒い魔法ローブ、主役は丸メガネと杖。"],
     ["pirate","伝説の海賊船長映画風","伝説の海賊船長映画ポスター。赤いバンダナ必須、くるくるしたドレッド風の髪かつら必須、ビーズ飾り、白いシャツ、黒〜焦げ茶のベスト、腰ベルト、海賊コート風。背景に海賊船、夕焼けと嵐空、海、煙、古い港町。"],
     ["subway_wind","地下鉄から風ふいてスカートめくれる映画風","1950年代アメリカ映画ポスター風。白いふわふわドレス姿のペットが地下鉄の通気口の上で、下から吹き上がる風によりスカートがふわっと大きく舞い上がる。横には黄色いスーツと帽子を着た同じペット種の男の子役が驚いたように見上げる。"],
-    ["detective","名探偵ミステリー映画風","霧の街、街灯、虫眼鏡、クラシカルな探偵映画ポスター風。主役は帽子とケープで謎を解く名探偵。"],
-    ["western","荒野のガンマン西部劇風","夕焼けの荒野、木造の街並み、テンガロンハットと西部劇風衣装。暴力表現や銃の強調は避け、映画ポスター風の雰囲気にする。"]
   ])},
   {id:"animal",label:"動物さんと一緒",icon:PawPrint,desc:"動物さんと一緒。色選択も自由記入もOK。",tpl:opt([["friend","動物さんと一緒","選んだ動物さんと仲良く一緒にいる、夢のように可愛い動物フォト。"]])},
   {id:"panel",label:"うちの子パネル",icon:Info,desc:"インフォグラフィック・カレンダー。",tpl:opt([
@@ -138,7 +136,7 @@ const monthThemes = {
  3:"ひな祭り。お雛様の祭壇、桃の花、和室、三色団子、甘酒、ひなあられ。淡いピンク系の可愛い和装。豪華すぎず上品。",
  4:"満開の桜。桜トンネル、桜吹雪多め、桜絨毯、青空。春のおでかけ服。女の子は桜色の春服・軽いケープ・春リボン、男の子は生成りや薄ピンクの春色ケープ。マズルに桜の花びらを1枚ちょこんと乗せる。マズルが目立たない子やハムスターは額に花びら。",
  5:"こいのぼりと初夏ピクニック。芝生、ピクニックシート、こいのぼり、シャボン玉。女の子はピンク系春服・ピンクワンピース・リボン。男の子は青系の鎧兜、若武者風、怖くしない、顔を隠さない。",
- 6:"梅雨の夢池。オオオニバスの葉っぱの上、周囲にスイレン、スイレンの葉の傘、お天気雨、紫陽花控えめ、雨粒キラキラ。可愛いレインコート必須。必要に応じて人形・ぬいぐるみ寄りの自然な直立ボディ。犬の骨格のまま無理に二足立ちさせない。前足は増やさず、丸いペットらしい手で傘を自然に持つ。",
+ 6:"梅雨の夢池。ペットを大きく寄せすぎず、背景の幻想的な池をたくさん見せる少し遠景構図。大きなオオオニバス、水面のきらめき、睡蓮、お天気雨、透明感のある池、雨粒の反射を美しく描く。紫陽花は控えめではなく、背景の左右や奥にふんわり多めに咲かせる。レインコートは単色ピンクではなく、水色・薄紫・ピンク・白を混ぜた紫陽花カラーの多色柄。透明素材、レース、紫陽花柄を混ぜた夢かわいいレインコート。蓮の葉の傘は大きめで可愛く。傘を持つ前足は片方だけにし、前足を3本にしない。左右の前足の数を必ず2本に保ち、余分な手・足・指を追加しない。全体は『梅雨の妖精』『夢の池』のような幻想的でキラキラした雰囲気。必要に応じて人形・ぬいぐるみ寄りの自然な直立ボディ。犬の骨格のまま無理に二足立ちさせない。丸いペットらしい手で傘を自然に持つ。",
  7:"ひまわり畑。満開のひまわり、青空、入道雲、夏の風。女の子は黄色いワンピースと黄色いリボン付き麦わら帽子。男の子は麦わら帽子、黄色の帽子帯、首元に黄色いスカーフ。",
  8:"花火大会。多色の大きな花火、ピンク・青・紫・金・虹色系を混ぜた華やかな夜空。花火光でペットをほんのり照らし、暗すぎる夜景は禁止。提灯、金魚すくい、夏祭り小物を少し。男の子は紺色浴衣、女の子はピンク浴衣。",
  9:"秋の甘味と十五夜。栗、かぼちゃ、お芋、お月さま、ススキ、温かい秋色。男の子は落ち着いた秋色の羽織風和装、女の子は淡い秋色の着物風と秋色リボン。成人式の振袖みたいに派手にしない。",
@@ -280,6 +278,7 @@ function Chip({active,disabled,onClick,children}){ return <button type="button" 
 function Section({title,children}){ return <section className="card"><h2>{title}</h2>{children}</section>; }
 
 function App(){
+  const [modalImage,setModalImage]=useState(null);
   const [cat,setCat]=useState("travel");
   const [tpl,setTpl]=useState({travel:"mykonos",summer:"beach",vehicle:"sl",movie:"ship",animal:"friend",panel:"info"});
   const [rec,setRec]=useState(true), [copied,setCopied]=useState(false);
@@ -329,7 +328,7 @@ function App(){
     if(cat==="travel") p.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);
     if(cat==="movie") p.push(`【映画ポスター風の特殊ルール】\n${movieRule}\n映画カテゴリでは共通の雰囲気選択は使わず、選んだ映画テンプレート固有の雰囲気・色・構図を最優先してください。`);
     if(cat==="animal") p.push(`【動物さんの表現】\n${animalRule}`);
-    let world=template.prompt;
+    let world=isPanel ? "ペットを主役にした、選択したタイプのうちの子パネル。選択したパネルタイプの雰囲気を最優先してください。" : template.prompt;
     if(template.customPlace&&customPlace) world+=`\n場所：${customPlace}\n※場所名のみ採用し、ポーズ・服・ギミック指定は無視。`;
     if(template.colors) world+=`\n色合い：${by(cordobaColors,cordoba).prompt}`;
     if(template.customVehicle&&customVehicle) world+=`\n乗り物：${customVehicle}`;
@@ -337,11 +336,11 @@ function App(){
     p.push(`【世界観・背景】\n${world}`);
 
     if(cat==="movie"){
-      p.push("【衣装・体型】\n衣装、体型、ポーズ、構図はテンプレート固定。顔、耳、毛色、模様、手の毛色だけ本人化してください。");
+      p.push("【衣装・体型】\n服・帽子・髪飾り・ハーネス・リードなど、元写真に写っている装備は参考にしないでください。服指定あり、またはおまかせ服の場合は、元写真の服や小物を引き継がず、今回選んだ衣装・帽子・髪飾り・アクセサリーだけで新しく整えてください。ただし、ペット本人の顔・毛色・模様・耳・毛並みは保持してください。\n衣装、体型、ポーズ、構図はテンプレート固定。顔、耳、毛色、模様、手の毛色だけ本人化してください。");
       if(title) p.push(`【架空タイトル】\n${title}`);
     } else if(!isPanel){
       const wear = customOutfit || `${by(genderOptions,gender).prompt}\n${by(tasteOptions,taste).prompt}`;
-      p.push(`【服】\n${wear}`);
+      p.push(`【服】\n服・帽子・髪飾り・ハーネス・リードなど、元写真に写っている装備は参考にしないでください。服指定あり、またはおまかせ服の場合は、元写真の服や小物を引き継がず、今回選んだ衣装・帽子・髪飾り・アクセサリーだけで新しく整えてください。ただし、ペット本人の顔・毛色・模様・耳・毛並みは保持してください。\n${wear}`);
       if(cat==="animal" && (!customOutfit || customOutfit.includes("きぐるみ"))) p.push(`【きぐるみ専用補正】\n${kigurumiRule}`);
       else {
         p.push(`【頭装備】\n${customHead||by(headChoices,head).prompt}`);
@@ -362,33 +361,36 @@ function App(){
 
     if(cat==="animal"){
       const a=customAnimal||`${animalColor?animalColor+"の":""}${by(animals,animal).label}`;
-      p.push(`【一緒にいる動物】\n${a}と一緒。選んだ動物に最も似合う夢背景を自動生成。ただの森・草原・単色背景は禁止。`);
+      p.push(`【一緒にいる動物】\n${a}と一緒。ペットの衣装は一緒にいる動物とおそろいのきぐるみにしてください。色・柄・耳・羽・模様・花冠などを合わせ、双子・親子・仲間のように見せてください。ペット本人の顔はそのまま。選んだ動物に最も似合う夢背景を自動生成。ただの森・草原・単色背景は禁止。`);
     }
 
     if(isInfo) p.push(`【うちの子インフォグラフィック】\nタイプ：${by(infoStyles,infoStyle).label}\n${by(infoStyles,infoStyle).prompt}\n\n${panelText||"入力された情報をもとに作成してください。"}\n学名風の名前はAIがその子らしく可愛く自動生成。空欄項目は無視。選んだタイプに合わせて、自然に言い換えてください。`);
     if(isCalendar) {
-      p.push(`【うちの子カレンダー】\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\n曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
+      p.push(`【うちの子カレンダー】\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\nカレンダー表は必ず通常の月間カレンダー形式にしてください。日曜始まり、日・月・火・水・木・金・土の7列、週ごとの横並びグリッドで配置してください。日付を縦一列や二列リストにしないでください。曜日ごとの列を崩さず、1週間単位で横に並べてください。\nただの日付一覧ではなく、飾りたくなる高級ペットカレンダーとして作成してください。季節感、光、透明感、空気感、夢感、背景世界を大切にしてください。\n曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
       if(Number(month)===10) p.push(`【ハロウィン衣装】\n性別：${by(genderOptions,gender).label}\n衣装：${halloween}`);
       if([1,2,5,8,12].includes(Number(month))) p.push(`【性別による衣装・配色】\n性別：${by(genderOptions,gender).label}`);
     }
 
-    p.push(`【雰囲気】\n${vibe.map(id=>by(vibes,id).prompt).join("\n")}\n${darkFix}`);
+    if(cat!=="movie") p.push(`【雰囲気】\n${vibe.map(id=>by(vibes,id).prompt).join("\n")}\n${darkFix}`);
     p.push(`【光・明るさ】\n${by(lightOptions,light).prompt}`);
-    if(!(isCalendar && paperId!=="sns")) if(!(isCalendar && paperId!=="sns")) p.push(`【縦横比】\n${ratioPrompt}`);
+    if(!(isCalendar && paperId!=="sns")) p.push(`【縦横比】\n${ratioPrompt}`);
+    p.push("【地味化防止】\n全体が地味・灰色・低彩度・曇り空・現実寄りになりすぎないようにしてください。光・透明感・色彩・きらめき・夢感・空気感を積極的に強化してください。");
     p.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");
     return p.join("\n\n");
   },[cat,template,customPlace,customVehicle,cordoba,fwPlace,title,gender,taste,customOutfit,head,customHead,shoe,customShoe,acc,customAcc,color,customColor,customGimmick,currentUnder,summerAct,animal,animalColor,customAnimal,isInfo,isCalendar,infoStyle,panelText,year,month,paperId,dir,halloween,vibe,light,ratioPrompt,headChoices]);
 
   const copy=async()=>{await navigator.clipboard.writeText(prompt);setCopied(true);setTimeout(()=>setCopied(false),1200)};
   const toggle=(arr,setter,id)=>setter(arr.includes(id)?arr.filter(x=>x!==id):[...arr,id]);
+  const resetAll=()=>{ if(window.confirm("すべての選択と入力をリセットしますか？")) window.location.reload(); };
+
   const catNum = cat==="panel" ? (isCalendar?4:3) : cat==="summer"||cat==="animal" ? 9 : cat==="movie" ? 4 : 8;
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
       <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
-      {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
+      {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{cursor:"pointer"}} onClick={(e)=>{e.stopPropagation();setModalImage(r.img)}}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
-        <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span></div>
+        <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={resetAll}>全部リセット</button></div>
         <Section title={<><Sparkles size={19}/>1. ジャンルを選択</>}><div className="choice-grid">{cats.map(c=>{const I=c.icon;return <button key={c.id} className={`big-choice ${cat===c.id?"active-soft":""}`} onClick={()=>{setCat(c.id);setTpl({...tpl,[c.id]:c.tpl[0].id})}}><strong><I size={18}/>{c.label}</strong><span>{c.desc}</span></button>})}</div></Section>
         <Section title={<><Icon size={19}/>2. テンプレを選択</>}><div className="chips">{category.tpl.map(t=><Chip key={t.id} active={template.id===t.id} onClick={()=>setTpl({...tpl,[cat]:t.id})}>{t.label}</Chip>)}</div>{template.customPlace&&<><p className="selected">※場所のみ記入。ギミック・ポーズ・服装指定は無視されます。</p><input value={customPlace} onChange={e=>setCustomPlace(e.target.value)} placeholder="例：フィレンツェ、モロッコの青い街"/></>}{template.customVehicle&&<><label>乗り物自由記入</label><input value={customVehicle} onChange={e=>setCustomVehicle(e.target.value)} placeholder="例：かぼちゃの馬車"/></>}{template.colors&&<><label>パティオの色合い</label><div className="chips">{cordobaColors.map(x=><Chip key={x.id} active={cordoba===x.id} onClick={()=>setCordoba(x.id)}>{x.label}</Chip>)}</div></>}{template.fireworks&&<><label>花火を見る場所</label><div className="chips">{fireworksPlaces.map(x=><Chip key={x.id} active={fwPlace===x.id} onClick={()=>setFwPlace(x.id)}>{x.label}</Chip>)}</div></>}</Section>
 
@@ -398,9 +400,9 @@ function App(){
         {cat==="animal"&&<Section title={<><PawPrint size={19}/>8. 動物を選択（五十音順）</>}><div className="animal-list">{animals.map(a=><div className="animal-row" key={a.id}><button className={`animal-name ${animal===a.id?"active":""}`} onClick={()=>{setAnimal(a.id);setAnimalColor(a.colors?.[0]||"")}}>{a.label}</button>{a.colors&&<span>{a.colors.map(c=><label className="radio-inline" key={c}><input type="radio" checked={animal===a.id&&animalColor===c} onChange={()=>{setAnimal(a.id);setAnimalColor(c)}}/>{c}</label>)}</span>}</div>)}</div><input value={customAnimal} onChange={e=>setCustomAnimal(e.target.value)} placeholder="自由記入：白いフェネックなど"/></Section>}
         {isInfo&&<Section title="3. プロフィール情報"><p className="selected">学名風はAIが自動生成。空欄は無効。</p><label>パネルタイプ</label><div className="chips">{infoStyles.map(s=><Chip key={s.id} active={infoStyle===s.id} onClick={()=>setInfoStyle(s.id)}>{s.label}</Chip>)}</div><div className="form-grid">{Object.entries({name:"名前",nick:"ニックネーム",birthday:"誕生日",age:"年齢",sex:"性別",species:"犬種・動物種",personality:"性格",likes:"好きなもの",dislikes:"苦手なもの",walk:"よく散歩に行く時間",place:"よくいる場所",food:"食べ物の好み",charm:"チャームポイント",skill:"特技",comment:"飼い主コメント"}).map(([k,l])=><label key={k}>{l}<input value={panel[k]} onChange={e=>setPanel({...panel,[k]:e.target.value})}/></label>)}</div></Section>}
         {isCalendar&&<Section title="3. カレンダー設定"><div className="form-grid"><label>年<input type="number" value={year} onChange={e=>setYear(e.target.value)}/></label><label>月<input type="number" min="1" max="12" value={month} onChange={e=>setMonth(e.target.value)}/></label></div><label>性別</label><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div><label>サイズ</label><div className="chips">{paper.map(p=><Chip key={p.id} active={paperId===p.id} onClick={()=>setPaper(p.id)}>{p.label}</Chip>)}</div><label>向き</label><div className="chips">{direction.map(d=><Chip key={d.id} active={dir===d.id} onClick={()=>setDir(d.id)}>{d.label}</Chip>)}</div>{Number(month)===10&&<><label>ハロウィン衣装</label><div className="chips">{["ミイラ","魔女","パンプキンきぐるみ","吸血鬼","アリス"].map(x=><Chip key={x} active={halloween===x} onClick={()=>setHalloween(x)}>{x}</Chip>)}</div></>}</Section>}
-        <Section title={`${catNum}. 雰囲気（3つまで選択可能）`}><div className="chips">{vibes.map(v=><Chip key={v.id} active={vibe.includes(v.id)} onClick={()=>setVibe(vibe.includes(v.id)?vibe.filter(x=>x!==v.id):vibe.length>=3?vibe:[...vibe,v.id])}>{v.label}</Chip>)}</div></Section>
-        <Section title={`${catNum+1}. 光・明るさ`}><div className="chips">{lightOptions.map(l=><Chip key={l.id} active={light===l.id} onClick={()=>setLight(l.id)}>{l.label}</Chip>)}</div></Section>
-        {!(isCalendar && paperId!=="sns")&&<Section title={`${catNum+2}. 縦横比`}><button type="button" className="outline-button mini" onClick={()=>{setRh("");setRw("");setRatio("4:5")}}>リセット</button><div className="chips">{ratioOptions.map(r=><Chip key={r.id} disabled={!!rh||!!rw} active={ratio===r.id} onClick={()=>setRatio(r.id)}>{r.label}</Chip>)}</div><div className="ratio-inputs"><label>縦<input value={rh} onChange={e=>setRh(e.target.value)} placeholder="9"/></label><span>：</span><label>横<input value={rw} onChange={e=>setRw(e.target.value)} placeholder="16"/></label></div></Section>}
+        {cat!=="movie"&&<Section title={`${catNum}. 雰囲気（3つまで選択可能）`}><div className="chips">{vibes.map(v=><Chip key={v.id} active={vibe.includes(v.id)} onClick={()=>setVibe(vibe.includes(v.id)?vibe.filter(x=>x!==v.id):vibe.length>=3?vibe:[...vibe,v.id])}>{v.label}</Chip>)}</div></Section>}
+        <Section title={`${cat==="movie"?4:catNum+1}. 光・明るさ`}><div className="chips">{lightOptions.map(l=><Chip key={l.id} active={light===l.id} onClick={()=>setLight(l.id)}>{l.label}</Chip>)}</div></Section>
+        {!(isCalendar && paperId!=="sns")&&<Section title={`${cat==="movie"?5:catNum+2}. 縦横比`}><button type="button" className="outline-button mini" onClick={()=>{setRh("");setRw("");setRatio("4:5")}}>リセット</button><div className="chips">{ratioOptions.map(r=><Chip key={r.id} disabled={!!rh||!!rw} active={ratio===r.id} onClick={()=>setRatio(r.id)}>{r.label}</Chip>)}</div><div className="ratio-inputs"><label>縦<input value={rh} onChange={e=>setRh(e.target.value)} placeholder="9"/></label><span>：</span><label>横<input value={rw} onChange={e=>setRw(e.target.value)} placeholder="16"/></label></div></Section>}
       </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/><div className="instagram-follow-card">
   <p className="instagram-title">Instagramも見てね</p>
   <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @momomimiyuyu を開く">
@@ -408,6 +410,17 @@ function App(){
   </a>
 </div></section></aside></div>
     </div>
+{modalImage && (
+      <div
+        onClick={() => setModalImage(null)}
+        style={{position:"fixed",inset:0,background:"rgba(0,0,0,.65)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px"}}
+      >
+        <div onClick={(e)=>e.stopPropagation()} style={{position:"relative",maxWidth:"92vw",maxHeight:"92vh"}}>
+          <button type="button" onClick={()=>setModalImage(null)} style={{position:"absolute",top:"-12px",right:"-12px",border:0,borderRadius:"999px",background:"white",color:"#7c3aed",padding:"8px 12px",fontWeight:800,cursor:"pointer",boxShadow:"0 6px 20px rgba(0,0,0,.25)"}}>閉じる</button>
+          <img src={modalImage} alt="おすすめ画像" style={{display:"block",maxWidth:"92vw",maxHeight:"92vh",borderRadius:"24px",boxShadow:"0 20px 80px rgba(0,0,0,.35)",background:"white"}}/>
+        </div>
+      </div>
+    )}
   </main>;
 }
 
