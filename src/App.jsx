@@ -412,7 +412,66 @@ function App(){
   const toggle=(arr,setter,id)=>setter(arr.includes(id)?arr.filter(x=>x!==id):[...arr,id]);
   const catNum = cat==="panel" ? (isCalendar?4:3) : cat==="summer"||cat==="animal" ? 9 : cat==="movie" ? 4 : 8;
 
-  return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
+  return 
+      <style>{`
+        .thumb-preview-button{
+          appearance:none;
+          border:0;
+          background:transparent;
+          padding:0;
+          margin:0;
+          cursor:pointer;
+          display:block;
+          width:100%;
+        }
+        .thumb-preview-button img{
+          display:block;
+          width:100%;
+          height:auto;
+          pointer-events:none;
+        }
+        .preview-backdrop{
+          position:fixed;
+          inset:0;
+          z-index:9999;
+          background:rgba(30,20,45,.62);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:20px;
+        }
+        .preview-modal{
+          position:relative;
+          max-width:min(92vw,520px);
+          max-height:92vh;
+          border-radius:24px;
+          overflow:hidden;
+          background:white;
+          box-shadow:0 24px 80px rgba(0,0,0,.35);
+          border:4px solid rgba(255,255,255,.9);
+        }
+        .preview-modal img{
+          display:block;
+          max-width:100%;
+          max-height:88vh;
+          object-fit:contain;
+        }
+        .preview-close{
+          position:absolute;
+          right:12px;
+          top:12px;
+          z-index:2;
+          border:0;
+          border-radius:999px;
+          padding:8px 12px;
+          background:rgba(255,255,255,.88);
+          color:#6b4b76;
+          font-weight:700;
+          cursor:pointer;
+        }
+      `}</style>
+
+      <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
       <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} onClick={(e)=>{e.stopPropagation();setPreviewImage({src:r.img,title:r.t})}}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
