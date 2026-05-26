@@ -406,7 +406,6 @@ function App(){
   <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @momomimiyuyu を開く">
     <img src="/instagram_momomimiyuyu.png" alt="Instagram @momomimiyuyu のQRコード" />
   </a>
-  <a className="instagram-link" href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noopener noreferrer">@momomimiyuyu</a>
 </div></section></aside></div>
     </div>
   </main>;
