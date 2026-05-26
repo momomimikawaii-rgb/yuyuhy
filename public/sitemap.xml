@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://yuyuhy.yuyu-chan.com/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://yuyuhy.yuyu-chan.com/mykonos.png</image:loc>
+      <image:title>ミコノス島風ペットAI画像プロンプト作成例</image:title>
+      <image:caption>ゆゆママの夢プロンプト工房で作れる、夢の世界旅行風ペットAI画像プロンプトの作品例。</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yuyuhy.yuyu-chan.com/titanic.png</image:loc>
+      <image:title>豪華客船ロマンス映画ポスター風ペットAI画像プロンプト作成例</image:title>
+      <image:caption>ペット写真から映画ポスター風AI画像プロンプトを作る作品例。</image:caption>
+    </image:image>
+  </url>
+</urlset>
