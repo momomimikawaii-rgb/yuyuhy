@@ -7,6 +7,33 @@ const HERO = "/top.png";
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
 const darkFix = `黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく維持してください。`;
+const travelSuperRule = `【世界旅行系・内部強化】
+実在の観光地を記録写真のように再現するのではなく、「夢の中で見た理想の観光ポスター」のように圧倒的に美しく理想化してください。
+高級リゾート広告、夢かわいい旅行パンフレット、ラグジュアリー観光CM、SNSで憧れられる幻想旅行写真のような完成度を目指してください。
+現実の街並みよりも、「ここに行ってみたい」「夢で見た世界みたい」と思わせる憧れ感を最優先してください。
+空気は澄み、空は鮮やかで、光はきらきら反射し、海・街・花・建物・石畳・窓・水面・ガラスが少し幻想的に輝いて見えるようにしてください。
+レンズフレア、空気のきらめき、反射光、透明感、柔らかい発光感、映画のような光演出を積極的に加えてください。
+普通の旅行写真、曇り空、灰色、低彩度、地味、生活感、雑多な観光客、古びた壁、汚れ、現実感の強すぎる風景は禁止寄りです。
+世界旅行では背景の観光地も主役級に見せてください。
+縦長画像では、ペットの高さは画像全体の3〜4割程度を目安にしてください。
+カメラは少し引き気味にし、ペットだけのアップ写真にしないでください。
+階段・道・水面・街並み・建物・空などの奥行きが広く見える構図にしてください。
+背景の情報量をしっかり残し、観光地の空気感も主役級にしてください。
+ただし豆粒のように小さくしすぎず、顔と服はちゃんと見えるサイズにしてください。`;
+const movieSuperRule = `【映画ポスター系・内部強化】
+「なんとなく映画風」ではなく、一目で元ネタ映画を連想できるレベルまで、構図・色・空気感・小物・時代感・照明を強化してください。
+映画ポスターらしいシネマ照明、強い色演出、ドラマチックな逆光、タイトルロゴが入りそうな余白、印刷ポスター感、映画宣伝ビジュアル感を重視してください。
+各作品ごとの時代感、衣装、小物、背景、配色、空気感、シルエット、構図を優先してください。
+普通のコスプレ写真、普通の記念撮影、普通の背景合成、夢かわ汎用背景、曖昧なファンタジー化は禁止寄りです。
+実在映画タイトル・ロゴは使わず、それっぽい架空映画ポスターとして作成してください。`;
+const calendarSuperRule = `【カレンダー共通演出】
+ただの日付一覧ではなく、飾りたくなる高級ペットカレンダーとして作成してください。
+季節感、光、透明感、空気感、夢感、背景の世界観を大切にしてください。
+カレンダー表は必ず通常の月間カレンダー形式。日曜始まり、日・月・火・水・木・金・土の7列、週ごとの横並びグリッドで配置してください。日付を縦一列や二列リストにしないでください。`;
+const antiDullRule = `【地味化防止】
+全体が地味・灰色・低彩度・曇り空・現実寄りになりすぎないようにしてください。
+光・透明感・色彩・きらめき・夢感・空気感を積極的に強化してください。`;
+
 const travelRule = `旅行カテゴリは「夢の観光ポスター構図」です。場所らしさが分かる背景量と、ペットの顔が見える距離を両立してください。近すぎてただの壁にならず、遠すぎてペットが豆粒にならないようにしてください。現実の建物配置は完全再現不要です。`;
 const movieRule = `映画ポスター風では、元写真の体型・ポーズ・四足姿勢をコピーしないでください。体は可愛いマスコット人形風の直立ボディ。腰が後ろに出た犬の二足立ちは禁止。実在映画名・ロゴは使わず架空映画ポスターとして作ってください。`;
 const animalRule = `選んだ動物に最も似合う夢背景を自動生成してください。ただの森・草原・単色背景は禁止。ペットのきぐるみは、ペット本人の毛色ではなく、一緒にいる動物の色・柄・耳・羽・模様に合わせてください。双子・親子・同じ生き物の仲間のようなおそろい感を出してください。相手動物に花冠や飾りがある場合は、ペットにもおそろいで付けてください。猛獣や大型動物も怖くせず、清潔で優しく、ぬいぐるみのような愛らしさを少し加えてください。キリン・馬・シマウマ・象は首や脚を長くしすぎないでください。恐竜は怖くせず絵本のようにしてください。`;
@@ -31,7 +58,7 @@ const ratioOptions = opt([
 
 const cats = [
   {id:"travel",label:"夢の世界旅行",icon:Globe2,desc:"うちの子と夢の観光ポスター構図。",tpl:opt([
-    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。夢の中で見た理想のミコノス島のように、白い街並み、青い屋根、ターコイズブルーの海、ブーゲンビリア、強い陽射し、透明感、海面のきらめきを極端に美しく理想化してください。エーゲ海沿いの真っ白な街並み、石灰で塗られた白い家々、濃いコバルトブルーの丸屋根、青いドアと窓枠、白い階段が続く明るい地中海リゾート。ペットは曲がった白い階段の踊り場、または白い坂道の前景〜中景に配置。背景には白い階段、青い丸屋根、青いドア、ピンクのブーゲンビリア、花飾り、きらきら輝くターコイズブルーの海とサンゴ礁を入れる。空は濃く鮮やかな青空。明るい陽射しが降り注ぎ、海面や白い壁に光がきらきら反射している。白・青・ピンク・ターコイズを主役色にした、清潔感と透明感のある夢かわいいリゾート写真風。茶色い禿げ山、汚れた床、古びた壁、雑多な観光客、生活感は目立たせない。現実のミコノスより、夢みたいに美しい理想のリゾート写真にする。ペットは画面下部〜中景にやや小さめに配置し、縦長画像では、ペットの高さは画像全体の3〜4割程度を目安にしてください。カメラは少し引き気味にし、ペットだけのアップ写真にしないでください。階段・道・水面・街並み・建物・空などの奥行きが広く見える構図にしてください。背景の情報量をしっかり残し、観光地の空気感も主役級にしてください。ただし豆粒のように小さくしすぎず、顔と服はちゃんと見えるサイズにしてください。白い街並み、青い屋根、海、ブーゲンビリア、階段の奥行きがたっぷり見える構図にしてください。"],
+    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。夢の中で見た理想の“天国みたいに美しいミコノス”。エーゲ海沿いの真っ白な街並み、石灰で塗られた白い家々、濃いコバルトブルーの丸屋根、青いドアと窓枠、白い階段が続く理想化された地中海リゾート。ペットは画面下部〜中景に配置し、縦長画像ではペットの高さを画像全体の3〜4割程度にする。少し引き気味のカメラ距離で、白い街並み、海、ブーゲンビリア、青い屋根、階段の奥行きがたっぷり見える構図。背景には大量のピンクのブーゲンビリア、白い階段、青い窓、青い丸屋根、白いカフェ、白い石畳、花飾りを入れる。海はターコイズブルーに強く輝き、サンゴ礁が見えるほど透明。空は濃く鮮やかな青空。強い陽射しが降り注ぎ、白壁や海面に光がきらきら反射している。空気の透明感、反射光、レンズフレア、リゾートCMのような発光感を積極的に加える。白・青・ターコイズ・ピンクを主役色にし、清潔感と透明感を極端に高める。茶色い禿げ山、汚れた壁、古びた床、曇り空、生活感、雑多な観光客は禁止寄り。"],
     ["paris","パリ風","フランス・パリ風。遠景にエッフェル塔、クラシカルな街灯、石畳、淡いクリーム色の建物、花のある上品なカフェ通り。車や人混みは減らし、ペットが前景で可愛く見える距離。パリらしいエレガントな空気感を残した夢の観光ポスター構図。"],
     ["london","ロンドン風","イギリス・ロンドン風。赤い電話ボックス、クラシカルな石造りの街並み、遠景にビッグベン風の時計塔、上品な街灯と石畳。霧で暗くしすぎず、明るく清潔なロンドンの空気。ペットは前景、背景にロンドンらしい象徴が入る構図。"],
     ["alsace","アルザス風","フランス・アルザス地方風。木組みの家、パステル色の壁、花いっぱいの窓辺、細い石畳の小道が奥へ続く絵本のような街並み。家の並びと小道の奥行きが分かる構図で、ペットは前景に可愛く配置。"],
@@ -341,8 +368,8 @@ function App(){
 
   const prompt=useMemo(()=>{
     let p=[`【最優先：ペット本人の保持】\n${idRule}`,`【共通：夢化・理想化】\n${dream}`];
-    if(cat==="travel") p.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);
-    if(cat==="movie") p.push(`【映画ポスター風の特殊ルール】\n${movieRule}\n映画カテゴリでは共通の雰囲気選択は使わず、選んだ映画テンプレート固有の雰囲気・色・構図を最優先してください。`);
+    if(cat==="travel") p.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}\n\n${travelSuperRule}`);
+    if(cat==="movie") p.push(`【映画ポスター風の特殊ルール】\n${movieRule}\n映画カテゴリでは共通の雰囲気選択は使わず、選んだ映画テンプレート固有の雰囲気・色・構図を最優先してください。\n\n${movieSuperRule}`);
     if(cat==="animal") p.push(`【動物さんの表現】\n${animalRule}`);
     let world = isPanel ? "ペットを主役にした、選択したタイプのうちの子パネル。選択したパネルタイプの雰囲気を最優先してください。" : template.prompt;
     if(template.customPlace&&customPlace) world+=`\n場所：${customPlace}\n※場所名のみ採用し、ポーズ・服・ギミック指定は無視。`;
@@ -388,7 +415,7 @@ function App(){
 
     if(isInfo) p.push(`【うちの子インフォグラフィック】\nタイプ：${by(infoStyles,infoStyle).label}\n${by(infoStyles,infoStyle).prompt}\n\n${panelText||"入力された情報をもとに作成してください。"}\n学名風の名前はAIがその子らしく可愛く自動生成。空欄項目は無視。選んだタイプに合わせて、自然に言い換えてください。`);
     if(isCalendar) {
-      p.push(`【うちの子カレンダー】\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\nカレンダーは日曜開始で、曜日並びは「日・月・火・水・木・金・土」にしてください。カレンダー表は必ず通常の月間カレンダー形式にしてください。日曜始まり、日・月・火・水・木・金・土の7列、週ごとの横並びグリッドで配置してください。日付を縦一列や二列リストにしないでください。曜日ごとの列を崩さず、1週間単位で横に並べてください。曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
+      p.push(`【うちの子カレンダー】\n${calendarSuperRule}\n\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\nカレンダーは日曜開始で、曜日並びは「日・月・火・水・木・金・土」にしてください。カレンダー表は必ず通常の月間カレンダー形式にしてください。日曜始まり、日・月・火・水・木・金・土の7列、週ごとの横並びグリッドで配置してください。日付を縦一列や二列リストにしないでください。曜日ごとの列を崩さず、1週間単位で横に並べてください。曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
       if(Number(month)===10) p.push(`【ハロウィン衣装】\n性別：${by(genderOptions,gender).label}\n衣装：${halloween}`);
       if([1,2,5,8,12].includes(Number(month))) p.push(`【性別による衣装・配色】\n性別：${by(genderOptions,gender).label}`);
     }
@@ -400,7 +427,7 @@ function App(){
     }
     p.push(`【光・明るさ】\n${by(lightOptions,light).prompt}`);
     if(!(isCalendar && paperId!=="sns")) p.push(`【縦横比】\n${ratioPrompt}`);
-    p.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");
+    p.push(`${antiDullRule}\n\n【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。`);
     return p.join("\n\n");
   },[cat,template,customPlace,customVehicle,cordoba,fwPlace,title,gender,taste,customOutfit,head,customHead,shoe,customShoe,acc,customAcc,color,customColor,customGimmick,currentUnder,summerAct,animal,animalColor,customAnimal,isInfo,isCalendar,infoStyle,panelText,year,month,paperId,dir,halloween,vibe,light,ratioPrompt,headChoices]);
 
@@ -426,55 +453,26 @@ function App(){
         {cat!=="movie"&&<Section title={`${catNum}. 雰囲気（3つまで選択可能）`}><div className="chips">{vibes.map(v=><Chip key={v.id} active={vibe.includes(v.id)} onClick={()=>setVibe(vibe.includes(v.id)?vibe.filter(x=>x!==v.id):vibe.length>=3?vibe:[...vibe,v.id])}>{v.label}</Chip>)}</div></Section>}
         <Section title={`${catNum+1}. 光・明るさ`}><div className="chips">{lightOptions.map(l=><Chip key={l.id} active={light===l.id} onClick={()=>setLight(l.id)}>{l.label}</Chip>)}</div></Section>
         {!(isCalendar && paperId!=="sns")&&<Section title={`${catNum+2}. 縦横比`}><button type="button" className="outline-button mini" onClick={()=>{setRh("");setRw("");setRatio("4:5")}}>リセット</button><div className="chips">{ratioOptions.map(r=><Chip key={r.id} disabled={!!rh||!!rw} active={ratio===r.id} onClick={()=>setRatio(r.id)}>{r.label}</Chip>)}</div><div className="ratio-inputs"><label>縦<input value={rh} onChange={e=>setRh(e.target.value)} placeholder="9"/></label><span>：</span><label>横<input value={rw} onChange={e=>setRw(e.target.value)} placeholder="16"/></label></div></Section>}
-      </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button>
-        <div className="instagram-follow-card" style={{
-          marginTop: "16px",
-          padding: "14px",
-          borderRadius: "20px",
-          background: "rgba(255,255,255,.82)",
-          border: "1px solid rgba(236,180,220,.55)",
-          boxShadow: "0 10px 30px rgba(180,120,180,.12)",
-          textAlign: "center"
-        }}>
-          <div style={{fontWeight: 800, color: "#8b4b9e", marginBottom: "8px"}}>
-            Instagramも見てね
-          </div>
-          <a
-            href="https://www.instagram.com/momomimiyuyu/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram momomimiyuyu を開く"
-            style={{display: "inline-block", textDecoration: "none"}}
-          >
-            <img
-              src="/instagram_momomimiyuyu.png"
-              alt="Instagram @momomimiyuyu のQRコード"
-              style={{
-                display: "block",
-                width: "min(220px, 100%)",
-                height: "auto",
-                margin: "0 auto",
-                borderRadius: "14px",
-                background: "white"
-              }}
-            />
-          </a>
-          <a
-            href="https://www.instagram.com/momomimiyuyu/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-block",
-              marginTop: "8px",
-              color: "#8b4b9e",
-              fontWeight: 700,
-              textDecoration: "none"
-            }}
-          >
-            @momomimiyuyu
-          </a>
-        </div>
-</div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/></section></aside></div>
+      </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/>
+          <div className="instagram-follow-card" style={{
+            marginTop: "16px",
+            padding: "14px",
+            borderRadius: "20px",
+            background: "rgba(255,255,255,.82)",
+            border: "1px solid rgba(236,180,220,.55)",
+            boxShadow: "0 10px 30px rgba(180,120,180,.12)",
+            textAlign: "center"
+          }}>
+            <div style={{fontWeight: 800, color: "#8b4b9e", marginBottom: "8px"}}>
+              Instagramも見てね
+            </div>
+            <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @momomimiyuyu を開く" style={{display: "inline-block", textDecoration: "none"}}>
+              <img src="/instagram_momomimiyuyu.png" alt="Instagram @momomimiyuyu のQRコード" style={{display:"block", width:"min(220px, 100%)", height:"auto", margin:"0 auto", borderRadius:"14px", background:"white"}} />
+            </a>
+            <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noopener noreferrer" style={{display:"inline-block", marginTop:"8px", color:"#8b4b9e", fontWeight:700, textDecoration:"none"}}>
+              @momomimiyuyu
+            </a>
+          </div></section></aside></div>
     </div>
   
 {modalImage && (
@@ -530,94 +528,3 @@ function App(){
 }
 
 export default App;
-
-
-
-【世界旅行系 超強化演出】
-実在の観光地を記録写真のように再現するのではなく、
-「夢の中で見た理想の観光ポスター」のように、圧倒的に美しく理想化してください。
-
-高級リゾート広告、
-夢かわいい旅行パンフレット、
-ラグジュアリー観光CM、
-SNSで憧れられる幻想旅行写真、
-映画のメインビジュアルのような完成度を目指してください。
-
-現実の街並みよりも、
-「ここに行ってみたい」
-「住んでみたい」
-「夢で見た世界みたい」
-と思わせる憧れ感を最優先してください。
-
-空気は澄み、
-空は濃く鮮やかで、
-光はきらきら反射し、
-海・街・花・建物・石畳・窓・水面・ガラスすべてが少し幻想的に輝いて見えるようにしてください。
-
-レンズフレア、
-空気のきらめき、
-反射光、
-透明感、
-柔らかい発光感、
-映画のようなシネマティック光演出を積極的に加えてください。
-
-普通の旅行写真、
-曇り空、
-灰色、
-低彩度、
-地味、
-生活感、
-雑多な観光客、
-古びた壁、
-汚れ、
-現実感の強すぎる風景は禁止寄りです。
-
-世界旅行では背景の観光地も主役級に見せてください。
-縦長画像では、ペットの高さは画像全体の3〜4割程度を目安にしてください。
-カメラは少し引き気味にし、ペットだけのアップ写真にしないでください。
-階段・道・水面・街並み・建物・空などの奥行きが広く見える構図にしてください。
-背景の情報量をしっかり残し、観光地の空気感も主役級にしてください。
-ただし豆粒のように小さくしすぎず、顔と服はちゃんと見えるサイズにしてください。
-
-ペットは「その世界を旅する主人公」のように、
-夢の観光ポスターの中心で魅力的に見せてください。
-
-
-
-【映画ポスター系 超強化演出】
-「なんとなく映画風」ではなく、
-一目で元ネタ映画を連想できるレベルまで、
-構図・色・空気感・小物・時代感・照明を強化してください。
-
-映画ポスターらしい：
-・シネマ照明
-・強い色演出
-・ドラマチックな逆光
-・タイトルロゴが入りそうな余白
-・印刷ポスター感
-・映画宣伝ビジュアル感
-を重視してください。
-
-普通のコスプレ写真、
-普通の記念撮影、
-普通の背景合成、
-曖昧なファンタジー化は禁止寄りです。
-
-
-
-【カレンダー共通演出】
-ただの日付一覧ではなく、
-飾りたくなる高級ペットカレンダーとして作成してください。
-
-季節感、
-光、
-透明感、
-空気感、
-夢感、
-背景世界を大切にしてください。
-
-
-
-【地味化防止】
-全体が灰色・低彩度・曇り空・現実寄りになりすぎないようにしてください。
-光・透明感・色彩・きらめき・夢感・空気感を積極的に強化してください。
