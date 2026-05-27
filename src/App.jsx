@@ -1,35 +1,26 @@
 
-const toggleOutfitColor=(id)=>{
-setSelectedOutfitColors(prev=>{
-if(prev.includes(id)) return prev.filter(v=>v!==id);
-if(prev.length>=3) return prev;
-return [...prev,id];
-});
-};
-
-
 const outfitColorChoices=[
-{id:"white",label:"白",color:"#ffffff"},
-{id:"beige",label:"ベージュ",color:"#e8d7b9"},
-{id:"brown",label:"茶",color:"#8b5a3c"},
-{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec"},
-{id:"pink",label:"ピンク",color:"#ff6fb5"},
-{id:"deepPink",label:"濃いピンク",color:"#e11d74"},
-{id:"red",label:"赤",color:"#e53935"},
-{id:"wine",label:"ワインレッド",color:"#7b1e3a"},
-{id:"orange",label:"オレンジ",color:"#ff8a3d"},
-{id:"yellow",label:"黄色",color:"#ffd84d"},
-{id:"sky",label:"水色",color:"#7dd3fc"},
-{id:"green",label:"緑",color:"#4caf50"},
-{id:"khaki",label:"カーキ",color:"#7a8450"},
-{id:"moss",label:"モスグリーン",color:"#556b2f"},
-{id:"fuji",label:"藤色",color:"#c4b5fd"},
-{id:"purple",label:"紫",color:"#9333ea"},
-{id:"navyPurple",label:"紫紺",color:"#47306b"},
-{id:"navy",label:"紺",color:"#1e3a8a"},
-{id:"black",label:"黒",color:"#111111"},
-{id:"gold",label:"金",color:"#d4af37"},
-{id:"silver",label:"銀",color:"#c0c0c0"},
+{id:"white",label:"白",color:"#ffffff",prompt:"白を基調にした清潔感のある服セット。"},
+{id:"beige",label:"ベージュ",color:"#e8d7b9",prompt:"ベージュを基調にしたやわらかく上品な服セット。"},
+{id:"brown",label:"茶",color:"#8b5a3c",prompt:"茶色を基調にしたナチュラルであたたかい服セット。"},
+{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec",prompt:"ベビーピンクを基調にした夢かわいい服セット。"},
+{id:"pink",label:"ピンク",color:"#ff6fb5",prompt:"ピンクを基調にした可愛い服セット。"},
+{id:"deepPink",label:"濃いピンク",color:"#e11d74",prompt:"濃いピンクをアクセントにした華やかな服セット。"},
+{id:"red",label:"赤",color:"#e53935",prompt:"赤を基調にした印象的で可愛い服セット。"},
+{id:"wine",label:"ワインレッド",color:"#7b1e3a",prompt:"ワインレッドを基調にした上品でクラシカルな服セット。"},
+{id:"orange",label:"オレンジ",color:"#ff8a3d",prompt:"オレンジを基調にした明るく元気な服セット。"},
+{id:"yellow",label:"黄色",color:"#ffd84d",prompt:"黄色を基調にした明るく可愛い服セット。"},
+{id:"sky",label:"水色",color:"#7dd3fc",prompt:"水色を基調にした透明感のある服セット。"},
+{id:"green",label:"緑",color:"#4caf50",prompt:"緑を基調にした爽やかな服セット。"},
+{id:"khaki",label:"カーキ",color:"#7a8450",prompt:"カーキを基調にした落ち着いた服セット。"},
+{id:"moss",label:"モスグリーン",color:"#556b2f",prompt:"モスグリーンを基調にした深みのある服セット。"},
+{id:"fuji",label:"藤色",color:"#c4b5fd",prompt:"藤色を基調にした上品で淡い夢かわ服セット。"},
+{id:"purple",label:"紫",color:"#9333ea",prompt:"紫を基調にした華やかで幻想的な服セット。"},
+{id:"navyPurple",label:"紫紺",color:"#47306b",prompt:"紫紺を基調にした大人っぽく上品な服セット。"},
+{id:"navy",label:"紺",color:"#1e3a8a",prompt:"紺を基調にした落ち着いた服セット。"},
+{id:"black",label:"黒",color:"#111111",prompt:"黒を基調にした引き締まった服セット。"},
+{id:"gold",label:"金",color:"#d4af37",prompt:"金をアクセントにした華やかで高級感のある服セット。"},
+{id:"silver",label:"銀",color:"#c0c0c0",prompt:"銀をアクセントにした上品で透明感のある服セット。"},
 ];
 
 import React, { useMemo, useState } from "react";
@@ -37,7 +28,7 @@ import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, 
 
 const SISTER = "https://yuyupm.yuyu-chan.com";
 const HERO = "/top.png";
-const UPDATED_AT = "2026/05/28（木） 04:40頃";
+const UPDATED_AT = "2026/05/28（木） 05:15頃";
 
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
@@ -155,7 +146,7 @@ const headUnderwater = opt([["seawalk","シーウォーク風金魚鉢ヘルメ�
 const headVehicle = opt([["goggles","ゴーグル","乗り物や冒険に似合う可愛いゴーグル。"],["pilot_hat","パイロット帽","可愛いパイロット帽。"]]);
 const shoes = opt([["auto","おまかせ","世界観に合う靴や足元。"],["keep","なし（元写真のまま）","靴は追加せず元写真の足元を維持。"],["sandals","サンダル","可愛いサンダル。"],["boots","ブーツ","可愛いブーツ。"]]);
 const accessories = opt([["auto","おまかせ","世界観に合うアクセサリーをAIが可愛く選ぶ。"],["keep","なし（元写真のまま）","アクセサリーは新しく追加しない。"],["neck","首飾り","可愛い首飾り。"],["bracelet","ブレスレット","小さな可愛いブレスレット。"],["bib","スタイ","可愛いスタイ。"]]);
-const colors = opt([["auto","おまかせ","世界観に合わせた色。"],["pink","ピンク系","ピンク系。"],["blue","水色系","水色系。"],["white","白系","白系。"],["lav","ラベンダー系","ラベンダー系。"],["mint","ミント系","ミント系。"],["red","赤系","赤系。"]]);
+const colors = opt([["auto","おまかせ","世界観と服の基本方針に合わせて、一番可愛く見える服セットの色合いへ自動調整してください。"],...outfitColorChoices.map(c=>[c.id,c.label,c.prompt,{color:c.color}])]);
 
 const under = opt([["auto","おまかせ","選んだ夏・海・水中テーマに一番似合う安全で可愛いギミックをAIが選ぶ。水中世界では透明な海底世界、珊瑚、泡、光、海底ミニチュア空間を優先する。",{block:[]}],["none","なし","",{block:[]}],["turtle","亀の上","大きな海亀の背中に優しく乗る。",{block:["ski","split"]}],["shell","貝の上","真珠のような大きな貝の上。",{block:["ski","split"]}], ["bottle_dome","ドーム型瓶","大きな透明ドーム型のガラス瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。瓶の中は海底神殿・小さな宮殿・深海プリンセス空間のようにし、白砂、パステル珊瑚、貝殻、真珠、宝石、泡、光の粒を入れる。宝石箱のような発光感と高級感を出し、瓶の外側にも神秘的な海底の青い奥行きを見せる。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["bottle_sand","斜めに砂へ埋まった瓶","海底の白砂へ斜めに埋まっている透明なガラス瓶。横倒しではなく、浅瀬の白砂に斜めに差し込まれて少し埋まった瓶にしてください。瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。浅瀬、白砂、珊瑚礁、泡、貝殻、真珠、光の差し込み、漂流ファンタジー感を入れ、海底で見つけた夢の小瓶のように見せる。背景は明るい浅瀬と透明なサンゴ礁の海。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["dolphin","イルカの上","優しいイルカの背中。",{block:["ski","split"]}],["orca","オルカの上","優しいオルカの背中。",{block:["ski","split"]}]]);
 const summerActs = opt([["none","なし",""],["split","スイカ割り","砂浜など安全な場所でスイカ割り。動物の背中では行わない。"],["watermelon","スイカを食べる","大きなスイカを嬉しそうに食べる。"],["ice","ソーダアイス","水色のソーダアイスを嬉しそうに食べる。"],["ski","水上スキー","透明な海で可愛く水上スキー。"]]);
@@ -352,8 +343,15 @@ function recommendedLight(categoryId, templateId){
 
 function App(){
   const [modalImage,setModalImage]=useState(null);
-  const [cat,setCat]=useState("travel")
-const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
+  const [cat,setCat]=useState("travel");
+  const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
+  const toggleOutfitColor=(id)=>{
+    setSelectedOutfitColors(prev=>{
+      if(prev.includes(id)) return prev.filter(v=>v!==id);
+      if(prev.length>=3) return prev;
+      return [...prev,id];
+    });
+  };
   const [tpl,setTpl]=useState({travel:"mykonos",summer:"beach",vehicle:"sl",movie:"ship",animal:"friend",panel:"info"});
   const [rec,setRec]=useState(true), [copied,setCopied]=useState(false);
   const [customPlace,setCustomPlace]=useState(""), [customVehicle,setCustomVehicle]=useState("");
@@ -431,7 +429,7 @@ const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
       const ac = customAcc || (accMode==="auto" ? by(accessories,"auto").prompt : accMode==="keep" ? "" : acc.map(id=>by(accessories,id).prompt).filter(Boolean).join("\n"));
       if(ac) p.push(`【アクセサリー】\n${ac}`);
       if(cat==="summer" && template.id==="fireworks" && outfit.startsWith("yukata")) p.push("【服セットの色合い】\n浴衣で選んだ色を最優先してください。追加の服色指定で浴衣の色を上書きしないでください。");
-      else p.push(`【服セットの色合い】\n${customColor||by(colors,color).prompt}`);
+      else p.push(`【服セットの色合い】\n${customColor||selectedOutfitColorPrompt||by(colors,color).prompt}`);
     }
 
     if(cat==="summer"){
@@ -465,14 +463,14 @@ const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
     if(!(isCalendar && paperId!=="sns")) p.push(`【縦横比】\n${ratioPrompt}`);
     p.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");
     return p.join("\n\n");
-  },[cat,template,customPlace,customVehicle,cordoba,fwPlace,title,gender,taste,outfit,outfitChoices,customOutfit,head,customHead,shoe,customShoe,acc,accMode,customAcc,color,customColor,customGimmick,currentUnder,summerAct,animal,animalColor,customAnimal,isInfo,isCalendar,infoStyle,panelText,year,month,paperId,dir,halloween,vibe,light,ratioPrompt,headChoices]);
+  },[cat,template,customPlace,customVehicle,cordoba,fwPlace,title,gender,taste,outfit,outfitChoices,customOutfit,head,customHead,shoe,customShoe,acc,accMode,customAcc,color,customColor,selectedOutfitColorPrompt,customGimmick,currentUnder,summerAct,animal,animalColor,customAnimal,isInfo,isCalendar,infoStyle,panelText,year,month,paperId,dir,halloween,vibe,light,ratioPrompt,headChoices]);
 
   const copy=async()=>{await navigator.clipboard.writeText(prompt);setCopied(true);setTimeout(()=>setCopied(false),1200)};
   const toggle=(arr,setter,id)=>setter(arr.includes(id)?arr.filter(x=>x!==id):[...arr,id]);
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：{UPDATED_AT}</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（木） 05:15頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
@@ -489,26 +487,22 @@ const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
               </div>
             : <Chip key={o.id} disabled={!!customOutfit} active={!customOutfit&&outfit===o.id} onClick={()=>setOutfit(o.id)}>{o.label}</Chip>)}</div>
           
-<label>服の色合い（3つまで）</label>
-<div className="color-chip-wrap">
-{outfitColorChoices.map(c=>
-<button
-type="button"
-key={c.id}
-className={`color-chip ${selectedOutfitColors.includes(c.id)?"active":""}`}
-style={{background:c.color}}
-title={c.label}
-onClick={()=>toggleOutfitColor(c.id)}
-/>)}
-</div>
-
 <label>服の自由記入</label>
 <input value={customOutfit} onChange={e=>setCustomOutfit(e.target.value)} placeholder="例：水色チェックのフリルワンピース"/>
           <>
             <div className="subhead"><h2>頭装備</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomHead("");setHead("auto")}}>リセット</button></div><div className="chips">{headChoices.map(h=><Chip key={h.id} disabled={!!customHead} active={head===h.id} onClick={()=>setHead(h.id)}>{h.label}</Chip>)}</div><input value={customHead} onChange={e=>setCustomHead(e.target.value)} placeholder="頭装備の自由記入"/>
             <div className="subhead"><h2>靴</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomShoe("");setShoe("auto")}}>リセット</button></div><div className="chips">{shoes.map(s=><Chip key={s.id} disabled={!!customShoe} active={shoe===s.id} onClick={()=>setShoe(s.id)}>{s.label}</Chip>)}</div><input value={customShoe} onChange={e=>setCustomShoe(e.target.value)} placeholder="靴の自由記入"/>
             <div className="subhead"><h2>アクセサリー</h2><button type="button" className="outline-button mini" onClick={()=>{setAcc([]);setAccMode("auto");setCustomAcc("")}}>リセット</button></div><div className="chips">{accessories.map(a=>a.id==="auto"||a.id==="keep" ? <Chip key={a.id} active={accMode===a.id&&!customAcc} onClick={()=>{setAcc([]);setAccMode(a.id);setCustomAcc("")}}>{a.label}</Chip> : <Chip key={a.id} active={accMode==="select"&&acc.includes(a.id)} onClick={()=>{setAccMode("select");toggle(acc,setAcc,a.id)}}>{a.label}</Chip>)}</div><input value={customAcc} onChange={e=>{setCustomAcc(e.target.value); if(e.target.value) setAccMode("select")}} placeholder="アクセサリー自由記入"/>
-            {!(cat==="summer"&&template.id==="fireworks"&&outfit.startsWith("yukata"))&&<><div className="subhead"><h2>服セットの色合い</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomColor("");setColor("auto")}}>リセット</button></div><div className="chips">{colors.map(c=><Chip key={c.id} disabled={!!customColor} active={color===c.id} onClick={()=>setColor(c.id)}>{c.label}</Chip>)}</div><input value={customColor} onChange={e=>setCustomColor(e.target.value)} placeholder="色合い自由記入"/></>}
+            {!(cat==="summer"&&template.id==="fireworks"&&outfit.startsWith("yukata"))&&<><div className="subhead"><h2>服セットの色合い</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomColor("");setColor("auto");setSelectedOutfitColors([])}}>リセット</button></div><div className="color-chip-wrap">{colors.filter(c=>c.id!=="auto").map(c=><button
+  type="button"
+  key={c.id}
+  className={`color-chip ${selectedOutfitColors.includes(c.id)?"active":""}`}
+  style={{background:c.color}}
+  title={c.label}
+  aria-label={c.label}
+  disabled={!!customColor}
+  onClick={()=>toggleOutfitColor(c.id)}
+/>)}</div><p className="selected">最大3色まで選べます。選択中の色は紫の枠とチェックで表示されます。</p><input value={customColor} onChange={e=>setCustomColor(e.target.value)} placeholder="色合い自由記入"/></>}
           </></Section>}
         {cat==="movie"&&<Section title={<><Film size={19}/>架空タイトル</>}><input value={title} onChange={e=>setTitle(e.target.value)} placeholder="例：白雪ゆゆ姫"/></Section>}
         {cat==="summer"&&<Section title={<><Waves size={19}/>夏・水中ギミック</>}><button type="button" className="outline-button mini" onClick={()=>{setCustomGimmick("");setUnder("auto");setSummerAct("none")}}>リセット</button><label>水中・海ギミック</label><div className="chips">{under.map(u=><Chip key={u.id} disabled={!!customGimmick} active={underId===u.id} onClick={()=>{setUnder(u.id);if((u.block||[]).includes(summerAct))setSummerAct("none")}}>{u.label}</Chip>)}</div><label>夏の小物・動き</label><div className="chips">{(template.id==="underwater"?summerActs.filter(s=>s.id==="none"):summerActs).map(s=><Chip key={s.id} disabled={!!customGimmick||blocked.includes(s.id)} active={summerAct===s.id} onClick={()=>setSummerAct(s.id)}>{s.label}</Chip>)}</div><label>ギミック自由記入</label><input value={customGimmick} onChange={e=>setCustomGimmick(e.target.value)} placeholder="例：大きな貝殻のソファ"/></Section>}
