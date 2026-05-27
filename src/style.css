@@ -150,3 +150,21 @@
   cursor:not-allowed;
   transform:none;
 }
+
+
+/* --- color chip visibility repair --- */
+.color-chip{
+  border:2px solid rgba(71,85,105,.22) !important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.72),0 4px 12px rgba(167,139,250,.18) !important;
+}
+.color-chip[title="白"],
+.color-chip[title="ベージュ"],
+.color-chip[title="ベビーピンク"],
+.color-chip[title="黄色"],
+.color-chip[title="銀"]{
+  border-color:rgba(71,85,105,.38) !important;
+}
+.color-chip.active{
+  outline:4px solid #7c3aed !important;
+  outline-offset:3px !important;
+}

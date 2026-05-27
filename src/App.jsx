@@ -27,7 +27,7 @@ import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, 
 
 const SISTER = "https://yuyupm.yuyu-chan.com";
 const HERO = "/top.png";
-const UPDATED_AT = "2026/05/28（木） 05:40頃";
+const UPDATED_AT = "2026/05/28（木） 06:10頃";
 
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
@@ -352,7 +352,7 @@ function App(){
     });
   };
   const selectedOutfitColorPrompt = selectedOutfitColors.length
-    ? selectedOutfitColors.map(id=>by(colors,id).prompt).join("\n")
+    ? selectedOutfitColors.map(id=>outfitColorChoices.find(c=>c.id===id)?.prompt).filter(Boolean).join("\n")
     : "";
   const [tpl,setTpl]=useState({travel:"mykonos",summer:"beach",vehicle:"sl",movie:"ship",animal:"friend",panel:"info"});
   const [rec,setRec]=useState(true), [copied,setCopied]=useState(false);
@@ -472,7 +472,7 @@ function App(){
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（木） 05:40頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（木） 06:10頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
@@ -494,11 +494,11 @@ function App(){
             <div className="subhead"><h2>頭装備</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomHead("");setHead("auto")}}>リセット</button></div><div className="chips">{headChoices.map(h=><Chip key={h.id} disabled={!!customHead} active={head===h.id} onClick={()=>setHead(h.id)}>{h.label}</Chip>)}</div><input value={customHead} onChange={e=>setCustomHead(e.target.value)} placeholder="頭装備の自由記入"/>
             <div className="subhead"><h2>靴</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomShoe("");setShoe("auto")}}>リセット</button></div><div className="chips">{shoes.map(s=><Chip key={s.id} disabled={!!customShoe} active={shoe===s.id} onClick={()=>setShoe(s.id)}>{s.label}</Chip>)}</div><input value={customShoe} onChange={e=>setCustomShoe(e.target.value)} placeholder="靴の自由記入"/>
             <div className="subhead"><h2>アクセサリー</h2><button type="button" className="outline-button mini" onClick={()=>{setAcc([]);setAccMode("auto");setCustomAcc("")}}>リセット</button></div><div className="chips">{accessories.map(a=>a.id==="auto"||a.id==="keep" ? <Chip key={a.id} active={accMode===a.id&&!customAcc} onClick={()=>{setAcc([]);setAccMode(a.id);setCustomAcc("")}}>{a.label}</Chip> : <Chip key={a.id} active={accMode==="select"&&acc.includes(a.id)} onClick={()=>{setAccMode("select");toggle(acc,setAcc,a.id)}}>{a.label}</Chip>)}</div><input value={customAcc} onChange={e=>{setCustomAcc(e.target.value); if(e.target.value) setAccMode("select")}} placeholder="アクセサリー自由記入"/>
-            {!(cat==="summer"&&template.id==="fireworks"&&outfit.startsWith("yukata"))&&<><div className="subhead"><h2>服セットの色合い</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomColor("");setColor("auto");setSelectedOutfitColors([])}}>リセット</button></div><div className="color-chip-wrap">{colors.filter(c=>c.id!=="auto").map(c=><button
+            {!(cat==="summer"&&template.id==="fireworks"&&outfit.startsWith("yukata"))&&<><div className="subhead"><h2>服セットの色合い</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomColor("");setColor("auto");setSelectedOutfitColors([])}}>リセット</button></div><div className="color-chip-wrap">{outfitColorChoices.map(c=><button
   type="button"
   key={c.id}
   className={`color-chip ${selectedOutfitColors.includes(c.id)?"active":""}`}
-  style={{background:c.extra?.color||"#fff"}}
+  style={{backgroundColor:c.color}}
   title={c.label}
   aria-label={c.label}
   disabled={!!customColor}
