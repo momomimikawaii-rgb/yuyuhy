@@ -1,3 +1,37 @@
+
+const toggleOutfitColor=(id)=>{
+setSelectedOutfitColors(prev=>{
+if(prev.includes(id)) return prev.filter(v=>v!==id);
+if(prev.length>=3) return prev;
+return [...prev,id];
+});
+};
+
+
+const outfitColorChoices=[
+{id:"white",label:"白",color:"#ffffff"},
+{id:"beige",label:"ベージュ",color:"#e8d7b9"},
+{id:"brown",label:"茶",color:"#8b5a3c"},
+{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec"},
+{id:"pink",label:"ピンク",color:"#ff6fb5"},
+{id:"deepPink",label:"濃いピンク",color:"#e11d74"},
+{id:"red",label:"赤",color:"#e53935"},
+{id:"wine",label:"ワインレッド",color:"#7b1e3a"},
+{id:"orange",label:"オレンジ",color:"#ff8a3d"},
+{id:"yellow",label:"黄色",color:"#ffd84d"},
+{id:"sky",label:"水色",color:"#7dd3fc"},
+{id:"green",label:"緑",color:"#4caf50"},
+{id:"khaki",label:"カーキ",color:"#7a8450"},
+{id:"moss",label:"モスグリーン",color:"#556b2f"},
+{id:"fuji",label:"藤色",color:"#c4b5fd"},
+{id:"purple",label:"紫",color:"#9333ea"},
+{id:"navyPurple",label:"紫紺",color:"#47306b"},
+{id:"navy",label:"紺",color:"#1e3a8a"},
+{id:"black",label:"黒",color:"#111111"},
+{id:"gold",label:"金",color:"#d4af37"},
+{id:"silver",label:"銀",color:"#c0c0c0"},
+];
+
 import React, { useMemo, useState } from "react";
 import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, PawPrint, Info, Image as ImageIcon, Link as LinkIcon, X } from "lucide-react";
 
@@ -318,7 +352,8 @@ function recommendedLight(categoryId, templateId){
 
 function App(){
   const [modalImage,setModalImage]=useState(null);
-  const [cat,setCat]=useState("travel");
+  const [cat,setCat]=useState("travel")
+const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
   const [tpl,setTpl]=useState({travel:"mykonos",summer:"beach",vehicle:"sl",movie:"ship",animal:"friend",panel:"info"});
   const [rec,setRec]=useState(true), [copied,setCopied]=useState(false);
   const [customPlace,setCustomPlace]=useState(""), [customVehicle,setCustomVehicle]=useState("");
@@ -453,7 +488,22 @@ function App(){
                 <span className="auto-chip-tastes">（{tasteOptions.map(t=><label className="radio-inline" key={t.id} onClick={e=>e.stopPropagation()}><input type="radio" name="taste" checked={taste===t.id} disabled={!!customOutfit||outfit!=="auto"} onChange={()=>{setOutfit("auto");setTaste(t.id)}}/>{t.label}</label>)}）</span>
               </div>
             : <Chip key={o.id} disabled={!!customOutfit} active={!customOutfit&&outfit===o.id} onClick={()=>setOutfit(o.id)}>{o.label}</Chip>)}</div>
-          <label>服の自由記入</label><input value={customOutfit} onChange={e=>setCustomOutfit(e.target.value)} placeholder="例：水色チェックのフリルワンピース"/>
+          
+<label>服の色合い（3つまで）</label>
+<div className="color-chip-wrap">
+{outfitColorChoices.map(c=>
+<button
+type="button"
+key={c.id}
+className={`color-chip ${selectedOutfitColors.includes(c.id)?"active":""}`}
+style={{background:c.color}}
+title={c.label}
+onClick={()=>toggleOutfitColor(c.id)}
+/>)}
+</div>
+
+<label>服の自由記入</label>
+<input value={customOutfit} onChange={e=>setCustomOutfit(e.target.value)} placeholder="例：水色チェックのフリルワンピース"/>
           <>
             <div className="subhead"><h2>頭装備</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomHead("");setHead("auto")}}>リセット</button></div><div className="chips">{headChoices.map(h=><Chip key={h.id} disabled={!!customHead} active={head===h.id} onClick={()=>setHead(h.id)}>{h.label}</Chip>)}</div><input value={customHead} onChange={e=>setCustomHead(e.target.value)} placeholder="頭装備の自由記入"/>
             <div className="subhead"><h2>靴</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomShoe("");setShoe("auto")}}>リセット</button></div><div className="chips">{shoes.map(s=><Chip key={s.id} disabled={!!customShoe} active={shoe===s.id} onClick={()=>setShoe(s.id)}>{s.label}</Chip>)}</div><input value={customShoe} onChange={e=>setCustomShoe(e.target.value)} placeholder="靴の自由記入"/>
@@ -527,3 +577,6 @@ function App(){
 }
 
 export default App;
+
+/* calendar global size rule */
+// カレンダー記入欄を除いた実質的な絵エリア基準で、ペットの高さは35〜45％程度にしてください。背景・季節感・小物・世界観がしっかり見える構図にしてください。
