@@ -96,13 +96,13 @@ const cordobaColors = opt([
   ["blue","爽やかブルー","白壁、青鉢多め、白・水色・淡ピンクの花を使った爽やかな配色。"]
 ]);
 
-const genderOptions = opt([["male","オス","男の子向けの色・形で自然に調整。"],["female","メス","女の子向けの色・形で自然に調整。"]]);
+const genderOptions = opt([["male","男の子服","男の子向けの色・形で自然に調整。"],["female","女の子服","女の子向けの色・形で自然に調整。"]]);
 const tasteOptions = opt([["elegant","エレガント","上品でエレガントな服装。"],["sporty","スポーティ","元気でスポーティな服装。"],["casual","カジュアル","自然で可愛いカジュアル服。"],["frill","フリル","フリルを使った可愛い服。"],["lolita","ロリータ","ロリータ風の可愛い服。"],["goth","ゴスロリ","ゴスロリ風の可愛い服。"],["punk","プリンセス","可愛いプリンセス風の服。"]]);
 
 const baseOutfits = opt([["keep","なし（元写真のまま）","服は新しく追加せず、元写真の服や自然な姿を維持。"],["auto","おまかせ","選んだ世界観に似合う服。"]]);
-const mykonosOutfits = opt([["swim_m","水着（オス）","男の子向けの爽やかな夏リゾート水着。"],["swim_f","水着（メス）","女の子向けの可愛い夏リゾート水着。"],["summer_frill","夏向きフリル付きワンピース","夏向きの軽やかなフリル付きワンピース。"],["summer_sport","夏向きスポーティセットアップ","夏向きのスポーティセットアップ。"],["summer_casual","夏向けカジュアルセットアップ","夏向けカジュアルセットアップ。"]]);
-const underwaterOutfits = opt([ ["water_swim_f","水着（メス）","女の子向けの可愛い水中・海向け水着。"],["water_swim_m","水着（オス）","男の子向けの爽やかな水中・海向け水着。"],["scuba","スキューバダイビングスーツ","明るい海に似合う可愛いスキューバダイビングスーツ。"],["light_dive","軽装ダイビングスーツ","軽やかで可愛い水中探検用ダイビングスーツ。"],["marine_rescue","マリンレスキュー風","水中レスキュー隊のような爽やかで安全そうなマリン服。"],["aqua_explorer","水中探検隊風","夢の水中探検隊のような可愛い服。"]]);
-const fireworksOutfits = opt([["yukata_m","紺色浴衣（オス）","男の子向けの紺色系浴衣。帯と和柄を自然に合わせてください。"],["yukata_f","ピンク浴衣（メス）","女の子向けのピンク系浴衣。帯と和柄を自然に合わせてください。"]]);
+const mykonosOutfits = opt([["swim_m","水着（男の子服）","男の子向けの爽やかな夏リゾート水着。"],["swim_f","水着（女の子服）","女の子向けの可愛い夏リゾート水着。"],["summer_frill","夏向きフリル付きワンピース","夏向きの軽やかなフリル付きワンピース。"],["summer_sport","夏向きスポーティセットアップ","夏向きのスポーティセットアップ。"],["summer_casual","夏向けカジュアルセットアップ","夏向けカジュアルセットアップ。"]]);
+const underwaterOutfits = opt([ ["water_swim_f","水着（女の子服）","女の子向けの可愛い水中・海向け水着。"],["water_swim_m","水着（男の子服）","男の子向けの爽やかな水中・海向け水着。"],["scuba","スキューバダイビングスーツ","明るい海に似合う可愛いスキューバダイビングスーツ。"],["light_dive","軽装ダイビングスーツ","軽やかで可愛い水中探検用ダイビングスーツ。"],["marine_rescue","マリンレスキュー風","水中レスキュー隊のような爽やかで安全そうなマリン服。"],["aqua_explorer","水中探検隊風","夢の水中探検隊のような可愛い服。"]]);
+const fireworksOutfits = opt([["yukata_m","紺色浴衣（男の子服）","男の子向けの紺色系浴衣。帯と和柄を自然に合わせてください。"],["yukata_f","ピンク浴衣（女の子服）","女の子向けのピンク系浴衣。帯と和柄を自然に合わせてください。"]]);
 
 const kyotoOutfits = opt([["furisode","振袖着物（友禅）","華やかな友禅柄の振袖着物。"],["taisho","大正ロマン風着物","大正ロマン風の上品で可愛い着物。"]]);
 const vehicleWear = {
@@ -114,7 +114,7 @@ const vehicleWear = {
 };
 const animalWear = opt([["k_auto","おまかせ（きぐるみ）","一緒にいる動物とおそろいに見える可愛いきぐるみ姿。動物の色・柄・耳・羽・模様・花冠などを合わせ、双子・親子・仲間のように見せる。",{kigurumi:true}],["keep","なし（元写真のまま）","元写真のまま。"]]);
 
-const headBase = opt([["keep","なし（元写真のまま）","頭装備は追加せず、元写真のまま。"],["auto","おまかせ","世界観に合う頭装備。"],["ribbon","リボン","可愛いリボン。"],["frill","フリル帽","可愛いフリル帽。"],["flower","花冠","可愛い花冠。"],["crown","王冠","小さな可愛い王冠。"]]);
+const headBase = opt([["keep","なし（元写真のまま）","頭装備は追加せず、元写真のまま。"],["auto","おまかせ","世界観に合う頭装備。"],["ribbon","リボン","可愛いリボン。"],["frill","フリル帽","可愛いフリル帽。"],["flower","花冠","可愛い花冠。"],["crown","ティアラ","小さな可愛いティアラ。"]]);
 const headSummer = opt([["straw","麦わら帽子","夏らしい麦わら帽子。"]]);
 const headUnderwater = opt([["seawalk","シーウォーク風金魚鉢ヘルメット","シーウォークのような丸い透明ヘルメット。顔は見えるようにしてください。"],["clear_helmet","丸型透明ヘルメット","丸い透明潜水ヘルメット。顔は隠しすぎない。"],["future_helmet","未来風透明ヘルメット","未来風の透明ヘルメット。可愛く安全そうに。"]]);
 
@@ -415,7 +415,7 @@ function App(){
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/27（水） 16:05頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/27（水） 19:20頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
@@ -525,3 +525,5 @@ export default App;
 // animalDefaultFixMemo: 動物さんと一緒は頭と靴をおまかせデフォルト
 
 // colorChipMemo: 服色はカラーチップ複数選択3つまで
+
+// TODO: 中性的な服 を追加
