@@ -27,7 +27,7 @@ import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, 
 
 const SISTER = "https://yuyupm.yuyu-chan.com";
 const HERO = "/top.png";
-const UPDATED_AT = "2026/05/28（木） 06:30頃";
+const UPDATED_AT = "2026/05/28（木） 06:45頃";
 
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
@@ -145,6 +145,16 @@ const headUnderwater = opt([["seawalk","シーウォーク風金魚鉢ヘルメ�
 const headVehicle = opt([["goggles","ゴーグル","乗り物や冒険に似合う可愛いゴーグル。"],["pilot_hat","パイロット帽","可愛いパイロット帽。"]]);
 const shoes = opt([["auto","おまかせ","世界観に合う靴や足元。"],["keep","なし（元写真のまま）","靴は追加せず元写真の足元を維持。"],["sandals","サンダル","可愛いサンダル。"],["boots","ブーツ","可愛いブーツ。"]]);
 const accessories = opt([["auto","おまかせ","世界観に合うアクセサリーをAIが可愛く選ぶ。"],["keep","なし（元写真のまま）","アクセサリーは新しく追加しない。"],["neck","首飾り","可愛い首飾り。"],["bracelet","ブレスレット","小さな可愛いブレスレット。"],["bib","スタイ","可愛いスタイ。"]]);
+
+const outfitMoodOptions = opt([
+["auto","おまかせ","世界観に合う普通服へ自動調整。"],
+["casual","カジュアル","自然で可愛いカジュアル服。"],
+["elegant","エレガント","上品で高級感のある普通服。"],
+["sporty","スポーティ","元気で動きやすいスポーティ服。"],
+["yumekawa","夢かわ","パステル中心の夢かわ服。"],
+["classical","クラシカル","アンティーク感のあるクラシカル服。"]
+]);
+
 const colors = opt([["auto","おまかせ","世界観と服の基本方針に合わせて、一番可愛く見える服セットの色合いへ自動調整してください。"],...outfitColorChoices.map(c=>[c.id,c.label,c.prompt,{color:c.color}])]);
 
 const under = opt([["auto","おまかせ","選んだ夏・海・水中テーマに一番似合う安全で可愛いギミックをAIが選ぶ。水中世界では透明な海底世界、珊瑚、泡、光、海底ミニチュア空間を優先する。",{block:[]}],["none","なし","",{block:[]}],["turtle","亀の上","大きな海亀の背中に優しく乗る。",{block:["ski","split"]}],["shell","貝の上","真珠のような大きな貝の上。",{block:["ski","split"]}], ["bottle_dome","ドーム型瓶","大きな透明ドーム型のガラス瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。瓶の中は海底神殿・小さな宮殿・深海プリンセス空間のようにし、白砂、パステル珊瑚、貝殻、真珠、宝石、泡、光の粒を入れる。宝石箱のような発光感と高級感を出し、瓶の外側にも神秘的な海底の青い奥行きを見せる。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["bottle_sand","斜めに砂へ埋まった瓶","海底の白砂へ斜めに埋まっている透明なガラス瓶。横倒しではなく、浅瀬の白砂に斜めに差し込まれて少し埋まった瓶にしてください。瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。浅瀬、白砂、珊瑚礁、泡、貝殻、真珠、光の差し込み、漂流ファンタジー感を入れ、海底で見つけた夢の小瓶のように見せる。背景は明るい浅瀬と透明なサンゴ礁の海。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["dolphin","イルカの上","優しいイルカの背中。",{block:["ski","split"]}],["orca","オルカの上","優しいオルカの背中。",{block:["ski","split"]}]]);
@@ -424,7 +434,7 @@ function App(){
         || (selectedOutfit.id==="auto"
           ? `${by(genderOptions,gender).prompt}\n${by(tasteOptions,taste).prompt}\n選んだ世界観に最も似合う服として、上記の方針で可愛く自動調整してください。`
           : `${by(genderOptions,gender).prompt}\n${selectedOutfit.prompt}`);
-      p.push(`【服】\n${wear}`);
+      p.push(`【服の種類】\n${wear}`);
       if(cat==="animal" && ((selectedOutfit.kigurumi && !customOutfit) || customOutfit.includes("きぐるみ"))) p.push(`【きぐるみ専用補正】\n${kigurumiRule}`);
       p.push(`【頭装備】\n${customHead||by(headChoices,head).prompt}`);
       p.push(`【靴】\n${customShoe||by(shoes,shoe).prompt}`);
@@ -472,7 +482,7 @@ function App(){
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（木） 06:30頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（木） 06:45頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
@@ -480,7 +490,13 @@ function App(){
         <Section title={<><Icon size={19}/>テンプレを選択</>}><div className="chips">{category.tpl.map(t=><Chip key={t.id} active={template.id===t.id} onClick={()=>setTpl({...tpl,[cat]:t.id})}>{t.label}</Chip>)}</div>{template.customPlace&&<><p className="selected">※場所のみ記入。ギミック・ポーズ・服装指定は無視されます。</p><input value={customPlace} onChange={e=>setCustomPlace(e.target.value)} placeholder="例：フィレンツェ、モロッコの青い街"/></>}{template.customVehicle&&<><label>乗り物自由記入</label><input value={customVehicle} onChange={e=>setCustomVehicle(e.target.value)} placeholder="例：かぼちゃの馬車"/></>}{template.colors&&<><label>パティオの色合い</label><div className="chips">{cordobaColors.map(x=><Chip key={x.id} active={cordoba===x.id} onClick={()=>setCordoba(x.id)}>{x.label}</Chip>)}</div></>}{template.fireworks&&<><label>花火を見る場所</label><div className="chips">{fireworksPlaces.map(x=><Chip key={x.id} active={fwPlace===x.id} onClick={()=>setFwPlace(x.id)}>{x.label}</Chip>)}</div></>}</Section>
 
         {cat!=="movie"&&!isPanel&&<Section title="服"><p className="selected">服指定あり・おまかせの場合は、元写真の服・帽子・髪飾り・ハーネスなどを引き継がず、今回選んだ衣装だけで作ります。</p>
-          <div className="subhead"><label>服の基本方針</label><button type="button" className="outline-button mini" onClick={()=>setGender("feminine")}>リセット</button></div><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div>
+          <div className="subhead"><label>服の種類</label>
+<div className="chips">{outfitTypes.map(o=><Chip key={o.id} active={outfit===o.id} onClick={()=>setOutfit(o.id)}>{o.label}</Chip>)}</div>
+
+{outfit==="auto" && <>
+<label>普通服の雰囲気</label>
+<div className="chips">{outfitMoodOptions.map(o=><Chip key={o.id} active={outfitMood===o.id} onClick={()=>setOutfitMood(o.id)}>{o.label}</Chip>)}</div>
+</>}<div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div>
           <div className="subhead"><label>服</label><button type="button" className="outline-button mini" onClick={()=>{setCustomOutfit("");setOutfit("auto");setTaste("frill")}}>リセット</button></div>
           <div className="chips">{outfitChoices.map(o=>o.id==="auto"&&cat!=="animal"
             ? <div key={o.id} className={`chip outfit-auto-chip ${!customOutfit&&outfit==="auto"?"active":""}`} onClick={()=>{setCustomOutfit("");setOutfit("auto")}}>
@@ -509,7 +525,9 @@ function App(){
         {cat==="summer"&&<Section title={<><Waves size={19}/>夏・水中ギミック</>}><button type="button" className="outline-button mini" onClick={()=>{setCustomGimmick("");setUnder("auto");setSummerAct("none")}}>リセット</button><label>水中・海ギミック</label><div className="chips">{under.map(u=><Chip key={u.id} disabled={!!customGimmick} active={underId===u.id} onClick={()=>{setUnder(u.id);if((u.block||[]).includes(summerAct))setSummerAct("none")}}>{u.label}</Chip>)}</div><label>夏の小物・動き</label><div className="chips">{(template.id==="underwater"?summerActs.filter(s=>s.id==="none"):summerActs).map(s=><Chip key={s.id} disabled={!!customGimmick||blocked.includes(s.id)} active={summerAct===s.id} onClick={()=>setSummerAct(s.id)}>{s.label}</Chip>)}</div><label>ギミック自由記入</label><input value={customGimmick} onChange={e=>setCustomGimmick(e.target.value)} placeholder="例：大きな貝殻のソファ"/></Section>}
         {cat==="animal"&&<Section title={<><PawPrint size={19}/>動物を選択（五十音順）</>}><div className="animal-list">{animals.map(a=><div className="animal-row" key={a.id}><button className={`animal-name ${animal===a.id?"active":""}`} onClick={()=>{setAnimal(a.id);setAnimalColor(a.colors?.[0]||"")}}>{a.label}</button>{a.colors&&<span>{a.colors.map(c=><label className="radio-inline" key={c}><input type="radio" checked={animal===a.id&&animalColor===c} onChange={()=>{setAnimal(a.id);setAnimalColor(c)}}/>{c}</label>)}</span>}</div>)}</div><input value={customAnimal} onChange={e=>setCustomAnimal(e.target.value)} placeholder="自由記入：白いフェネックなど"/></Section>}
         {isInfo&&<Section title="プロフィール情報"><p className="selected">学名風はAIが自動生成。空欄は無効。</p><label>パネルタイプ</label><div className="chips">{infoStyles.map(s=><Chip key={s.id} active={infoStyle===s.id} onClick={()=>setInfoStyle(s.id)}>{s.label}</Chip>)}</div><div className="form-grid">{Object.entries({name:"名前",nick:"ニックネーム",birthday:"誕生日",age:"年齢",sex:"性別",species:"犬種・動物種",personality:"性格",likes:"好きなもの",dislikes:"苦手なもの",walk:"よく散歩に行く時間",place:"よくいる場所",food:"食べ物の好み",charm:"チャームポイント",skill:"特技",comment:"その他うちの子について"}).map(([k,l])=><label key={k}>{l}<input value={panel[k]} onChange={e=>setPanel({...panel,[k]:e.target.value})}/></label>)}</div></Section>}
-        {isCalendar&&<Section title="カレンダー設定"><div className="form-grid"><label>年<input type="number" value={year} onChange={e=>setYear(e.target.value)}/></label><label>月<input type="number" min="1" max="12" value={month} onChange={e=>setMonth(e.target.value)}/></label></div><label>服の基本方針</label><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div><label>サイズ</label><div className="chips">{paper.map(p=><Chip key={p.id} active={paperId===p.id} onClick={()=>setPaper(p.id)}>{p.label}</Chip>)}</div><label>向き</label><div className="chips">{direction.map(d=><Chip key={d.id} active={dir===d.id} onClick={()=>setDir(d.id)}>{d.label}</Chip>)}</div>{Number(month)===10&&<><label>ハロウィン衣装</label><div className="chips">{["ミイラ","魔女","パンプキンきぐるみ","吸血鬼","アリス"].map(x=><Chip key={x} active={halloween===x} onClick={()=>setHalloween(x)}>{x}</Chip>)}</div></>}</Section>}
+        {isCalendar&&<Section title="カレンダー設定"><div className="form-grid"><label>年<input type="number" value={year} onChange={e=>setYear(e.target.value)}/></label><label>月<input type="number" min="1" max="12" value={month} onChange={e=>setMonth(e.target.value)}/></label></div><label>季節</label><div className="chips">{seasonOptions.map(s=><Chip key={s.id} active={season===s.id} onClick={()=>setSeason(s.id)}>{s.label}</Chip>)}</div>
+
+<label>服の基本方針</label><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div><label>サイズ</label><div className="chips">{paper.map(p=><Chip key={p.id} active={paperId===p.id} onClick={()=>setPaper(p.id)}>{p.label}</Chip>)}</div><label>向き</label><div className="chips">{direction.map(d=><Chip key={d.id} active={dir===d.id} onClick={()=>setDir(d.id)}>{d.label}</Chip>)}</div>{Number(month)===10&&<><label>ハロウィン衣装</label><div className="chips">{["ミイラ","魔女","パンプキンきぐるみ","吸血鬼","アリス"].map(x=><Chip key={x} active={halloween===x} onClick={()=>setHalloween(x)}>{x}</Chip>)}</div></>}</Section>}
         {!(isCalendar && paperId!=="sns")&&<Section title={`縦横比`}><button type="button" className="outline-button mini" onClick={()=>{setRh("");setRw("");setRatio("4:5")}}>リセット</button><div className="chips">{ratioOptions.map(r=><Chip key={r.id} disabled={!!rh||!!rw} active={ratio===r.id} onClick={()=>setRatio(r.id)}>{r.label}</Chip>)}</div><div className="ratio-inputs"><label>縦<input value={rh} onChange={e=>setRh(e.target.value)} placeholder="9"/></label><span>：</span><label>横<input value={rw} onChange={e=>setRw(e.target.value)} placeholder="16"/></label></div></Section>}
       </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/><div className="instagram-follow-card">
           <div className="instagram-title">Instagramも見てね</div>
@@ -575,3 +593,17 @@ export default App;
 
 /* calendar global size rule */
 // カレンダー記入欄を除いた実質的な絵エリア基準で、ペットの高さは35〜45％程度にしてください。背景・季節感・小物・世界観がしっかり見える構図にしてください。
+
+
+/*
+季節固定メモ
+ミコノス：夏
+水中：夏
+花火：夏
+桜：春
+紅葉：秋
+クリスマス：冬
+オーロラ・雪原・氷世界：酷寒
+
+パリ・ロンドン等は服欄の季節を背景へ反映
+*/
