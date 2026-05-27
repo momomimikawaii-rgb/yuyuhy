@@ -41,3 +41,30 @@
 @media(max-width:920px){
   .instagram-follow-card img{width:min(240px,100%)}
 }
+
+
+.subhead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px 0 8px;
+}
+.subhead label,.subhead h2{margin:0}
+.outfit-auto-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  max-width:100%;
+  text-align:left;
+}
+.outfit-auto-chip .auto-chip-main{font-weight:900}
+.outfit-auto-chip .auto-chip-tastes{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.outfit-auto-chip input:disabled{cursor:not-allowed}
+.outfit-auto-chip:has(input:disabled) .auto-chip-tastes{opacity:.45}
