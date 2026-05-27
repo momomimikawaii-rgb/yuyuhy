@@ -76,7 +76,7 @@ const cats = [
     ["nanny","傘をさして空から降りてくる乳母さん風","傘をさして空からふわっと降りてくるクラシカルな乳母さん風映画ポスター。女の子はピンク系、男の子は青系。服・帽子・傘・バッグは同系色で統一。絵本風指定時は街並みを明るいパステルカラーにする。"],
     ["planet","赤いペットの惑星SFポスター風","赤く染まった惑星の空。全体を赤・黒・オレンジ系で統一した終末SF映画ポスター風。画面左下に砂に半分埋もれた巨大な自由の女神像。ペットの顔を中央〜右側に大きく印象的に配置。遠景に荒廃した未来都市、赤い空、惑星、宇宙船。"],
     ["street","アメリカ下町ミュージカル映画風","アメリカの下町ストリート、古いレンガ建物、非常階段、黄色いビートル風レトロ車。ペット3匹でミュージカルダンス。中央の子を大きく、両手を広げ、右足つま先立ち、左足を横に大きく広げる。3枚アップなら1枚目中央、2枚目左、3枚目右。1枚だけなら左右は同じペット種。日本の昭和商店街は禁止。"],
-    ["cinderella","ガラスの靴プリンセス映画風","青いキラキラドレスのプリンセス映画ポスター。大きな階段を降りる構図、ドレスの裾が大きく流れる。ガラスの靴とかぼちゃの馬車を小さく入れる。夜空、魔法の光、青白い輝き。"],
+    ["cinderella","ガラスの靴プリンセス／メルヘン映画風","青いキラキラドレスのプリンセス映画ポスター。大きな階段を降りる構図、ドレスの裾が大きく流れる。ガラスの靴とかぼちゃの馬車を小さく入れる。夜空、魔法の光、青白い輝き。"],
     ["ice_princess","氷のプリンセス映画風","青白い氷世界。青い氷ドレス、長い金髪のおさげウィッグが風になびく。氷の城、吹雪、青白い氷の光。前足から雪と氷の魔法が広がる映画ポスター風。"],
     ["magic","魔法学校ファンタジー映画風","1枚目のペットを中央の主役にした魔法学校映画ポスター。人数は3匹。左右の仲間は2枚目・3枚目があれば本人化、1枚だけなら同じペット種でAIが作る。左上または右上に夜の崖上の魔法学校の城、背景または下部に赤黒のレトロな魔法列車。黒い魔法ローブ、主役は丸メガネと杖。"],
     ["pirate","伝説の海賊船長映画風","伝説の海賊船長映画ポスター。赤いバンダナ必須、くるくるしたドレッド風の髪かつら必須、ビーズ飾り、白いシャツ、黒〜焦げ茶のベスト、腰ベルト、海賊コート風。背景に海賊船、夕焼けと嵐空、海、煙、古い港町。"],
@@ -97,7 +97,7 @@ const cordobaColors = opt([
 ]);
 
 const genderOptions = opt([["male","オス","男の子向けの色・形で自然に調整。"],["female","メス","女の子向けの色・形で自然に調整。"]]);
-const tasteOptions = opt([["elegant","エレガント","上品でエレガントな服装。"],["sporty","スポーティ","元気でスポーティな服装。"],["casual","カジュアル","自然で可愛いカジュアル服。"],["frill","フリル","フリルを使った可愛い服。"],["lolita","ロリータ","ロリータ風の可愛い服。"],["goth","ゴスロリ","ゴスロリ風の可愛い服。"],["punk","パンク","可愛いパンク風の服。"]]);
+const tasteOptions = opt([["elegant","エレガント","上品でエレガントな服装。"],["sporty","スポーティ","元気でスポーティな服装。"],["casual","カジュアル","自然で可愛いカジュアル服。"],["frill","フリル","フリルを使った可愛い服。"],["lolita","ロリータ","ロリータ風の可愛い服。"],["goth","ゴスロリ","ゴスロリ風の可愛い服。"],["punk","プリンセス","可愛いプリンセス風の服。"]]);
 
 const baseOutfits = opt([["keep","なし（元写真のまま）","服は新しく追加せず、元写真の服や自然な姿を維持。"],["auto","おまかせ","選んだ世界観に似合う服。"]]);
 const mykonosOutfits = opt([["swim_m","水着（オス）","男の子向けの爽やかな夏リゾート水着。"],["swim_f","水着（メス）","女の子向けの可愛い夏リゾート水着。"],["summer_frill","夏向きフリル付きワンピース","夏向きの軽やかなフリル付きワンピース。"],["summer_sport","夏向きスポーティセットアップ","夏向きのスポーティセットアップ。"],["summer_casual","夏向けカジュアルセットアップ","夏向けカジュアルセットアップ。"]]);
@@ -415,7 +415,7 @@ function App(){
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/27（水） 15:52頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/27（水） 16:05頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
@@ -521,3 +521,7 @@ function App(){
 export default App;
 
 // 浴衣選択時は浴衣色優先
+
+// animalDefaultFixMemo: 動物さんと一緒は頭と靴をおまかせデフォルト
+
+// colorChipMemo: 服色はカラーチップ複数選択3つまで
