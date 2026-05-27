@@ -3,7 +3,7 @@ import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, 
 
 const SISTER = "https://yuyupm.yuyu-chan.com";
 const HERO = "/top.png";
-const UPDATED_AT = "2026/05/28（木） 04:10頃";
+const UPDATED_AT = "2026/05/28（木） 04:40頃";
 
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
@@ -322,7 +322,7 @@ function App(){
   const [tpl,setTpl]=useState({travel:"mykonos",summer:"beach",vehicle:"sl",movie:"ship",animal:"friend",panel:"info"});
   const [rec,setRec]=useState(true), [copied,setCopied]=useState(false);
   const [customPlace,setCustomPlace]=useState(""), [customVehicle,setCustomVehicle]=useState("");
-  const [cordoba,setCordoba]=useState("yuyu"), [gender,setGender]=useState("feminine"), [taste,setTaste]=useState("frill"), [customOutfit,setCustomOutfit]=useState("");
+  const [cordoba,setCordoba]=useState("yuyu"), [gender,setGender]=useState("feminine"), [taste,setTaste]=useState("frill"), [outfit,setOutfit]=useState("auto"), [customOutfit,setCustomOutfit]=useState("");
   const [head,setHead]=useState("auto"), [customHead,setCustomHead]=useState("");
   const [shoe,setShoe]=useState("auto"), [customShoe,setCustomShoe]=useState("");
   const [acc,setAcc]=useState([]), [accMode,setAccMode]=useState("auto"), [customAcc,setCustomAcc]=useState("");
