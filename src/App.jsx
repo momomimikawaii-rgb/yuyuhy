@@ -1,41 +1,17 @@
-const outfitColorChoices=[
-{id:"white",label:"白",color:"#ffffff",prompt:"白を基調にした清潔感のある服セット。"},
-{id:"beige",label:"ベージュ",color:"#e8d7b9",prompt:"ベージュを基調にしたやわらかく上品な服セット。"},
-{id:"brown",label:"茶",color:"#8b5a3c",prompt:"茶色を基調にしたナチュラルであたたかい服セット。"},
-{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec",prompt:"ベビーピンクを基調にした夢かわいい服セット。"},
-{id:"pink",label:"ピンク",color:"#ff6fb5",prompt:"ピンクを基調にした可愛い服セット。"},
-{id:"deepPink",label:"濃いピンク",color:"#e11d74",prompt:"濃いピンクをアクセントにした華やかな服セット。"},
-{id:"red",label:"赤",color:"#e53935",prompt:"赤を基調にした印象的で可愛い服セット。"},
-{id:"wine",label:"ワインレッド",color:"#7b1e3a",prompt:"ワインレッドを基調にした上品でクラシカルな服セット。"},
-{id:"orange",label:"オレンジ",color:"#ff8a3d",prompt:"オレンジを基調にした明るく元気な服セット。"},
-{id:"yellow",label:"黄色",color:"#ffd84d",prompt:"黄色を基調にした明るく可愛い服セット。"},
-{id:"sky",label:"水色",color:"#7dd3fc",prompt:"水色を基調にした透明感のある服セット。"},
-{id:"green",label:"緑",color:"#4caf50",prompt:"緑を基調にした爽やかな服セット。"},
-{id:"khaki",label:"カーキ",color:"#7a8450",prompt:"カーキを基調にした落ち着いた服セット。"},
-{id:"moss",label:"モスグリーン",color:"#556b2f",prompt:"モスグリーンを基調にした深みのある服セット。"},
-{id:"fuji",label:"藤色",color:"#c4b5fd",prompt:"藤色を基調にした上品で淡い夢かわ服セット。"},
-{id:"purple",label:"紫",color:"#9333ea",prompt:"紫を基調にした華やかで幻想的な服セット。"},
-{id:"navyPurple",label:"紫紺",color:"#47306b",prompt:"紫紺を基調にした大人っぽく上品な服セット。"},
-{id:"navy",label:"紺",color:"#1e3a8a",prompt:"紺を基調にした落ち着いた服セット。"},
-{id:"black",label:"黒",color:"#111111",prompt:"黒を基調にした引き締まった服セット。"},
-{id:"gold",label:"金",color:"#d4af37",prompt:"金をアクセントにした華やかで高級感のある服セット。"},
-{id:"silver",label:"銀",color:"#c0c0c0",prompt:"銀をアクセントにした上品で透明感のある服セット。"},
-];
-
 import React, { useMemo, useState } from "react";
 import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, PawPrint, Info, Image as ImageIcon, Link as LinkIcon, X } from "lucide-react";
 
 const SISTER = "https://yuyupm.yuyu-chan.com";
 const HERO = "/top.png";
-const UPDATED_AT = "2026/05/28（木） 09:05頃";
+const UPDATED_AT = "2026/05/28（水） 10:05頃";
 
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
 const darkFix = `黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく維持してください。`;
-const travelRule = `旅行カテゴリは「夢の観光ポスター構図」です。世界旅行は共通固定構図にせず、選んだ場所が一番美しく見える構図へ最適化してください。一本道や壁ドン構図を避け、曲がる道、上へ続く階段、踊り場、奥へ続く小道、街並みの連なり、広場、橋、水路、庭園、建物の重なりなど、その場所に合う奥行き・高低差・背景量を入れてください。場所らしさが分かる背景量と、ペットの顔が見える距離を両立してください。行き止まり、ただの壁、背景不足、犬だけアップは禁止。「先へ行きたくなる感」のある夢の観光ポスター構図にしてください。寺院・教会・宮殿・霊廟などは場所ごとの正しい建築要素として扱い、全地域へ一律には入れないでください。現実の建物配置は完全再現不要です。`;
+const travelRule = `旅行カテゴリは「夢の観光ポスター構図」です。一本道や壁ドン構図を避け、曲がる道、上へ続く階段、踊り場、奥へ続く構図、高低差、寺院や建物、街並みの連なりを入れてください。場所らしさが分かる背景量と、ペットの顔が見える距離を両立してください。行き止まり、ただの壁、背景不足、犬だけアップは禁止。近すぎてただの壁にならず、遠すぎてペットが豆粒にならないようにし、「先へ行きたくなる感」のある夢の観光ポスター構図にしてください。現実の建物配置は完全再現不要です。`;
 const movieRule = `映画ポスター風では、元写真の体型・ポーズ・四足姿勢をコピーしないでください。体は可愛いマスコット人形風の直立ボディ。腰が後ろに出た犬の二足立ちは禁止。実在映画名・ロゴは使わず架空映画ポスターとして作ってください。`;
 const animalRule = `選んだ動物に最も似合う夢背景を自動生成してください。ペットの高さは画像全体の35〜45％程度を目安にし、相手動物・背景・ギミックも見える少し引き気味の構図にしてください。ただの森・草原・単色背景は禁止。ペットのきぐるみは、ペット本人の毛色ではなく、一緒にいる動物の色・柄・耳・羽・模様に合わせてください。双子・親子・同じ生き物の仲間のようなおそろい感を出してください。相手動物に花冠や飾りがある場合は、ペットにもおそろいで付けてください。猛獣や大型動物も怖くせず、清潔で優しく、ぬいぐるみのような愛らしさを少し加えてください。キリン・馬・シマウマ・象は首や脚を長くしすぎないでください。恐竜は怖くせず絵本のようにしてください。`;
-const petSizeRule = `映画ポスター風・インフォグラフィックを除き、世界旅行、動物さんと一緒、夏・海・水中、乗り物系では、ペットの高さを画像全体の35〜45％程度にしてください。ペットをアップにしすぎず、背景・ギミック・世界観がしっかり見える構図にしてください。カレンダーではカレンダー記入欄を除いた実質的な絵エリア基準で35〜45％程度にしてください。`;
+const petSizeRule = `映画ポスター風・インフォグラフィックを除き、世界旅行、動物さんと一緒、夏・海・水中、乗り物系では、ペットの高さを画像全体の35〜45％程度にしてください。ペットをアップにしすぎず、背景・ギミック・世界観がしっかり見える構図にしてください。目的は、背景を見せること、世界観を見せること、観光感や没入感を出すことです。カレンダーだけは、カレンダー記入欄を除いた実質的な絵エリア基準で35〜45％程度にしてください。`;
 const kigurumiRule = `きぐるみは首から下を完全に丸いぬいぐるみ体型にしてください。顔だけ本人が見えている状態にし、手先・足先まできぐるみで覆ってください。高級感のあるふわふわフェイクファーで、安っぽい化繊・スポンジ感は禁止。`;
 
 const opt = (rows) => rows.map(([id,label,prompt,extra]) => ({id,label,prompt,...(extra||{})}));
@@ -57,7 +33,7 @@ const ratioOptions = opt([
 
 const cats = [
   {id:"travel",label:"夢の世界旅行",icon:Globe2,desc:"うちの子と夢の観光ポスター構図。",tpl:opt([
-    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。夢の中で見た理想のミコノス島のように、白い街並み、青い屋根、サンゴ礁ブルー〜ターコイズブルーの海、ブーゲンビリア、強い陽射し、透明感、海面のきらめきを極端に美しく理想化してください。単なる白い家背景ではなく、白い階段、曲がる坂道、上へ続く寺院や青い丸屋根、踊り場、青いドアと窓枠、石畳、白壁の光反射、ピンクのブーゲンビリア、遠くに見えるエーゲ海を入れてください。ペットは曲がった白い階段の踊り場、または奥へ続く白い坂道の前景〜中景に配置。背景には階段の奥行き、青い屋根、白い街並み、海の水平線がたっぷり見える構図。リゾートCMのような発光感、白壁反射、レンズフレア、透明な海、幸福感、観光ポスター感を強めてください。一本道・壁だけ・行き止まり・犬だけアップは禁止。ペットの高さは画像全体の35〜45％程度を目安にしてください。カメラは少し引き気味にし、背景量と顔の見えやすさを両立してください。"],
+    ["mykonos","ミコノス島風","ギリシャ・ミコノス島風。単なる白い家背景ではなく、夢の観光ポスターのような奥行きのある高級リゾート構図。白い階段、曲がる白い坂道、上へ続く小さな寺院や青い丸屋根、踊り場、青いドアと窓枠、ピンクのブーゲンビリア、白壁反射、サンゴ礁ブルーの海、ターコイズブルーの浅瀬、海面のきらめき、レンズフレア、強い陽射し、リゾートCMのような発光感を入れる。ペットは曲がった白い階段の踊り場、または奥へ続く白い坂道の前景〜中景に配置。背景には階段や坂道が奥へ続き、その先に寺院、白い街並み、青い丸屋根、透明な海が広がる構図。一本道や壁ドン構図、行き止まり、ただの白壁、背景不足、犬だけアップは禁止。白・青・ピンク・ターコイズを主役色にした、清潔感と透明感のある夢かわいい地中海リゾート写真風。茶色い禿げ山、汚れた床、古びた壁、雑多な観光客、生活感は目立たせない。ペットの高さは画像全体の35〜45％程度を目安にし、顔と服が見えるサイズを保ちながら、背景の階段・坂道・建物・空・海の奥行きをたっぷり見せる。"],
     ["paris","パリ風","フランス・パリ風。遠景にエッフェル塔、クラシカルな街灯、石畳、淡いクリーム色の建物、花のある上品なカフェ通り。車や人混みは減らし、ペットが前景で可愛く見える距離。パリらしいエレガントな空気感を残した夢の観光ポスター構図。"],
     ["london","ロンドン風","イギリス・ロンドン風。赤い電話ボックス、クラシカルな石造りの街並み、遠景にビッグベン風の時計塔、上品な街灯と石畳。霧で暗くしすぎず、明るく清潔なロンドンの空気。ペットは前景、背景にロンドンらしい象徴が入る構図。"],
     ["alsace","アルザス風","フランス・アルザス地方風。木組みの家、パステル色の壁、花いっぱいの窓辺、細い石畳の小道が奥へ続く絵本のような街並み。家の並びと小道の奥行きが分かる構図で、ペットは前景に可愛く配置。"],
@@ -73,7 +49,7 @@ const cats = [
     ["aurora","オーロラの国風","北欧・オーロラの国風。雪原、遠くの針葉樹、夜空に広がる緑や紫のオーロラ、澄んだ空気。夜景でもペットの顔は柔らかく明るく、雪は清潔で透明感ある白にする。"],
     ["burano","ブラーノ島風","イタリア・ブラーノ島風。運河沿いに並ぶ赤・青・黄色・ピンクなど鮮やかな家々、小さな橋、明るい水面反射。少し離れた運河沿い構図で、カラフルな家並みの連なりが分かるようにし、ペットは前景寄り。"],
     ["guanajuato","グアナファト風","メキシコ・グアナファト風。丘に密集するカラフルな家々、坂道、階段、テラス、明るい空。高台から少し見下ろす構図で街全体の色の重なりが分かるようにし、ペットは手前のテラスや石畳に配置。"],
-    ["cordoba","コルドバのパティオ風","スペイン・コルドバのパティオ風。スペイン南部アンダルシア地方の白壁の中庭住宅。左右対称の正面固定だけにせず、斜めから見た非対称で可愛いパティオ構図にする。片側には白壁と青い鉢花が多く並び、反対側にはアーチ、小道、窓、アイアン装飾、植物の抜け感を作る。狭い石畳の中庭、白い壁一面の鉢花、青い鉢や色とりどりの鉢、アーチ、2〜3階の吹き抜けの中庭感。建物の高さや奥行きに差をつけ、奥へ続く石畳や小さな入口を見せる。上から光が差し込む明るいヨーロッパ住宅の中庭として表現し、ただの白壁、完全左右対称のステージ背景、謎の鉢植え背景にしない。",{colors:true}],
+    ["cordoba","コルドバのパティオ風","スペイン・コルドバのパティオ風。スペイン南部アンダルシア地方の白壁の中庭住宅。狭い石畳の中庭、白い壁一面に大量の鉢花、青い鉢や色とりどりの鉢、アーチ、アイアン装飾、2〜3階の吹き抜けの中庭感。上から光が差し込む明るいヨーロッパ住宅の中庭として表現し、ただの白壁や謎の鉢植え背景にしない。",{colors:true}],
     ["custom","自由記入の場所","ユーザー指定の場所を夢の観光ポスター構図で理想化。場所以外のギミック・ポーズ・服装指定は無視。",{customPlace:true}]
   ])},
   {id:"summer",label:"夏・海・水中",icon:Waves,desc:"海・花火・水中・夏リゾート。",tpl:opt([
@@ -121,12 +97,12 @@ const cordobaColors = opt([
 ]);
 
 const genderOptions = opt([["feminine","女の子服","フリル・リボン・ワンピース・可愛い色合いなど、女の子服寄りの服作り方針。"],["masculine","男の子服","シャツ・ベスト・パンツ・スポーティさなど、男の子服寄りの服作り方針。"],["neutral","中性的な服","性別感を強く出しすぎず、ナチュラルで可愛いユニセックス寄りの服作り方針。"]]);
-const tasteOptions = opt([["elegant","エレガント","上品でエレガントな服装。"],["sporty","スポーティ","元気でスポーティな服装。"],["casual","カジュアル","自然で可愛いカジュアル服。"],["frill","フリル","フリルを使った可愛い服。"],["lolita","ロリータ","ロリータ風の可愛い服。"],["goth","ゴスロリ","ゴスロリ風の可愛い服。"],["princess","プリンセス","ティアラやリボンが似合う、上品で夢かわいいプリンセス系の服。"]]);
+const tasteOptions = opt([["elegant","エレガント","上品でエレガントな服装。"],["sporty","スポーティ","元気でスポーティな服装。"],["casual","カジュアル","自然で可愛いカジュアル服。"],["frill","フリル","フリルを使った可愛い服。"],["lolita","ロリータ","ロリータ風の可愛い服。"],["goth","ゴスロリ","ゴスロリ風の可愛い服。"],["punk","パンク","可愛いパンク風の服。"]]);
 
-const baseOutfits = opt([["auto","おまかせ","選んだ世界観に似合う服。"],["keep","なし（元写真のまま）","服は新しく追加せず、元写真の服や自然な姿を維持。"]]);
-const mykonosOutfits = opt([["swim","水着","服の基本方針に合わせた爽やかで可愛い夏リゾート水着。"],["summer_frill","夏向きフリル付きワンピース","夏向きの軽やかなフリル付きワンピース。"],["summer_sport","夏向きスポーティセットアップ","夏向きのスポーティセットアップ。"],["summer_casual","夏向けカジュアルセットアップ","夏向けカジュアルセットアップ。"]]);
-const underwaterOutfits = opt([["water_swim","水着","服の基本方針に合わせた爽やかで可愛い水中・海向け水着。"],["scuba","スキューバダイビングスーツ","明るい海に似合う可愛いスキューバダイビングスーツ。"],["light_dive","軽装ダイビングスーツ","軽やかで可愛い水中探検用ダイビングスーツ。"],["marine_rescue","マリンレスキュー風","水中レスキュー隊のような爽やかで安全そうなマリン服。"],["aqua_explorer","水中探検隊風","夢の水中探検隊のような可愛い服。"]]);
-const fireworksOutfits = opt([["yukata","浴衣","服の基本方針に合わせた夏祭り向けの可愛い浴衣。帯と和柄を自然に合わせてください。"]]);
+const baseOutfits = opt([["keep","なし（元写真のまま）","服は新しく追加せず、元写真の服や自然な姿を維持。"],["auto","おまかせ","選んだ世界観に似合う服。"]]);
+const mykonosOutfits = opt([["swim_m","水着（オス）","服の基本方針に合わせた爽やかな夏リゾート水着。"],["swim_f","水着（メス）","服の基本方針に合わせた可愛い夏リゾート水着。"],["summer_frill","夏向きフリル付きワンピース","夏向きの軽やかなフリル付きワンピース。"],["summer_sport","夏向きスポーティセットアップ","夏向きのスポーティセットアップ。"],["summer_casual","夏向けカジュアルセットアップ","夏向けカジュアルセットアップ。"]]);
+const underwaterOutfits = opt([ ["water_swim_f","水着（メス）","服の基本方針に合わせた可愛い水中・海向け水着。"],["water_swim_m","水着（オス）","服の基本方針に合わせた爽やかな水中・海向け水着。"],["scuba","スキューバダイビングスーツ","明るい海に似合う可愛いスキューバダイビングスーツ。"],["light_dive","軽装ダイビングスーツ","軽やかで可愛い水中探検用ダイビングスーツ。"],["marine_rescue","マリンレスキュー風","水中レスキュー隊のような爽やかで安全そうなマリン服。"],["aqua_explorer","水中探検隊風","夢の水中探検隊のような可愛い服。"]]);
+const fireworksOutfits = opt([["yukata_m","紺色浴衣（オス）","男の子向けの紺色系浴衣。帯と和柄を自然に合わせてください。"],["yukata_f","ピンク浴衣（メス）","女の子向けのピンク系浴衣。帯と和柄を自然に合わせてください。"]]);
 
 const kyotoOutfits = opt([["furisode","振袖着物（友禅）","華やかな友禅柄の振袖着物。"],["taisho","大正ロマン風着物","大正ロマン風の上品で可愛い着物。"]]);
 const vehicleWear = {
@@ -138,16 +114,49 @@ const vehicleWear = {
 };
 const animalWear = opt([["k_auto","おまかせ（きぐるみ）","一緒にいる動物とおそろいに見える可愛いきぐるみ姿。動物の色・柄・耳・羽・模様・花冠などを合わせ、双子・親子・仲間のように見せる。",{kigurumi:true}],["keep","なし（元写真のまま）","元写真のまま。"]]);
 
-const headBase = opt([["auto","おまかせ","世界観に合う頭装備。"],["keep","なし（元写真のまま）","頭装備は追加せず、元写真のまま。"],["ribbon","リボン","可愛いリボン。"],["frill","フリル帽","可愛いフリル帽。"],["flower","花冠","可愛い花冠。"],["tiara","ティアラ","小さく上品で可愛いティアラ。"]]);
+const headBase = opt([["keep","なし（元写真のまま）","頭装備は追加せず、元写真のまま。"],["auto","おまかせ","世界観に合う頭装備。"],["ribbon","リボン","可愛いリボン。"],["frill","フリル帽","可愛いフリル帽。"],["flower","花冠","可愛い花冠。"],["crown","王冠","小さな可愛い王冠。"]]);
 const headSummer = opt([["straw","麦わら帽子","夏らしい麦わら帽子。"]]);
 const headUnderwater = opt([["seawalk","シーウォーク風金魚鉢ヘルメット","シーウォークのような丸い透明ヘルメット。顔は見えるようにしてください。"],["clear_helmet","丸型透明ヘルメット","丸い透明潜水ヘルメット。顔は隠しすぎない。"],["future_helmet","未来風透明ヘルメット","未来風の透明ヘルメット。可愛く安全そうに。"]]);
 
 const headVehicle = opt([["goggles","ゴーグル","乗り物や冒険に似合う可愛いゴーグル。"],["pilot_hat","パイロット帽","可愛いパイロット帽。"]]);
-const shoes = opt([["auto","おまかせ","世界観に合う靴や足元。"],["keep","なし（元写真のまま）","靴は追加せず元写真の足元を維持。"],["sandals","サンダル","可愛いサンダル。"],["boots","ブーツ","可愛いブーツ。"]]);
-const accessories = opt([["auto","おまかせ","世界観に合うアクセサリーをAIが可愛く選ぶ。"],["keep","なし（元写真のまま）","アクセサリーは新しく追加しない。"],["neck","首飾り","可愛い首飾り。"],["bracelet","ブレスレット","小さな可愛いブレスレット。"],["bib","スタイ","可愛いスタイ。"]]);
+const shoes = opt([["keep","なし（元写真のまま）","靴は追加せず元写真の足元を維持。"],["auto","おまかせ","世界観に合う靴や足元。"],["sandals","サンダル","可愛いサンダル。"],["boots","ブーツ","可愛いブーツ。"]]);
+const accessories = opt([["neck","首飾り","可愛い首飾り。"],["bracelet","ブレスレット","小さな可愛いブレスレット。"],["bib","スタイ","可愛いスタイ。"]]);
+const outfitColorChoices=[
+{id:"white",label:"白",color:"#ffffff",prompt:"白を基調にした清潔感。"},
+{id:"ivory",label:"アイボリー",color:"#fffff0",prompt:"アイボリーを基調にした、白より少しやわらかい上品な明るさ。"},
+{id:"cream",label:"クリーム",color:"#fff6d5",prompt:"クリーム色を基調にした、淡くやさしい暖かみ。"},
+{id:"beige",label:"ベージュ",color:"#e8d7b9",prompt:"ベージュを基調にしたやわらかく上品な印象。"},
+{id:"milkTea",label:"ミルクティー",color:"#d8bfa3",prompt:"ミルクティー色を基調にした甘く上品でナチュラルな印象。"},
+{id:"camel",label:"キャメル",color:"#c48a3a",prompt:"キャメル色を基調にした上品でナチュラルな暖かみ。"},
+{id:"brown",label:"茶",color:"#8b5a3c",prompt:"茶色を基調にしたナチュラルであたたかい印象。"},
+{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec",prompt:"ベビーピンクを基調にした夢かわいさ。"},
+{id:"dustyPink",label:"くすみピンク",color:"#d8a1ad",prompt:"くすみピンクを基調にした、大人っぽくやさしい可愛さ。"},
+{id:"pink",label:"ピンク",color:"#ff6fb5",prompt:"ピンクを基調にした可愛さ。"},
+{id:"deepPink",label:"濃いピンク",color:"#e11d74",prompt:"濃いピンクをアクセントにした華やかさ。"},
+{id:"red",label:"赤",color:"#e53935",prompt:"赤を基調にした印象的な可愛さ。"},
+{id:"budou",label:"葡萄色",color:"#522f60",prompt:"葡萄色を基調にした、紫みのある深い赤紫の上品さ。"},
+{id:"orange",label:"オレンジ",color:"#ff8a3d",prompt:"オレンジを基調にした明るく元気な印象。"},
+{id:"yellow",label:"黄色",color:"#ffd84d",prompt:"黄色を基調にした明るく可愛い印象。"},
+{id:"lightYellow",label:"薄い黄色",color:"#fff7a8",prompt:"薄い黄色を基調にした、やさしく明るい可愛さ。"},
+{id:"mustard",label:"からし色",color:"#c79a00",prompt:"からし色を基調にしたレトロでおしゃれな暖かみ。"},
+{id:"sky",label:"水色",color:"#7dd3fc",prompt:"水色を基調にした透明感。"},
+{id:"blue",label:"青",color:"#2563eb",prompt:"青を基調にした爽やかで印象的な服セット。"},
+{id:"navy",label:"紺",color:"#1e3a8a",prompt:"紺を基調にした落ち着き。"},
+{id:"yellowGreen",label:"黄緑",color:"#b8e05f",prompt:"黄緑を基調にした明るく爽やかな印象。"},
+{id:"green",label:"緑",color:"#4caf50",prompt:"緑を基調にした爽やかさ。"},
+{id:"moss",label:"モスグリーン",color:"#556b2f",prompt:"モスグリーンを基調にした深みのある落ち着き。"},
+{id:"fuji",label:"藤色",color:"#c4b5fd",prompt:"藤色を基調にした上品で淡い夢かわ感。"},
+{id:"purple",label:"紫",color:"#9333ea",prompt:"紫を基調にした華やかで幻想的な印象。"},
+{id:"benikikyo",label:"紅桔梗色",color:"#4d4398",prompt:"紅桔梗色を基調にした、青紫寄りの上品で華やかな印象。"},
+{id:"sobakiri",label:"蕎麦切色",color:"#d4dcd6",prompt:"蕎麦切色を基調にした、淡く上品なグレージュ感。"},
+{id:"gray",label:"グレー",color:"#9ca3af",prompt:"グレーを基調にした落ち着いた定番の服セット。"},
+{id:"black",label:"黒",color:"#111111",prompt:"黒を基調にした引き締まった印象。"},
+{id:"gold",label:"金",color:"#d4af37",prompt:"金をアクセントにした華やかで高級感。"},
+{id:"silver",label:"銀",color:"#c0c0c0",prompt:"銀をアクセントにした上品で透明感。"},
+];
 const colors = opt([["auto","おまかせ","世界観と服の基本方針に合わせて、一番可愛く見える服セットの色合いへ自動調整してください。"],...outfitColorChoices.map(c=>[c.id,c.label,c.prompt,{color:c.color}])]);
 
-const under = opt([["auto","おまかせ","選んだ夏・海・水中テーマに一番似合う安全で可愛いギミックをAIが選ぶ。水中世界では透明な海底世界、珊瑚、泡、光、海底ミニチュア空間を優先する。",{block:[]}],["none","なし","",{block:[]}],["turtle","亀の上","大きな海亀の背中に優しく乗る。",{block:["ski","split"]}],["shell","貝の上","真珠のような大きな貝の上。",{block:["ski","split"]}], ["bottle_dome","ドーム型瓶","大きな透明ドーム型のガラス瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。瓶の中は海底神殿・小さな宮殿・深海プリンセス空間のようにし、白砂、パステル珊瑚、貝殻、真珠、宝石、泡、光の粒を入れる。宝石箱のような発光感と高級感を出し、瓶の外側にも神秘的な海底の青い奥行きを見せる。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["bottle_sand","斜めに砂へ埋まった瓶","海底の白砂へ斜めに埋まっている透明なガラス瓶。横倒しではなく、浅瀬の白砂に斜めに差し込まれて少し埋まった瓶にしてください。瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。浅瀬、白砂、珊瑚礁、泡、貝殻、真珠、光の差し込み、漂流ファンタジー感を入れ、海底で見つけた夢の小瓶のように見せる。背景は明るい浅瀬と透明なサンゴ礁の海。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["dolphin","イルカの上","優しいイルカの背中。",{block:["ski","split"]}],["orca","オルカの上","優しいオルカの背中。",{block:["ski","split"]}]]);
+const under = opt([["none","なし","",{block:[]}],["turtle","亀の上","大きな海亀の背中に優しく乗る。",{block:["ski","split"]}],["shell","貝の上","真珠のような大きな貝の上。",{block:["ski","split"]}], ["bottle_dome","縦型ドーム瓶","大きな透明ドーム型のガラス瓶の中に、ペットが座れる「瓶の中の小さな夢かわ海底世界」を作る。小さな海底神殿、海底宮殿、深海プリンセス空間、宝石箱のような光、白砂、パステルカラーの珊瑚、貝殻、真珠、泡、キラキラした光を入れる。「ゆゆ姫空間」のような曖昧語だけにせず、海底ミニチュア空間・小さな海底神殿・宝石箱のような空間として具体的に描く。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["bottle_sand","斜めに砂へ埋まった瓶","海底の白砂へ斜めに埋まっている透明なガラス瓶。横倒しではなく、斜めに砂へ埋まった漂流ファンタジー風の瓶にする。瓶の中に、ペットが座れる小さな夢かわ海底ミニチュア空間を作る。浅瀬、白砂、珊瑚礁、泡、光の差し込み、貝殻、真珠を入れ、海底で見つけた夢の瓶のように見せる。ドーム型瓶とは違い、浅瀬の白砂と珊瑚礁、透明な光、漂流ファンタジー感を主役にする。ペットの高さは画像全体の35〜45％程度。",{block:["ski","split","watermelon","ice"]}],["dolphin","イルカの上","優しいイルカの背中。",{block:["ski","split"]}],["orca","オルカの上","優しいオルカの背中。",{block:["ski","split"]}]]);
 const summerActs = opt([["none","なし",""],["split","スイカ割り","砂浜など安全な場所でスイカ割り。動物の背中では行わない。"],["watermelon","スイカを食べる","大きなスイカを嬉しそうに食べる。"],["ice","ソーダアイス","水色のソーダアイスを嬉しそうに食べる。"],["ski","水上スキー","透明な海で可愛く水上スキー。"]]);
 const fireworksPlaces = opt([["park","遊園地","遊園地から花火を見る。"],["festival","夏祭り","夏祭り会場で花火を見る。"],["shrine","神社の境内","神社の境内から花火を見る。"],["boat","船の上","船の上から花火を見る。"],["beach","ビーチ","ビーチから花火を見る。"]]);
 const vibes = opt([["clear","透明感","透明感のある澄んだ仕上がり。"],["dream","夢のよう","夢の中のように幻想的。"],["bright","明るい","明るく晴れやか。"],["clean","清潔感","汚れや生活感のない清潔な仕上がり。"],["book","絵本感","絵本のような優しい世界観。"]]);
@@ -318,52 +327,20 @@ function movieMood(id){
   };
   return moods[id] || "選んだ映画テンプレートに合う映画ポスター風の雰囲気で統一してください。";
 }
-function recommendedVibe(categoryId, templateId){
-  const base = "清潔感・透明感・夢感を大切にし、背景を明るく理想化してください。";
-  if(categoryId==="travel") return `${base}\n選んだ場所の魅力が一番伝わる観光ポスター風。現実そのままではなく、行きたくなる夢の旅行写真として整える。`;
-  if(categoryId==="summer" && templateId==="underwater") return `${base}\n水中でも暗くせず、泡・珊瑚・光の筋・透明な海底ミニチュア感を入れた幻想的で可愛い雰囲気。`;
-  if(categoryId==="summer") return `${base}\n夏らしく明るく、爽やかで透明感のあるリゾート感。`;
-  if(categoryId==="animal") return `${base}\n相手動物と仲良しに見える、ぬいぐるみ絵本のような優しい雰囲気。`;
-  if(categoryId==="vehicle") return `${base}\n乗り物が安全で可愛い夢のアトラクションに見える、楽しい冒険感。`;
-  if(categoryId==="panel") return `${base}\n情報が読みやすく、飾りたくなる上品なパネル感。`;
-  return `${base}\n選んだテーマに一番似合う可愛い雰囲気。`;
-}
-
-function recommendedLight(categoryId, templateId){
-  if(categoryId==="movie") return "映画ポスターらしいドラマチックな光。ただしペットの顔は暗くせず、表情と毛並みが見えるようにしてください。";
-  if(categoryId==="travel" && templateId==="mykonos") return "白壁に反射する明るい地中海の陽射し、サンゴ礁ブルーの海の反射、軽いレンズフレア。白飛びしすぎず清潔で発光感のある光。";
-  if(categoryId==="travel") return "その場所が一番美しく見える明るい観光ポスター光。顔は柔らかく明るく、背景には奥行きが出る自然な陰影。";
-  if(categoryId==="summer" && templateId==="underwater") return "水面から差し込む光の筋、泡のきらめき、珊瑚に反射する透明な光。水中でも暗く濁らせない。";
-  if(categoryId==="summer" && templateId==="fireworks") return "花火の光で顔をほんのり明るく照らす。夜でも顔を暗くしすぎない。";
-  if(categoryId==="animal") return "相手動物とペットの顔がどちらも可愛く見える、柔らかく明るい絵本のような光。";
-  return "選んだ世界観に一番似合う明るく清潔な光。顔と毛並みがきれいに見えるようにしてください。";
-}
-
 
 function App(){
   const [modalImage,setModalImage]=useState(null);
   const [cat,setCat]=useState("travel");
-  const [selectedOutfitColors,setSelectedOutfitColors]=useState([]);
-  const toggleOutfitColor=(id)=>{
-    setSelectedOutfitColors(prev=>{
-      if(prev.includes(id)) return prev.filter(v=>v!==id);
-      if(prev.length>=3) return prev;
-      return [...prev,id];
-    });
-  };
-  const selectedOutfitColorPrompt = selectedOutfitColors.length
-    ? selectedOutfitColors.map(id=>outfitColorChoices.find(c=>c.id===id)?.prompt).filter(Boolean).join("\n")
-    : "";
   const [tpl,setTpl]=useState({travel:"mykonos",summer:"beach",vehicle:"sl",movie:"ship",animal:"friend",panel:"info"});
   const [rec,setRec]=useState(true), [copied,setCopied]=useState(false);
   const [customPlace,setCustomPlace]=useState(""), [customVehicle,setCustomVehicle]=useState("");
   const [cordoba,setCordoba]=useState("yuyu"), [gender,setGender]=useState("feminine"), [taste,setTaste]=useState("frill"), [outfit,setOutfit]=useState("auto"), [customOutfit,setCustomOutfit]=useState("");
   const [head,setHead]=useState("auto"), [customHead,setCustomHead]=useState("");
-  const [shoe,setShoe]=useState("auto"), [customShoe,setCustomShoe]=useState("");
-  const [acc,setAcc]=useState([]), [accMode,setAccMode]=useState("auto"), [customAcc,setCustomAcc]=useState("");
+  const [shoe,setShoe]=useState("keep"), [customShoe,setCustomShoe]=useState("");
+  const [acc,setAcc]=useState([]), [customAcc,setCustomAcc]=useState("");
   const [color,setColor]=useState("auto"), [customColor,setCustomColor]=useState("");
   const [light,setLight]=useState("auto"), [ratio,setRatio]=useState("4:5"), [rh,setRh]=useState(""), [rw,setRw]=useState("");
-  const [underId,setUnder]=useState("auto"), [customGimmick,setCustomGimmick]=useState(""), [summerAct,setSummerAct]=useState("none"), [fwPlace,setFwPlace]=useState("festival");
+  const [underId,setUnder]=useState("none"), [customGimmick,setCustomGimmick]=useState(""), [summerAct,setSummerAct]=useState("none"), [fwPlace,setFwPlace]=useState("festival");
   const [vibe,setVibe]=useState(["clear","dream","clean"]), [title,setTitle]=useState("");
   const [animal,setAnimal]=useState("panda"), [animalColor,setAnimalColor]=useState(""), [customAnimal,setCustomAnimal]=useState("");
   const [infoStyle,setInfoStyle]=useState("rare");
@@ -402,6 +379,7 @@ function App(){
     if(cat==="travel") p.push(`【旅行カテゴリ：夢の観光ポスター構図】\n${travelRule}`);
     if(cat==="movie") p.push(`【映画ポスター風の特殊ルール】\n${movieRule}\n映画カテゴリでは共通の雰囲気選択は使わず、選んだ映画テンプレート固有の雰囲気・色・構図を最優先してください。`);
     if(cat==="animal") p.push(`【動物さんの表現】\n${animalRule}`);
+    if(["travel","summer","vehicle","animal"].includes(cat)) p.push(`【ペットサイズ共通ルール】\n${petSizeRule}`);
     let world = isPanel ? "ペットを主役にした、選択したタイプのうちの子パネル。選択したパネルタイプの雰囲気を最優先してください。" : template.prompt;
     if(template.customPlace&&customPlace) world+=`\n場所：${customPlace}\n※場所名のみ採用し、ポーズ・服・ギミック指定は無視。`;
     if(template.colors) world+=`\n色合い：${by(cordobaColors,cordoba).prompt}`;
@@ -420,22 +398,21 @@ function App(){
       if(title) p.push(`【架空タイトル】\n${title}`);
     } else if(!isPanel){
       const selectedOutfit = by(outfitChoices,outfit);
-      const wear = customOutfit
-        || (selectedOutfit.id==="auto"
-          ? `${by(genderOptions,gender).prompt}\n${by(tasteOptions,taste).prompt}\n選んだ世界観に最も似合う服として、上記の方針で可愛く自動調整してください。`
-          : `${by(genderOptions,gender).prompt}\n${selectedOutfit.prompt}`);
+      const wear = customOutfit || `${by(genderOptions,gender).prompt}\n${selectedOutfit.id === "auto" ? `${selectedOutfit.prompt}\n方向性：${by(tasteOptions,taste).prompt}` : selectedOutfit.prompt}`;
       p.push(`【服】\n${wear}`);
-      if(cat==="animal" && ((selectedOutfit.kigurumi && !customOutfit) || customOutfit.includes("きぐるみ"))) p.push(`【きぐるみ専用補正】\n${kigurumiRule}`);
-      p.push(`【頭装備】\n${customHead||by(headChoices,head).prompt}`);
-      p.push(`【靴】\n${customShoe||by(shoes,shoe).prompt}`);
-      const ac = customAcc || (accMode==="auto" ? by(accessories,"auto").prompt : accMode==="keep" ? "" : acc.map(id=>by(accessories,id).prompt).filter(Boolean).join("\n"));
-      if(ac) p.push(`【アクセサリー】\n${ac}`);
-      if(cat==="summer" && template.id==="fireworks" && outfit.startsWith("yukata")) p.push("【服セットの色合い】\n浴衣で選んだ色を最優先してください。追加の服色指定で浴衣の色を上書きしないでください。");
-      else p.push(`【服セットの色合い】\n${customColor||selectedOutfitColorPrompt||by(colors,color).prompt}`);
+      if(cat==="animal" && ((selectedOutfit.extra?.kigurumi && !customOutfit) || customOutfit.includes("きぐるみ"))) p.push(`【きぐるみ専用補正】\n${kigurumiRule}`);
+      else {
+        p.push(`【頭装備】\n${customHead||by(headChoices,head).prompt}`);
+        p.push(`【靴】\n${customShoe||by(shoes,shoe).prompt}`);
+        const ac=[...acc.map(id=>by(accessories,id).prompt),customAcc].filter(Boolean).join("\n");
+        if(ac) p.push(`【アクセサリー】\n${ac}`);
+        if(cat==="summer" && template.id==="fireworks" && outfit.startsWith("yukata")) p.push("【服セットの色合い】\n浴衣で選んだ色を最優先してください。追加の服色指定で浴衣の色を上書きしないでください。");
+        else p.push(`【服セットの色合い】\n${customColor||by(colors,color).prompt}`);
+      }
     }
 
     if(cat==="summer"){
-      if(template.id==="underwater") p.push("【水中世界の禁止事項】\n水中世界では、スイカ割り、スイカを食べる、ソーダアイス、水上スキー、浮き輪を出さないでください。水中に合わない地上・水上遊びを混ぜず、夢かわいい海底世界として作成してください。");
+      if(template.id==="underwater") p.push("【水中世界の禁止事項】\n水中世界では、スイカ割り、スイカを食べる、ソーダアイス、水上スキー、浮き輪を入れないでください。水中なのに不自然・危険・事故りやすい小物や動きは避け、透明な海底世界、珊瑚、光、泡、海底ミニチュア空間を優先してください。");
       if(customGimmick) p.push(`【水中・海ギミック】\n${customGimmick}\n自由記入ギミックを優先し、夏の小物・動きは混ぜないでください。`);
       else {
         if(currentUnder.prompt) p.push(`【水中・海ギミック】\n${currentUnder.prompt}`);
@@ -451,7 +428,6 @@ function App(){
     if(isInfo) p.push(`【うちの子インフォグラフィック】\nタイプ：${by(infoStyles,infoStyle).label}\n${by(infoStyles,infoStyle).prompt}\n\n${panelText||"入力された情報をもとに作成してください。"}\n学名風の名前はAIがその子らしく可愛く自動生成。空欄項目は無視。選んだタイプに合わせて、自然に言い換えてください。`);
     if(isCalendar) {
       p.push(`【うちの子カレンダー】\n${year}年${month}月のカレンダー。\n月別テーマ：${monthThemes[Number(month)]||"季節感のある可愛いカレンダー。"}\nカレンダー表：${daysText(Number(year),Number(month))}\n\n【カレンダー祝日】\n${holidaysText(Number(year),Number(month))}\n\nカレンダーは日曜開始で、曜日並びは「日・月・火・水・木・金・土」にしてください。カレンダー表は必ず通常の月間カレンダー形式にしてください。日曜始まり、日・月・火・水・木・金・土の7列、週ごとの横並びグリッドで配置してください。日付を縦一列や二列リストにしないでください。曜日ごとの列を崩さず、1週間単位で横に並べてください。曜日・日付・祝日名を創作しないでください。カレンダー表とカレンダー祝日の内容を必ず守ってください。日曜と祝日は赤、土曜は青で表示してください。\nサイズ：${by(paper,paperId).label}、${by(direction,dir).label}向き。`);
-      if(Number(month)===6) p.push(`【6月カレンダー事故防止】\nカレンダー記入欄を除いた絵エリア基準でペットの高さは35〜45％程度。人間のような傘をさしかける構図は禁止。睡蓮の葉っぱ傘、深めのレインコート帽子、紫陽花の夢世界、雨粒のきらめきを優先してください。前足は左右2本のみで、余分な手足を追加しないでください。`);
       if(Number(month)===10) p.push(`【ハロウィン衣装】\n服の基本方針：${by(genderOptions,gender).label}\n衣装：${halloween}`);
       if([1,2,5,8,12].includes(Number(month))) p.push(`【服の基本方針による衣装・配色】\n服の基本方針：${by(genderOptions,gender).label}`);
     }
@@ -459,62 +435,66 @@ function App(){
     if(cat==="movie") {
       p.push(`【映画ポスター専用の雰囲気】\n${movieMood(template.id)}\n${darkFix}`);
     } else {
-      p.push(`【おすすめの雰囲気】\n${recommendedVibe(cat,template.id)}\n${darkFix}`);
+      p.push(`【雰囲気】\n${vibe.map(id=>by(vibes,id).prompt).join("\n")}\n${darkFix}`);
     }
-    p.push(`【おすすめの光・明るさ】\n${recommendedLight(cat,template.id)}`);
+    p.push(`【光・明るさ】\n${by(lightOptions,light).prompt}`);
     if(!(isCalendar && paperId!=="sns")) p.push(`【縦横比】\n${ratioPrompt}`);
     p.push("【仕上げ】\n高品質、可愛いペットポートレート、清潔感、透明感、理想化された夢の世界。");
     return p.join("\n\n");
-  },[cat,template,customPlace,customVehicle,cordoba,fwPlace,title,gender,taste,outfit,outfitChoices,customOutfit,head,customHead,shoe,customShoe,acc,accMode,customAcc,color,customColor,selectedOutfitColorPrompt,customGimmick,currentUnder,summerAct,animal,animalColor,customAnimal,isInfo,isCalendar,infoStyle,panelText,year,month,paperId,dir,halloween,vibe,light,ratioPrompt,headChoices]);
+  },[cat,template,customPlace,customVehicle,cordoba,fwPlace,title,gender,taste,outfit,outfitChoices,customOutfit,head,customHead,shoe,customShoe,acc,customAcc,color,customColor,customGimmick,currentUnder,summerAct,animal,animalColor,customAnimal,isInfo,isCalendar,infoStyle,panelText,year,month,paperId,dir,halloween,vibe,light,ratioPrompt,headChoices]);
 
   const copy=async()=>{await navigator.clipboard.writeText(prompt);setCopied(true);setTimeout(()=>setCopied(false),1200)};
   const toggle=(arr,setter,id)=>setter(arr.includes(id)?arr.filter(x=>x!==id):[...arr,id]);
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（木） 09:05頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（水） 10:05頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
-        <Section title={<><Sparkles size={19}/>ジャンルを選択</>}><div className="choice-grid">{cats.map(c=>{const I=c.icon;return <button key={c.id} className={`big-choice ${cat===c.id?"active-soft":""}`} onClick={()=>{setCat(c.id);setTpl({...tpl,[c.id]:c.tpl[0].id}); if(c.id==="animal"){setHead("auto");setShoe("auto");setAcc([]);setAccMode("auto");}}}><strong><I size={18}/>{c.label}</strong><span>{c.desc}</span></button>})}</div></Section>
+        <Section title={<><Sparkles size={19}/>ジャンルを選択</>}><div className="choice-grid">{cats.map(c=>{const I=c.icon;return <button key={c.id} className={`big-choice ${cat===c.id?"active-soft":""}`} onClick={()=>{setCat(c.id);setTpl({...tpl,[c.id]:c.tpl[0].id})}}><strong><I size={18}/>{c.label}</strong><span>{c.desc}</span></button>})}</div></Section>
         <Section title={<><Icon size={19}/>テンプレを選択</>}><div className="chips">{category.tpl.map(t=><Chip key={t.id} active={template.id===t.id} onClick={()=>setTpl({...tpl,[cat]:t.id})}>{t.label}</Chip>)}</div>{template.customPlace&&<><p className="selected">※場所のみ記入。ギミック・ポーズ・服装指定は無視されます。</p><input value={customPlace} onChange={e=>setCustomPlace(e.target.value)} placeholder="例：フィレンツェ、モロッコの青い街"/></>}{template.customVehicle&&<><label>乗り物自由記入</label><input value={customVehicle} onChange={e=>setCustomVehicle(e.target.value)} placeholder="例：かぼちゃの馬車"/></>}{template.colors&&<><label>パティオの色合い</label><div className="chips">{cordobaColors.map(x=><Chip key={x.id} active={cordoba===x.id} onClick={()=>setCordoba(x.id)}>{x.label}</Chip>)}</div></>}{template.fireworks&&<><label>花火を見る場所</label><div className="chips">{fireworksPlaces.map(x=><Chip key={x.id} active={fwPlace===x.id} onClick={()=>setFwPlace(x.id)}>{x.label}</Chip>)}</div></>}</Section>
 
-        {cat!=="movie"&&!isPanel&&<Section title="服"><p className="selected">服指定あり・おまかせの場合は、元写真の服・帽子・髪飾り・ハーネスなどを引き継がず、今回選んだ衣装だけで作ります。</p>
-          <div className="subhead"><label>服の基本方針</label><button type="button" className="outline-button mini" onClick={()=>setGender("feminine")}>リセット</button></div><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div>
-          <div className="subhead"><label>服</label><button type="button" className="outline-button mini" onClick={()=>{setCustomOutfit("");setOutfit("auto");setTaste("frill")}}>リセット</button></div>
-          <div className="chips">{outfitChoices.map(o=>o.id==="auto"&&cat!=="animal"
-            ? <div key={o.id} className={`chip outfit-auto-chip ${!customOutfit&&outfit==="auto"?"active":""}`} onClick={()=>{setCustomOutfit("");setOutfit("auto")}}>
-                <span className="auto-chip-main">おまかせ</span>
-                <span className="auto-chip-tastes">（{tasteOptions.map(t=><label className="radio-inline" key={t.id} onClick={e=>e.stopPropagation()}><input type="radio" name="taste" checked={taste===t.id} disabled={!!customOutfit||outfit!=="auto"} onChange={()=>{setOutfit("auto");setTaste(t.id)}}/>{t.label}</label>)}）</span>
-              </div>
-            : <Chip key={o.id} disabled={!!customOutfit} active={!customOutfit&&outfit===o.id} onClick={()=>setOutfit(o.id)}>{o.label}</Chip>)}</div>
-<label>服の自由記入</label>
-<input value={customOutfit} onChange={e=>setCustomOutfit(e.target.value)} placeholder="例：水色チェックのフリルワンピース"/>
-          <>
-            <div className="subhead"><h2>頭装備</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomHead("");setHead("auto")}}>リセット</button></div><div className="chips">{headChoices.map(h=><Chip key={h.id} disabled={!!customHead} active={head===h.id} onClick={()=>setHead(h.id)}>{h.label}</Chip>)}</div><input value={customHead} onChange={e=>setCustomHead(e.target.value)} placeholder="頭装備の自由記入"/>
-            <div className="subhead"><h2>靴</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomShoe("");setShoe("auto")}}>リセット</button></div><div className="chips">{shoes.map(s=><Chip key={s.id} disabled={!!customShoe} active={shoe===s.id} onClick={()=>setShoe(s.id)}>{s.label}</Chip>)}</div><input value={customShoe} onChange={e=>setCustomShoe(e.target.value)} placeholder="靴の自由記入"/>
-            <div className="subhead"><h2>アクセサリー</h2><button type="button" className="outline-button mini" onClick={()=>{setAcc([]);setAccMode("auto");setCustomAcc("")}}>リセット</button></div><div className="chips">{accessories.map(a=>a.id==="auto"||a.id==="keep" ? <Chip key={a.id} active={accMode===a.id&&!customAcc} onClick={()=>{setAcc([]);setAccMode(a.id);setCustomAcc("")}}>{a.label}</Chip> : <Chip key={a.id} active={accMode==="select"&&acc.includes(a.id)} onClick={()=>{setAccMode("select");toggle(acc,setAcc,a.id)}}>{a.label}</Chip>)}</div><input value={customAcc} onChange={e=>{setCustomAcc(e.target.value); if(e.target.value) setAccMode("select")}} placeholder="アクセサリー自由記入"/>
-            {!(cat==="summer"&&template.id==="fireworks"&&outfit.startsWith("yukata"))&&<><div className="subhead"><h2>服セットの色合い</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomColor("");setColor("auto");setSelectedOutfitColors([])}}>リセット</button></div><div className="color-chip-wrap">{outfitColorChoices.map(c=><button
-  type="button"
-  key={c.id}
-  className={`color-chip ${selectedOutfitColors.includes(c.id)?"active":""}`}
-  style={{backgroundColor:c.color}}
-  title={c.label}
-  aria-label={c.label}
-  disabled={!!customColor}
-  onClick={()=>toggleOutfitColor(c.id)}
-/>)}</div><p className="selected">最大3色まで選べます。選択中の色は紫の枠とチェックで表示されます。</p><input value={customColor} onChange={e=>setCustomColor(e.target.value)} placeholder="色合い自由記入"/></>}
-          </></Section>}
+        {cat!=="movie"&&!isPanel&&<Section title="服"><p className="selected">服指定あり・おまかせの場合は、元写真の服・帽子・髪飾り・ハーネスなどを引き継がず、今回選んだ衣装だけで作ります。</p><label>服の基本方針</label><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div><label>服</label><button type="button" className="outline-button mini" onClick={()=>{setCustomOutfit("");setOutfit("auto")}}>服をリセット</button><div className="chips">{outfitChoices.map(o=><React.Fragment key={o.id}><Chip disabled={!!customOutfit} active={!customOutfit&&outfit===o.id} onClick={()=>setOutfit(o.id)}>{o.label}</Chip>{o.id==="auto"&&cat!=="animal"&&<span style={{display:"inline-flex",alignItems:"center",gap:"8px",flexWrap:"wrap",fontSize:"13px",lineHeight:1.8,color:"#5f4b7a"}}>（{tasteOptions.map(t=><label className="radio-inline" key={t.id} style={{display:"inline-flex",alignItems:"center",gap:"4px",margin:0}}><input type="radio" name="taste" checked={taste===t.id} onChange={()=>setTaste(t.id)}/>{t.label}</label>)}）</span>}</React.Fragment>)}</div><label>服の自由記入</label><input value={customOutfit} onChange={e=>setCustomOutfit(e.target.value)} placeholder="例：水色チェックのフリルワンピース"/>{!(cat==="animal"&&customOutfit.includes("きぐるみ"))&&<><h2>頭装備</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomHead("");setHead("auto")}}>頭装備をリセット</button><div className="chips">{headChoices.map(h=><Chip key={h.id} disabled={!!customHead} active={head===h.id} onClick={()=>setHead(h.id)}>{h.label}</Chip>)}</div><input value={customHead} onChange={e=>setCustomHead(e.target.value)} placeholder="頭装備の自由記入"/><h2>靴</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomShoe("");setShoe("keep")}}>靴をリセット</button><div className="chips">{shoes.map(s=><Chip key={s.id} disabled={!!customShoe} active={shoe===s.id} onClick={()=>setShoe(s.id)}>{s.label}</Chip>)}</div><input value={customShoe} onChange={e=>setCustomShoe(e.target.value)} placeholder="靴の自由記入"/><h2>アクセサリー</h2><div className="chips">{accessories.map(a=><Chip key={a.id} active={acc.includes(a.id)} onClick={()=>toggle(acc,setAcc,a.id)}>{a.label}</Chip>)}</div><input value={customAcc} onChange={e=>setCustomAcc(e.target.value)} placeholder="アクセサリー自由記入"/>{!(cat==="summer"&&template.id==="fireworks"&&outfit.startsWith("yukata"))&&<><h2>服セットの色合い</h2><button type="button" className="outline-button mini" onClick={()=>{setCustomColor("");setColor("auto")}}>色合いをリセット</button><div className="chips">{colors.map(c=><Chip key={c.id} disabled={!!customColor} active={color===c.id} onClick={()=>setColor(c.id)}>{c.label}</Chip>)}</div><input value={customColor} onChange={e=>setCustomColor(e.target.value)} placeholder="色合い自由記入"/></>}</>}</Section>}
         {cat==="movie"&&<Section title={<><Film size={19}/>架空タイトル</>}><input value={title} onChange={e=>setTitle(e.target.value)} placeholder="例：白雪ゆゆ姫"/></Section>}
-        {cat==="summer"&&<Section title={<><Waves size={19}/>夏・水中ギミック</>}><button type="button" className="outline-button mini" onClick={()=>{setCustomGimmick("");setUnder("auto");setSummerAct("none")}}>リセット</button><label>水中・海ギミック</label><div className="chips">{under.map(u=><Chip key={u.id} disabled={!!customGimmick} active={underId===u.id} onClick={()=>{setUnder(u.id);if((u.block||[]).includes(summerAct))setSummerAct("none")}}>{u.label}</Chip>)}</div><label>夏の小物・動き</label><div className="chips">{(template.id==="underwater"?summerActs.filter(s=>s.id==="none"):summerActs).map(s=><Chip key={s.id} disabled={!!customGimmick||blocked.includes(s.id)} active={summerAct===s.id} onClick={()=>setSummerAct(s.id)}>{s.label}</Chip>)}</div><label>ギミック自由記入</label><input value={customGimmick} onChange={e=>setCustomGimmick(e.target.value)} placeholder="例：大きな貝殻のソファ"/></Section>}
+        {cat==="summer"&&<Section title={<><Waves size={19}/>夏・水中ギミック</>}><button type="button" className="outline-button mini" onClick={()=>{setCustomGimmick("");setUnder("none");setSummerAct("none")}}>ギミックをリセット</button><label>水中・海ギミック</label><div className="chips">{under.map(u=><Chip key={u.id} disabled={!!customGimmick} active={underId===u.id} onClick={()=>{setUnder(u.id);if((u.block||[]).includes(summerAct))setSummerAct("none")}}>{u.label}</Chip>)}</div><label>夏の小物・動き</label><div className="chips">{(template.id==="underwater"?summerActs.filter(s=>s.id==="none"):summerActs).map(s=><Chip key={s.id} disabled={!!customGimmick||blocked.includes(s.id)} active={summerAct===s.id} onClick={()=>setSummerAct(s.id)}>{s.label}</Chip>)}</div><label>ギミック自由記入</label><input value={customGimmick} onChange={e=>setCustomGimmick(e.target.value)} placeholder="例：大きな貝殻のソファ"/></Section>}
         {cat==="animal"&&<Section title={<><PawPrint size={19}/>動物を選択（五十音順）</>}><div className="animal-list">{animals.map(a=><div className="animal-row" key={a.id}><button className={`animal-name ${animal===a.id?"active":""}`} onClick={()=>{setAnimal(a.id);setAnimalColor(a.colors?.[0]||"")}}>{a.label}</button>{a.colors&&<span>{a.colors.map(c=><label className="radio-inline" key={c}><input type="radio" checked={animal===a.id&&animalColor===c} onChange={()=>{setAnimal(a.id);setAnimalColor(c)}}/>{c}</label>)}</span>}</div>)}</div><input value={customAnimal} onChange={e=>setCustomAnimal(e.target.value)} placeholder="自由記入：白いフェネックなど"/></Section>}
         {isInfo&&<Section title="プロフィール情報"><p className="selected">学名風はAIが自動生成。空欄は無効。</p><label>パネルタイプ</label><div className="chips">{infoStyles.map(s=><Chip key={s.id} active={infoStyle===s.id} onClick={()=>setInfoStyle(s.id)}>{s.label}</Chip>)}</div><div className="form-grid">{Object.entries({name:"名前",nick:"ニックネーム",birthday:"誕生日",age:"年齢",sex:"性別",species:"犬種・動物種",personality:"性格",likes:"好きなもの",dislikes:"苦手なもの",walk:"よく散歩に行く時間",place:"よくいる場所",food:"食べ物の好み",charm:"チャームポイント",skill:"特技",comment:"その他うちの子について"}).map(([k,l])=><label key={k}>{l}<input value={panel[k]} onChange={e=>setPanel({...panel,[k]:e.target.value})}/></label>)}</div></Section>}
         {isCalendar&&<Section title="カレンダー設定"><div className="form-grid"><label>年<input type="number" value={year} onChange={e=>setYear(e.target.value)}/></label><label>月<input type="number" min="1" max="12" value={month} onChange={e=>setMonth(e.target.value)}/></label></div><label>服の基本方針</label><div className="chips">{genderOptions.map(g=><Chip key={g.id} active={gender===g.id} onClick={()=>setGender(g.id)}>{g.label}</Chip>)}</div><label>サイズ</label><div className="chips">{paper.map(p=><Chip key={p.id} active={paperId===p.id} onClick={()=>setPaper(p.id)}>{p.label}</Chip>)}</div><label>向き</label><div className="chips">{direction.map(d=><Chip key={d.id} active={dir===d.id} onClick={()=>setDir(d.id)}>{d.label}</Chip>)}</div>{Number(month)===10&&<><label>ハロウィン衣装</label><div className="chips">{["ミイラ","魔女","パンプキンきぐるみ","吸血鬼","アリス"].map(x=><Chip key={x} active={halloween===x} onClick={()=>setHalloween(x)}>{x}</Chip>)}</div></>}</Section>}
+        {cat!=="movie"&&<Section title={`雰囲気（3つまで選択可能）`}><div className="chips">{vibes.map(v=><Chip key={v.id} active={vibe.includes(v.id)} onClick={()=>setVibe(vibe.includes(v.id)?vibe.filter(x=>x!==v.id):vibe.length>=3?vibe:[...vibe,v.id])}>{v.label}</Chip>)}</div></Section>}
+        <Section title={`光・明るさ`}><div className="chips">{lightOptions.map(l=><Chip key={l.id} active={light===l.id} onClick={()=>setLight(l.id)}>{l.label}</Chip>)}</div></Section>
         {!(isCalendar && paperId!=="sns")&&<Section title={`縦横比`}><button type="button" className="outline-button mini" onClick={()=>{setRh("");setRw("");setRatio("4:5")}}>リセット</button><div className="chips">{ratioOptions.map(r=><Chip key={r.id} disabled={!!rh||!!rw} active={ratio===r.id} onClick={()=>setRatio(r.id)}>{r.label}</Chip>)}</div><div className="ratio-inputs"><label>縦<input value={rh} onChange={e=>setRh(e.target.value)} placeholder="9"/></label><span>：</span><label>横<input value={rw} onChange={e=>setRw(e.target.value)} placeholder="16"/></label></div></Section>}
-      </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/><div className="instagram-follow-card">
-          <div className="instagram-title">Instagramも見てね</div>
-          <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram momomimiyuyu を開く">
-            <img src="/instagram_momomimiyuyu.png" alt="Instagram QRコード" />
+      </section><aside className="right"><section className="card result-card"><div className="card-head"><h2><ImageIcon size={19}/>生成プロンプト</h2><button className="main-button" onClick={copy}>{copied?<CheckCircle2 size={16}/>:<Copy size={16}/>} {copied?"コピー済み":"コピー"}</button></div><div className="message warn"><AlertCircle size={16}/>画像生成時は、このプロンプトと一緒にペット写真をアップロードしてください。</div><textarea value={prompt} readOnly/><div className="instagram-follow-card" style={{
+          marginTop: "16px",
+          padding: "14px",
+          borderRadius: "20px",
+          background: "rgba(255,255,255,.82)",
+          border: "1px solid rgba(236,180,220,.55)",
+          boxShadow: "0 10px 30px rgba(180,120,180,.12)",
+          textAlign: "center"
+        }}>
+          <div style={{fontWeight: 800, color: "#8b4b9e", marginBottom: "8px"}}>
+            Instagramも見てね
+          </div>
+          <a
+            href="https://www.instagram.com/momomimiyuyu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram momomimiyuyu を開く"
+            style={{display: "inline-block", textDecoration: "none"}}
+          >
+            <img
+              src="/instagram_momomimiyuyu.png"
+              alt="Instagram QRコード"
+              style={{
+                display: "block",
+                width: "min(220px, 100%)",
+                height: "auto",
+                margin: "0 auto",
+                borderRadius: "14px",
+                background: "white"
+              }}
+            />
           </a>
         </div></section></aside></div>
     </div>
@@ -573,5 +553,4 @@ function App(){
 
 export default App;
 
-/* calendar global size rule */
-// カレンダー記入欄を除いた実質的な絵エリア基準で、ペットの高さは35〜45％程度にしてください。背景・季節感・小物・世界観がしっかり見える構図にしてください。
+// 浴衣選択時は浴衣色優先
