@@ -170,3 +170,13 @@
 }
 
 .prompt-title{white-space:nowrap;word-break:keep-all;line-height:1.2;flex:1 1 auto;min-width:0}
+
+
+/* --- color-auto-chip repair 2026-05-28 --- */
+.color-chip-wrap .chip{
+  height:34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-right:4px;
+}
