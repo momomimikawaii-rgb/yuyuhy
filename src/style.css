@@ -196,3 +196,24 @@
   font-size:12px!important;
   text-shadow:none!important;
 }
+
+
+/* --- hide color chip labels; use title tooltip only --- */
+.color-chip span{
+  display:none !important;
+}
+.color-chip-auto span{
+  display:inline !important;
+  position:static !important;
+  transform:none !important;
+  color:#7c3aed !important;
+  font-size:12px !important;
+  text-shadow:none !important;
+}
+.color-chip-wrap{
+  align-items:center;
+  row-gap:12px !important;
+}
+.color-chip{
+  overflow:hidden;
+}
