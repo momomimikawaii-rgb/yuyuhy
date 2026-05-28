@@ -1,25 +1,35 @@
 const outfitColorChoices=[
-{id:"white",label:"白",color:"#ffffff",prompt:"白を基調にした清潔感のある服セット。"},
-{id:"beige",label:"ベージュ",color:"#e8d7b9",prompt:"ベージュを基調にしたやわらかく上品な服セット。"},
-{id:"brown",label:"茶",color:"#8b5a3c",prompt:"茶色を基調にしたナチュラルであたたかい服セット。"},
-{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec",prompt:"ベビーピンクを基調にした夢かわいい服セット。"},
-{id:"pink",label:"ピンク",color:"#ff6fb5",prompt:"ピンクを基調にした可愛い服セット。"},
-{id:"deepPink",label:"濃いピンク",color:"#e11d74",prompt:"濃いピンクをアクセントにした華やかな服セット。"},
-{id:"red",label:"赤",color:"#e53935",prompt:"赤を基調にした印象的で可愛い服セット。"},
-{id:"wine",label:"ワインレッド",color:"#7b1e3a",prompt:"ワインレッドを基調にした上品でクラシカルな服セット。"},
-{id:"orange",label:"オレンジ",color:"#ff8a3d",prompt:"オレンジを基調にした明るく元気な服セット。"},
-{id:"yellow",label:"黄色",color:"#ffd84d",prompt:"黄色を基調にした明るく可愛い服セット。"},
-{id:"sky",label:"水色",color:"#7dd3fc",prompt:"水色を基調にした透明感のある服セット。"},
-{id:"green",label:"緑",color:"#4caf50",prompt:"緑を基調にした爽やかな服セット。"},
-{id:"khaki",label:"カーキ",color:"#7a8450",prompt:"カーキを基調にした落ち着いた服セット。"},
-{id:"moss",label:"モスグリーン",color:"#556b2f",prompt:"モスグリーンを基調にした深みのある服セット。"},
-{id:"fuji",label:"藤色",color:"#c4b5fd",prompt:"藤色を基調にした上品で淡い夢かわ服セット。"},
-{id:"purple",label:"紫",color:"#9333ea",prompt:"紫を基調にした華やかで幻想的な服セット。"},
-{id:"navyPurple",label:"紫紺",color:"#47306b",prompt:"紫紺を基調にした大人っぽく上品な服セット。"},
-{id:"navy",label:"紺",color:"#1e3a8a",prompt:"紺を基調にした落ち着いた服セット。"},
-{id:"black",label:"黒",color:"#111111",prompt:"黒を基調にした引き締まった服セット。"},
-{id:"gold",label:"金",color:"#d4af37",prompt:"金をアクセントにした華やかで高級感のある服セット。"},
-{id:"silver",label:"銀",color:"#c0c0c0",prompt:"銀をアクセントにした上品で透明感のある服セット。"},
+{id:"white",label:"白",color:"#ffffff",prompt:"白を基調にした清潔感。"},
+{id:"ivory",label:"アイボリー",color:"#fffff0",prompt:"アイボリーを基調にした、白より少しやわらかい上品な明るさ。"},
+{id:"cream",label:"クリーム",color:"#fff6d5",prompt:"クリーム色を基調にした、淡くやさしい暖かみ。"},
+{id:"beige",label:"ベージュ",color:"#e8d7b9",prompt:"ベージュを基調にしたやわらかく上品な印象。"},
+{id:"milkTea",label:"ミルクティー",color:"#d8bfa3",prompt:"ミルクティー色を基調にした甘く上品でナチュラルな印象。"},
+{id:"camel",label:"キャメル",color:"#c48a3a",prompt:"キャメル色を基調にした上品でナチュラルな暖かみ。"},
+{id:"brown",label:"茶",color:"#8b5a3c",prompt:"茶色を基調にしたナチュラルであたたかい印象。"},
+{id:"babyPink",label:"ベビーピンク",color:"#ffd9ec",prompt:"ベビーピンクを基調にした夢かわいさ。"},
+{id:"dustyPink",label:"くすみピンク",color:"#d8a1ad",prompt:"くすみピンクを基調にした、大人っぽくやさしい可愛さ。"},
+{id:"pink",label:"ピンク",color:"#ff6fb5",prompt:"ピンクを基調にした可愛さ。"},
+{id:"deepPink",label:"濃いピンク",color:"#e11d74",prompt:"濃いピンクをアクセントにした華やかさ。"},
+{id:"red",label:"赤",color:"#e53935",prompt:"赤を基調にした印象的な可愛さ。"},
+{id:"budou",label:"葡萄色",color:"#522f60",prompt:"葡萄色を基調にした、紫みのある深い赤紫の上品さ。"},
+{id:"orange",label:"オレンジ",color:"#ff8a3d",prompt:"オレンジを基調にした明るく元気な印象。"},
+{id:"yellow",label:"黄色",color:"#ffd84d",prompt:"黄色を基調にした明るく可愛い印象。"},
+{id:"lightYellow",label:"薄い黄色",color:"#fff7a8",prompt:"薄い黄色を基調にした、やさしく明るい可愛さ。"},
+{id:"mustard",label:"からし色",color:"#c79a00",prompt:"からし色を基調にしたレトロでおしゃれな暖かみ。"},
+{id:"sky",label:"水色",color:"#7dd3fc",prompt:"水色を基調にした透明感。"},
+{id:"blue",label:"青",color:"#2563eb",prompt:"青を基調にした爽やかで印象的な服セット。"},
+{id:"navy",label:"紺",color:"#1e3a8a",prompt:"紺を基調にした落ち着き。"},
+{id:"yellowGreen",label:"黄緑",color:"#b8e05f",prompt:"黄緑を基調にした明るく爽やかな印象。"},
+{id:"green",label:"緑",color:"#4caf50",prompt:"緑を基調にした爽やかさ。"},
+{id:"moss",label:"モスグリーン",color:"#556b2f",prompt:"モスグリーンを基調にした深みのある落ち着き。"},
+{id:"fuji",label:"藤色",color:"#c4b5fd",prompt:"藤色を基調にした上品で淡い夢かわ感。"},
+{id:"purple",label:"紫",color:"#9333ea",prompt:"紫を基調にした華やかで幻想的な印象。"},
+{id:"benikikyo",label:"紅桔梗色",color:"#4d4398",prompt:"紅桔梗色を基調にした、青紫寄りの上品で華やかな印象。"},
+{id:"sobakiri",label:"蕎麦切色",color:"#d4dcd6",prompt:"蕎麦切色を基調にした、淡く上品なグレージュ感。"},
+{id:"gray",label:"グレー",color:"#9ca3af",prompt:"グレーを基調にした落ち着いた定番の服セット。"},
+{id:"black",label:"黒",color:"#111111",prompt:"黒を基調にした引き締まった印象。"},
+{id:"gold",label:"金",color:"#d4af37",prompt:"金をアクセントにした華やかで高級感。"},
+{id:"silver",label:"銀",color:"#c0c0c0",prompt:"銀をアクセントにした上品で透明感。"},
 ];
 
 import React, { useMemo, useState } from "react";
@@ -27,7 +37,7 @@ import { Sparkles, Copy, CheckCircle2, AlertCircle, Globe2, Waves, Film, Train, 
 
 const SISTER = "https://yuyupm.yuyu-chan.com";
 const HERO = "/top.png";
-const UPDATED_AT = "2026/05/28（水） 10:20頃";
+const UPDATED_AT = "2026/05/28（水） 10:35頃";
 
 const idRule = `アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。別の子に変えないでください。白目・まつ毛・別の口元など、元写真にない要素は勝手に追加しないでください。`;
 const dream = `現実そのままではなく、夢の中のように美しく理想化してください。生活感・汚れ・暗さ・混雑・不要な看板を避け、清潔感・透明感・夢感を大切にしてください。ペットの顔が主役として見える構図にしてください。`;
@@ -483,7 +493,7 @@ const isPanel=cat==="panel", isInfo=isPanel&&template.id==="info", isCalendar=is
 
   return <main className="page"><div className="blob blob-pink"/><div className="blob blob-violet"/><div className="blob blob-blue"/><div className="dots"/>
     <div className="container">
-      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（水） 10:20頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
+      <header className="hero"><div className="badge"><Sparkles size={18}/>Yuyu Mama Dream Prompt Studio</div><h1>ゆゆママの夢プロンプト工房（汎用版）</h1><p className="subtitle">うちの子を主役に、世界旅行・夏の海・乗り物・映画ポスター・うちの子パネルを作る工房です。</p><p className="selected">更新日時：2026/05/28（水） 10:35頃</p><div className="hero-image"><img src={HERO} alt="top"/></div><a className="sister-link" href={SISTER} target="_blank" rel="noreferrer"><LinkIcon size={16}/>姉妹サイト：ゆゆ姫の夢かわプロンプト工房はこちら</a></header>
       {rec&&<section className="card recommend-card"><div className="card-head"><h2>ゆゆママのお勧め</h2><button className="outline-button" onClick={()=>setRec(false)}><X size={16}/>閉じる</button></div><div className="recommend-grid">{[{t:"夢のミコノス島フォト",img:"/mykonos.png",c:"travel",p:"mykonos",d:"白と青とターコイズの夢リゾート。"},{t:"豪華客船ロマンス風",img:"/titanic.png",c:"movie",p:"ship",d:"顔と毛色だけ本人化する映画ポスター風。"}].map(r=><article className="recommend-item" key={r.t}><img src={r.img} alt={r.t} style={{ cursor:"pointer" }} onClick={() => setModalImage(r.img)}/><div><strong>{r.t}</strong><small>{r.d}</small><button className="main-button mini" onClick={()=>{setCat(r.c);setTpl({...tpl,[r.c]:r.p})}}>このおすすめを使う</button></div></article>)}</div></section>}
       <div className="grid"><section className="left">
         <div className="notice"><strong>この工房の方針</strong><span>清潔感・透明感・夢感を大切にした「うちの子の理想世界」を作ります。</span><button type="button" className="outline-button mini" onClick={()=>{if(window.confirm("すべてリセットしますか？")) window.location.reload();}}>全部リセット</button></div>
